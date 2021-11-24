@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<%--  <jsp:include page="../views/partials/layout.jsp"/>--%>
+  <jsp:include page="../../views/partials/nav.jsp"/>
   <div class="container-fluid mt-4">
     <div class="row">
       <div class="col-sm-3">

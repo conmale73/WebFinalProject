@@ -1,6 +1,6 @@
 package com.onelineauction.webfinalproject.controllers;
 
-//import com.ute.ecwebapp.beans.Category;
+
 
 
 //import com.example.cuoiky.utils.ServletUtils;
@@ -25,9 +25,11 @@ public class HomeServlet extends HttpServlet {
 
     switch (path) {
       case "/Index":
-        ServletUtils.forward("/views/partials/layout.jsp", request, response);
+        ServletUtils.forward("/views/vwGuest/index.jsp", request, response);
         break;
-
+      default:
+        ServletUtils.forward("/views/404.jsp", request, response);
+        break;
     }
   }
 
