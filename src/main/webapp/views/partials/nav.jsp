@@ -1,3 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:useBean id="authUser" scope="session" type="com.onelineauction.webfinalproject.beans.User" />
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +29,6 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-
     </ul>
 
       <div class="">
@@ -35,11 +37,34 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
+    <c:choose>
+    <c:when test ="${auth}">
+    <ul class="navbar-nav ">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hi,User
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">
+            <i class=" fa fa-sign-out" aria-hidden="true"></i>
+            Sign out
+          </a>
+        </div>
+      </li>
+    </c:when>
+    <c:otherwise>
       <div class=" ml-auto">
-        <button type="button" class="btn btn-primary ">Login</button>
-        <button type="button" class="btn btn-danger ">Register</button>
+        <a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/Account/Login">Login</a>
+        <a type="button" class="btn btn-danger " href="${pageContext.request.contextPath}/Account/Register">Register</a>
       </div>
-
+      </c:otherwise>
+      </c:choose>
+    </ul>
   </div>
 
 </nav>

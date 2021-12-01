@@ -65,6 +65,7 @@
             <button type="submit" class="btn btn-primary">
                 Register
             </button>
+
         </form>
         </form>
     </jsp:body>
