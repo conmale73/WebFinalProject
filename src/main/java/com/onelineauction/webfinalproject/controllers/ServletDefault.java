@@ -1,8 +1,5 @@
 package com.onelineauction.webfinalproject.controllers;
 
-//import com.ute.ecwebapp.utils.ServletUtils;
-
-//import com.example.cuoiky.utils.ServletUtils;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
 import javax.servlet.ServletException;

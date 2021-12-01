@@ -39,18 +39,19 @@
       </div>
     <c:choose>
     <c:when test ="${auth}">
+    <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post"></form>
     <ul class="navbar-nav ">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Hi,User
+          Hi <b>${authUser.name}</b>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/Account/Profile">
             <i class="fa fa-user" aria-hidden="true"></i>
             Profile
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="javascript: $('#frmLogout').submit()">
             <i class=" fa fa-sign-out" aria-hidden="true"></i>
             Sign out
           </a>
