@@ -5,16 +5,16 @@ import java.time.LocalDate;
 
 public class User {
     private int id;
-    private String account,pass,name,email,address;
-    private LocalDate dob;
-    private int level;
+    private String username,password,HoTen,Email,DiaChi;
+    private LocalDate NgaySinh;
+    private int DiemUyTin, Quyen;
     public User()
     {
 
     }
 
     public String getAddress() {
-        return address;
+        return DiaChi;
     }
 
     public int getId() {
@@ -22,37 +22,43 @@ public class User {
     }
 
     public String getUsername() {
-        return account;
+        return username;
     }
 
     public String getPassword() {
-        return pass;
+        return password;
     }
 
     public String getName() {
-        return name;
+        return HoTen;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public LocalDate getDob() {
-        return dob;
+        return NgaySinh;
     }
 
     public int getLevel() {
-        return level;
+        return Quyen;
     }
-    public User(int id, String username, String password, String name, String email, String address, LocalDate dob, int level) {
+
+    public int getDiemUyTin() {
+        return DiemUyTin;
+    }
+
+    public User(int id, String username, String password, String name, LocalDate NgaySinh,String address,String email,int DiemUyTin, int level) {
         this.id = id;
-        this.account = username;
-        this.pass = password;
-        this.name = name;
-        this.email = email;
-        this.address = address;
-        this.dob = dob;
-        this.level = level;
+        this.username = username;
+        this.password = password;
+        this.HoTen = name;
+        this.NgaySinh = NgaySinh;
+        this.DiaChi = address;
+        this.Email = email;
+        this.DiemUyTin = DiemUyTin;
+        this.Quyen = level;
     }
 }
 

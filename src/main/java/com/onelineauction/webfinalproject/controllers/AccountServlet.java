@@ -75,7 +75,7 @@ public class AccountServlet extends HttpServlet {
 
 
         int permission =0;
-        User c = new User(0,username,password,name,email,address,dob,permission);
+        User c = new User(0,username,password,name,dob,address,email,90, permission);
         UserModel.add(c);
         ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
 
