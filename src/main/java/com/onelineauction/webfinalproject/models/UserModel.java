@@ -7,11 +7,11 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class UserModel {
-    public static User findByUsername(String account) {
-        final String query = "select * from user where account = :account";
+    public static User findByUsername(String username) {
+        final String query = "select * from users where username =:username";
         try (Connection con = DbUtils.getConnection()) {
             List<User> list = con.createQuery(query)
-                    .addParameter("account", account)
+                    .addParameter("username", username)
                     .executeAndFetch(User.class);
 
             if (list.size() == 0) {
@@ -23,17 +23,19 @@ public class UserModel {
     }
     public static void add(User c)
     {
-        String insertSql = "INSERT INTO user ( account, pass, name, address, email, level, dob) VALUES (:account,:pass,:name,:address,:email,:level,:dob)\n";
+        String insertSql = "INSERT INTO users ( username, password, HoTen, NgaySinh, DiaChi, Email,DiemUyTin, Quyen) VALUES (:username,:password,:HoTen,:NgaySinh,:DiaChi,:Email,:DiemUyTin,:Quyen)\n";
 
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(insertSql)
-                    .addParameter("account", c.getUsername())
-                    .addParameter("pass", c.getPassword())
-                    .addParameter("name", c.getName())
-                    .addParameter("address", c.getAddress())
-                    .addParameter("email", c.getEmail())
-                    .addParameter("level", c.getLevel())
-                    .addParameter("dob", c.getDob())
+                    .addParameter("username", c.getUsername())
+                    .addParameter("password", c.getPassword())
+                    .addParameter("HoTen", c.getName())
+                    .addParameter("NgaySinh", c.getDob())
+                    .addParameter("DiaChi", c.getAddress())
+                    .addParameter("Email", c.getEmail())
+                    .addParameter("DiemUyTin", c.getDiemUyTin())
+                    .addParameter("Quyen", c.getLevel())
+
                     .executeUpdate();
         }
 

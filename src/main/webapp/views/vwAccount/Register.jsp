@@ -50,6 +50,10 @@
                 <input type="text" class="form-control" id="txtName"  name="name" placeholder="">
             </div>
             <div class="form-group">
+                <label for="txtDOB">Date Of Birth</label>
+                <input type="text" class="form-control" id="txtDOB"  name="dob" placeholder="">
+            </div>
+            <div class="form-group">
                 <label for="txtAddress">Address</label>
                 <input type="text" class="form-control" id="txtAddress"  name="address" placeholder="">
             </div>
@@ -57,11 +61,6 @@
                 <label for="txtEmail">Email</label>
                 <input type="email" class="form-control" id="txtEmail"  name="email" placeholder="">
             </div>
-            <div class="form-group">
-                <label for="txtDOB">Date Of Birth</label>
-                <input type="text" class="form-control" id="txtDOB"  name="dob" placeholder="">
-            </div>
-
             <button type="submit" class="btn btn-primary">
                 Register
             </button>
