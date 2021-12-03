@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+<<<<<<< HEAD
+Built-By: ACER
+Build-Jdk: 11.0.13
+=======
+Built-By: ducha
+Build-Jdk: version 11.0.12
+>>>>>>> 19f125c12f51b8684dab71c285fdadc8e7464329
+
