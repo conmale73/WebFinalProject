@@ -1,2 +1,4 @@
-package com.onelineauction.webfinalproject.models;public class Category {
+package com.onelineauction.webfinalproject.models;
+
+public class Category {
 }
