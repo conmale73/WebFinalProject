@@ -1,6 +1,6 @@
 <div class="card mt-3">
   <h4 class="card-header">
-    Laptop
+    Máy tính xách tay
   </h4>
   <div class="list-group list-group-flush">
     <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
@@ -14,7 +14,7 @@
 </div>
 <div class="card mt-3">
   <h4 class="card-header">
-    CellPhone
+    Điện thoại di động
   </h4>
   <div class="list-group list-group-flush">
     <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
