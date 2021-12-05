@@ -1,7 +1,5 @@
 package com.onelineauction.webfinalproject.beans;
 
-import javax.xml.crypto.Data;
-import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 
 public class Product {
@@ -12,8 +10,8 @@ public class Product {
     private double BuocGia;
     private int IDDanhMuc;
     private int IDNguoiGiuGiaHienTai;
-    private Date ThoiGianDangBan;
-    private Date ThoiGianKetThuc;
+    private DateTimeFormatter ThoiGianDangBan;
+    private DateTimeFormatter ThoiGianKetThuc;
     private String ChiTiet;
     private String AnhChinh;
     private String AnhPhu;
@@ -22,7 +20,7 @@ public class Product {
 
     }
 
-    public Product(String IDSanPham, int IDNguoiBan, double GiaHienTai, double GiaMuaNgay, double BuocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, Date ThoiGianDangBan, Date ThoiGianKetThuc, String ChiTiet, String AnhChinh, String AnhPhu){
+    public Product(String IDSanPham, int IDNguoiBan, double GiaHienTai, double GiaMuaNgay, double BuocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter ThoiGianDangBan, DateTimeFormatter ThoiGianKetThuc, String ChiTiet, String AnhChinh, String AnhPhu){
         this.IDSanPham = IDSanPham;
         this.IDNguoiBan = IDNguoiBan;
         this.GiaHienTai = GiaHienTai;
@@ -65,11 +63,11 @@ public class Product {
         return IDNguoiGiuGiaHienTai;
     }
 
-    public Date getThoiGianDangBan() {
+    public DateTimeFormatter getThoiGianDangBan() {
         return ThoiGianDangBan;
     }
 
-    public Date getThoiGianKetThuc() {
+    public DateTimeFormatter getThoiGianKetThuc() {
         return ThoiGianKetThuc;
     }
 
