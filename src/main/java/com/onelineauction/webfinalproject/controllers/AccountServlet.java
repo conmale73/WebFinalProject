@@ -93,7 +93,10 @@ public class AccountServlet extends HttpServlet {
                 HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
                 session.setAttribute("auth",true);
                 session.setAttribute("authUser",user);
-
+                //Kiem tra xem vao co pphai la admin hay ko
+                boolean ktra_ad = UserModel.findLevel(username);
+                if(ktra_ad)
+                    request.setAttribute("lev2",true);
                 //String url = "/Home/Index";
                 String url = (String) session.getAttribute("retUrl");
                 if (url == null)

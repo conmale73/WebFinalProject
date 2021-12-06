@@ -6,6 +6,9 @@ import org.sql2o.Connection;
 
 import java.util.List;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 public class UserModel {
     public static User findByUsername(String username) {
         final String query = "select * from users where username =:username";
@@ -35,11 +38,25 @@ public class UserModel {
                     .addParameter("Email", c.getEmail())
                     .addParameter("DiemUyTin", c.getDiemUyTin())
                     .addParameter("Quyen", c.getLevel())
-
                     .executeUpdate();
         }
 
 
+    }
+    public static boolean findLevel(String username)
+    {
+        final String query = "select Quyen from users where username =:username";
+        try (Connection con = DbUtils.getConnection()) {
+            List<User> list = con.createQuery(query)
+                    .addParameter("username", username)
+                    .executeAndFetch(User.class);
+
+            if (list.size() == 0) {
+                return false;
+            }
+
+            return true;
+        }
     }
 
 }
