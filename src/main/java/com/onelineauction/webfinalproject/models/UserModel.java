@@ -45,7 +45,7 @@ public class UserModel {
     }
     public static boolean findLevel(String username)
     {
-        final String query = "select Quyen from users where username =:username";
+        final String query = "select * from users where username =:username and Quyen =2 ";
         try (Connection con = DbUtils.getConnection()) {
             List<User> list = con.createQuery(query)
                     .addParameter("username", username)
@@ -54,8 +54,8 @@ public class UserModel {
             if (list.size() == 0) {
                 return false;
             }
-
-            return true;
+            else
+                return true;
         }
     }
 

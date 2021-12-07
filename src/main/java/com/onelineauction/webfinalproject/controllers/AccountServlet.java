@@ -1,6 +1,7 @@
 package com.onelineauction.webfinalproject.controllers;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.onelineauction.webfinalproject.beans.SendEmail;
 import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
@@ -55,6 +56,11 @@ public class AccountServlet extends HttpServlet {
             case "/Logout":
                 logout(request, response);
                 break;
+            case  "/SendEmail":
+                sendEmail(request, response);
+                break;
+            case  "/Verify":
+                verify(request, response);
       default:
         ServletUtils.forward("/views/404.jsp", request, response);
         break;
@@ -95,13 +101,24 @@ public class AccountServlet extends HttpServlet {
                 session.setAttribute("authUser",user);
                 //Kiem tra xem vao co pphai la admin hay ko
                 boolean ktra_ad = UserModel.findLevel(username);
-                if(ktra_ad)
-                    request.setAttribute("lev2",true);
-                //String url = "/Home/Index";
-                String url = (String) session.getAttribute("retUrl");
-                if (url == null)
-                    url = "/Home";
-                ServletUtils.redirect(url,request,response);
+                if(ktra_ad) // Neu la Admin
+                {
+                    session.setAttribute("lev2", true);
+                    //String url = "/Home/Index";
+                    String url = (String) session.getAttribute("retUrl");
+                    if (url == null)
+                        url = "/AdminServlet";
+                    ServletUtils.redirect(url, request, response);
+                }
+                //Neu la ng khac
+                else
+                {
+                    //String url = "/Home/Index";
+                    String url = (String) session.getAttribute("retUrl");
+                    if (url == null)
+                        url = "/Home";
+                    ServletUtils.redirect(url, request, response);
+                }
             }
             else
             {
@@ -128,8 +145,34 @@ public class AccountServlet extends HttpServlet {
         if (url == null)
             url = "/Home";
         ServletUtils.redirect(url,request,response);
+    }
+    String codeOtp;
+    private void sendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String email = request.getParameter("email");
+        SendEmail sm = new SendEmail();
+        String otp = sm.getRandom();
+        codeOtp = otp;
+        boolean test = sm.sendEmail(email,otp);
+        if(test)
+            System.out.println("ket noi duoc");
 
 
+    }
+    private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String otp = request.getParameter("otp");
+
+        HttpSession session = request.getSession();
+//        User user= (User) session.getAttribute("authcode");
+//
+//        String code = request.getParameter("authcode");
+
+        if(otp.equals(codeOtp)){
+
+        }else{
+
+        }
 
     }
 

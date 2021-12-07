@@ -60,16 +60,24 @@
                         </div>
                         <div class="col-4">
                             <form class="form-inline">
-                            <button type="submit" class="btn btn-primary mt-5">Send</button>
-                        </form>
+                                <form id="frmSend" action="${pageContext.request.contextPath}/Account/SendEmail" method="post"></form>
+
+                                <a type="submit" class="btn btn-primary mt-5 " href="javascript: $('#frmSend').onsubmit()">
+                                    Send
+                                </a>
+                            </form>
                         </div>
                     </div>
 
                     <div class="form-group ">
                         <label for="inputCity">OTP sending</label>
                         <form class="form-inline">
-                        <input type="text" class="form-control" id="inputCity">
-                            <button type="submit" class="btn btn-primary ml-2">Verify</button>
+                        <input type="text" class="form-control" id="inputCity" name="otp">
+                            <a type="submit" class="btn btn-primary ml-2" >
+                                Verify
+                            </a>
+                            <form id="frmVerify" action="${pageContext.request.contextPath}/Account/SendEmail" method="post"></form>
+
                         </form>
                     </div>
                     <button type="submit" class="btn btn-primary">Register</button>
@@ -91,7 +99,7 @@
     $('#frmRegister').on('submit',function (e)
     {
         e.preventDefault();
-        const username = $('#txtUsername').val();
+        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
         if(username.length===0)
         {
             alert('Invalid username');
@@ -107,6 +115,7 @@
         }
     );
     $('#txtUsername').select(); //auto focus
+
 </script>
 </body>
 </html>
