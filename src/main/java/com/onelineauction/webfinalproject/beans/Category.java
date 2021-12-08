@@ -13,6 +13,10 @@ public class Category {
         this.TenDanhMuc = TenDM;
     }
 
+    public Category(String TenDM) {
+        this.IDDanhMuc = -1;
+        this.TenDanhMuc = TenDM;
+    }
     public int getIDDanhMuc() {
         return IDDanhMuc;
     }

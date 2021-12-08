@@ -1,6 +1,8 @@
 package com.onelineauction.webfinalproject.controllers;
 
+import com.onelineauction.webfinalproject.beans.Category;
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.models.CategoryModel;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
@@ -28,6 +30,11 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("Product", list);
                 ServletUtils.forward("/views/vwGuest/Product.jsp", request,response);
                 break;
+//            case "/Category":
+//                List<Category> categoryList = CategoryModel.findAll();
+//                request.setAttribute("Category", categoryList);
+//                ServletUtils.forward("", request, response);
+//                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
