@@ -1,6 +1,8 @@
 package com.onelineauction.webfinalproject.controllers;
 import com.mysql.cj.xdevapi.Schema;
+import com.onelineauction.webfinalproject.beans.Category;
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.models.CategoryModel;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
@@ -23,6 +25,8 @@ public class Home1Servlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
+                List<Category> listCat = CategoryModel.findAll();
+                request.setAttribute("category", listCat);
                 ServletUtils.forward("/views/vwGuest/index.jsp", request,response);
                 break;
             case "/Product":
