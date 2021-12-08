@@ -8,7 +8,7 @@
       <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Product List</a>
       <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Details</a>
     </div>
-    </div>
+
   </c:when>
   <c:otherwise>
     <div class="card mt-3">

@@ -26,6 +26,7 @@ public class AccountServlet extends HttpServlet {
 
 
         switch (path) {
+
             case "/Register":
                 ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
                 break;
@@ -34,6 +35,9 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "/Profile":
                 ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
+                break;
+            case "/OTP":
+                ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -56,17 +60,19 @@ public class AccountServlet extends HttpServlet {
             case "/Logout":
                 logout(request, response);
                 break;
-            case  "/SendEmail":
-                sendEmail(request, response);
+
+            case  "/OTP":
+                //Lay cac thong tin va gui Email
+                sendEmail(request,response);
+                //verify(request, response);
                 break;
-            case  "/Verify":
-                verify(request, response);
       default:
         ServletUtils.forward("/views/404.jsp", request, response);
         break;
         }
     }
     private void registerUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String rawpwd = request.getParameter("rawpwd");
         String password = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());//Ma hoa bCript
 
@@ -103,12 +109,11 @@ public class AccountServlet extends HttpServlet {
                 boolean ktra_ad = UserModel.findLevel(username);
                 if(ktra_ad) // Neu la Admin
                 {
-                    session.setAttribute("lev2", true);
-                    //String url = "/Home/Index";
+
                     String url = (String) session.getAttribute("retUrl");
-                    if (url == null)
-                        url = "/AdminServlet";
-                    ServletUtils.redirect(url, request, response);
+                    ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+
+
                 }
                 //Neu la ng khac
                 else
@@ -140,11 +145,11 @@ public class AccountServlet extends HttpServlet {
         HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
         session.setAttribute("auth",false);
         session.setAttribute("authUser",new User());
-
         String url = request.getHeader("referer");
         if (url == null)
             url = "/Home";
         ServletUtils.redirect(url,request,response);
+
     }
     String codeOtp;
     private void sendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -153,26 +158,33 @@ public class AccountServlet extends HttpServlet {
         SendEmail sm = new SendEmail();
         String otp = sm.getRandom();
         codeOtp = otp;
-        boolean test = sm.sendEmail(email,otp);
-        if(test)
-            System.out.println("ket noi duoc");
+        boolean test = sm.sendEmail(email,otp); //Gui email cho ngta
+        if(test) {
+            ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
+            System.out.println("Ra roi");
+        }else
+            System.out.println("Khong ra");
+
 
 
     }
     private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String otp = request.getParameter("otp");
+        //String otp = request.getParameter("otp");
 
         HttpSession session = request.getSession();
+        //String otp = session.getAttribute("otp");
+
+
 //        User user= (User) session.getAttribute("authcode");
 //
 //        String code = request.getParameter("authcode");
 
-        if(otp.equals(codeOtp)){
-
-        }else{
-
-        }
+//        if(otp.equals(codeOtp)){
+//
+//        }else{
+//
+//        }
 
     }
 

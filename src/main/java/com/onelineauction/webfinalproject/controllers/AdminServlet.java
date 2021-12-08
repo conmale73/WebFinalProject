@@ -1,7 +1,9 @@
 package com.onelineauction.webfinalproject.controllers;
 
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.models.ProductModel;
+import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
 import javax.servlet.*;
@@ -21,12 +23,18 @@ public class AdminServlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
+//                List<User> list = UserModel.findBidders();
+//                request.setAttribute("products", list);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
-            case "/Product":
-                List<Product> list = ProductModel.findAll();
-                request.setAttribute("Product", list);
-                ServletUtils.forward("/views/vwGuest/Product.jsp", request,response);
+            case "/SellerList":
+                ServletUtils.forward("/views/vwAdmin/Sellers.jsp", request,response);
+                break;
+            case "/BidderList":
+                List<User> list = UserModel.findBidders();
+                request.setAttribute("bidders", list);
+                ServletUtils.forward("/views/vwAdmin/Bidders.jsp", request,response);
+
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
