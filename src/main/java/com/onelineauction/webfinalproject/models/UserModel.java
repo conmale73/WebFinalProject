@@ -58,5 +58,18 @@ public class UserModel {
                 return true;
         }
     }
-
+    public static List<User> findBidders()  {
+        final String query = "select * from users where Quyen = 0";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(User.class);
+        }
+    }
+    public static List<User> findSellers()  {
+        final String query = "select * from users where Quyen = 1";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(User.class);
+        }
+    }
 }

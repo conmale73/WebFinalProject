@@ -22,66 +22,58 @@
         Home
     </a>
     <div class="row">
+        <div class="col-3"></div>
+        <div class="col-sm-6 ">
 
-        <div class="col-sm-11 ">
-<%--            <jsp:body>--%>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+
+                </div>
+                <div class="col-md-auto">
+                    <div class="p-3 mb-2 bg-success text-white text-center mx-sm-3 rounded ">Registration Form</div>
+                </div>
+                <div class="col col-lg-2">
+
+                </div>
+            </div>
+            <%--            <div class="p-3 mb-2 bg-success text-white text-center mx-sm-3">Registration Form</div>--%>
             <form action="" method="post" id="frmRegister">
-                <form class="dropdown-menu p-4 "  action="">
+                <form class="dropdown-menu p-4 " action="">
                     <div class="form-group ">
                         <label for="txtUsername">Username</label>
                         <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="txtPassword">Password</label>
-                        <input type="password" class="form-control" id="txtPassword" name="rawpwd" placeholder="Password">
+                        <input type="password" class="form-control" id="txtPassword" name="rawpwd"
+                               placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label for="txtConfirm">Confirm</label>
-                        <input type="password" class="form-control" id="txtConfirm"  placeholder="Password">
+                        <input type="password" class="form-control" id="txtConfirm" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label for="txtName">Name</label>
-                        <input type="text" class="form-control" id="txtName"  name="name" placeholder="">
+                        <input type="text" class="form-control" id="txtName" name="name" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="txtDOB">Date Of Birth</label>
-                        <input type="text" class="form-control" id="txtDOB"  name="dob" placeholder="">
+                        <input type="text" class="form-control" id="txtDOB" name="dob" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="txtAddress">Address</label>
-                        <input type="text" class="form-control" id="txtAddress"  name="address" placeholder="">
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="form-group ">
-                                <label for="txtEmail">Email</label>
-                                <input type="email" class="form-control" id="txtEmail"  name="email" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <form class="form-inline">
-                                <form id="frmSend" action="${pageContext.request.contextPath}/Account/SendEmail" method="post"></form>
-
-                                <a type="submit" class="btn btn-primary mt-5 " href="javascript: $('#frmSend').onsubmit()">
-                                    Send
-                                </a>
-                            </form>
-                        </div>
+                        <input type="text" class="form-control" id="txtAddress" name="address" placeholder="">
                     </div>
 
                     <div class="form-group ">
-                        <label for="inputCity">OTP sending</label>
-                        <form class="form-inline">
-                        <input type="text" class="form-control" id="inputCity" name="otp">
-                            <a type="submit" class="btn btn-primary ml-2" >
-                                Verify
-                            </a>
-                            <form id="frmVerify" action="${pageContext.request.contextPath}/Account/SendEmail" method="post"></form>
-
-                        </form>
+                        <label for="txtEmail">Email</label>
+                        <input type="email" class="form-control" id="txtEmail" name="email" placeholder="">
                     </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <a type="button" class="btn btn-danger" href="${pageContext.request.contextPath}/Account/Login">Login</a>
+
+                    <div class="d-flex justify-content-center">
+                        <a type="submit" class="btn btn-primary " href="${pageContext.request.contextPath}/Account/OTP">Register</a>
+
+                    </div>
 
                 </form>
             </form>
@@ -94,24 +86,26 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <%--<jsp:invoke fragment="js"/>--%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
+        integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    $('#frmRegister').on('submit',function (e)
-    {
-        e.preventDefault();
-        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-        if(username.length===0)
-        {
-            alert('Invalid username');
-            return;
-        }
-        $('#frmRegister').off('submit').submit();
-    });
+    // $('#frmRegister').on('submit',function (e)
+    // {
+    //     e.preventDefault();
+    //     const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
+    //     if(username.length===0)
+    //     {
+    //         alert('Invalid username');
+    //         return;
+    //     }
+    //     $('#frmRegister').off('submit').submit();
+    // });
     $('#txtDOB').datetimepicker(
         {
-            format : 'd/m/Y',
-            timepicker:false,
-            mask:true
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true
         }
     );
     $('#txtUsername').select(); //auto focus
