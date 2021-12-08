@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <a type="submit" class="btn btn-primary " href="${pageContext.request.contextPath}/Account/OTP">Register</a>
+                        <a type="submit" class="btn btn-primary " href="${pageContext.request.contextPath}/Account/Register">Register</a>
 
                     </div>
 
