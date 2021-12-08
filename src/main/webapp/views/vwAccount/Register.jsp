@@ -24,20 +24,17 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-sm-6 ">
-
             <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
-
                 </div>
                 <div class="col-md-auto">
                     <div class="p-3 mb-2 bg-success text-white text-center mx-sm-3 rounded ">Registration Form</div>
                 </div>
                 <div class="col col-lg-2">
-
                 </div>
             </div>
             <%--            <div class="p-3 mb-2 bg-success text-white text-center mx-sm-3">Registration Form</div>--%>
-            <form action="" method="post" id="frmRegister">
+            <form action="${pageContext.request.contextPath}/Account/OTP" method="post" id="frmRegister">
                 <form class="dropdown-menu p-4 " action="">
                     <div class="form-group ">
                         <label for="txtUsername">Username</label>
@@ -64,14 +61,12 @@
                         <label for="txtAddress">Address</label>
                         <input type="text" class="form-control" id="txtAddress" name="address" placeholder="">
                     </div>
-
                     <div class="form-group ">
                         <label for="txtEmail">Email</label>
                         <input type="email" class="form-control" id="txtEmail" name="email" placeholder="">
                     </div>
-
                     <div class="d-flex justify-content-center">
-                        <a type="submit" class="btn btn-primary " href="${pageContext.request.contextPath}/Account/Register">Register</a>
+                        <button type="submit" class="btn btn-primary">Register</button>
 
                     </div>
 
@@ -90,17 +85,17 @@
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    // $('#frmRegister').on('submit',function (e)
-    // {
-    //     e.preventDefault();
-    //     const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-    //     if(username.length===0)
-    //     {
-    //         alert('Invalid username');
-    //         return;
-    //     }
-    //     $('#frmRegister').off('submit').submit();
-    // });
+    $('#frmRegister').on('submit',function (e)
+    {
+        e.preventDefault();
+        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
+        if(username.length===0)
+        {
+            alert('Invalid username');
+            return;
+        }
+        $('#frmRegister').off('submit').submit();
+    });
     $('#txtDOB').datetimepicker(
         {
             format: 'd/m/Y',

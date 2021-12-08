@@ -35,8 +35,8 @@
             <form action="" method="post" id="frmRegister">
                 <form class="dropdown-menu p-4 "  action="">
                     <div class="form-group ">
-                        <label for="txtUsername">Enter OTP</label>
-                        <input type="text" class="form-control w-100" id="txtUsername" name="OTP" placeholder="">
+                        <label for="txtOTP">Enter OTP</label>
+                        <input type="text" class="form-control w-100" id="txtOTP" name="OTP" placeholder="">
                     </div>
                     <div class="d-flex justify-content-center">
                         <a type="submit" class="btn btn-primary " href="${pageContext.request.contextPath}/Account/Register">VeriFy</a>

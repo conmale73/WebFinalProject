@@ -21,8 +21,8 @@ public class SendEmail {
         boolean test = false;
 
         String toEmail = email;
-        String fromEmail = "tuantuan3455@gmail.com";
-        String password = "haodaubuoi";
+        String fromEmail = "swan4567890@gmail.com";
+        String password = "751953tT";
 
         try {
 
@@ -32,8 +32,8 @@ public class SendEmail {
             pr.setProperty("mail.smtp.port", "587");
             pr.setProperty("mail.smtp.auth", "true");
             pr.setProperty("mail.smtp.starttls.enable", "true");
-            pr.put("mail.smtp.socketFactory.port", "587");
-            pr.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            //pr.put("mail.smtp.socketFactory.port", "587");
+            //pr.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
             //get session to authenticate the host email address and password
             Session session = Session.getInstance(pr, new Authenticator() {

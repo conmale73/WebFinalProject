@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<t:admin>
+<t:main>
     <jsp:body>
         <table class="table table-hover table-dark">
             <thead>
@@ -23,4 +23,20 @@
             </tbody>
         </table>
     </jsp:body>
-</t:admin>
+</t:main>
+<script>
+
+    $(document).ready(function () {
+        $(".list-group-item").hover(function () {
+                $(this).css("background-color", "yellow");
+                $(this).css("color", "black");
+                $(this).css("font-weight", 800);
+
+            }, function () {
+                $(this).css("background-color", "white");
+                $(this).css("color", "black");
+                $(this).css("font-weight", 200);
+            }
+        );
+    });
+</script>

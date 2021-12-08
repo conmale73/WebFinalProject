@@ -8,9 +8,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">vdfvdf</th>
+                <th scope="col">vfdvdf</th>
+                <th scope="col">vfdvfdvdvdfv</th>
             </tr>
             </thead>
             <tbody>

@@ -16,18 +16,19 @@
                     <table class="table table-hover table-dark">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>Desciption</th>
+                            <th>ID</th> <%--Day la id ng mua--%>
+                            <th>Ho va Ten</th>
+                            <th>Ten San Pham</th>   <%--Lay từ IDSanPham suy ra tên sản phẩm --%>
+                            <th>Giá Đang đấu</th>   <%--GiaHienTai--%>
                             <th class="text-right">Price</th>
                             <th class="text-right">Quantity</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${products}" var="c">
+                        <c:forEach items="${bidders}" var="c">
                             <tr>
-                                <td>${c.proID}</td>
+<%--                                <td>${c.}</td>--%>
                                 <td>${c.proName}</td>
                                 <td>${c.tinyDes}</td>
                                 <td class="text-right">

@@ -3,6 +3,7 @@ package com.onelineauction.webfinalproject.controllers;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.onelineauction.webfinalproject.beans.SendEmail;
 import com.onelineauction.webfinalproject.beans.User;
+import com.onelineauction.webfinalproject.constant.constant;
 import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
@@ -52,7 +53,8 @@ public class AccountServlet extends HttpServlet {
 
         switch (path) {
             case "/Register":
-                registerUser(request, response);
+                sendEmail(request,response);
+                //registerUser(request, response);
                 break;
             case "/Login":
                 login(request, response);
@@ -72,24 +74,34 @@ public class AccountServlet extends HttpServlet {
         }
     }
     private void registerUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       // String OTPcode = request.getParameter("OTP");
+       // HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
+        //String email = session.getParameter("email");
+        //String email = session.getAttribute("email");
+        //if (OTPcode.equals(codeOtp)) {
 
-        String rawpwd = request.getParameter("rawpwd");
-        String password = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());//Ma hoa bCript
+            String rawpwd = request.getParameter("rawpwd");
+            String password = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());//Ma hoa bCript
 
-        String username = request.getParameter("username");
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String address = request.getParameter("address");
+            String username = request.getParameter("username");
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
 
-        String strDob = request.getParameter("dob");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dob = LocalDate.parse(strDob, df);
+            String strDob = request.getParameter("dob");
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate dob = LocalDate.parse(strDob, df);
 
 
-        int permission =0;
-        User c = new User(0,username,password,name,dob,address,email,90, permission);
-        UserModel.add(c);
-        ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
+            int permission = 0;
+            User c = new User(0, username, password, name, dob, address, email, 90, permission);
+            //UserModel.add(c);
+            constant.userConstant= c;
+            ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
+//        } else
+//        {
+//
+//        }
 
     }
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -105,15 +117,13 @@ public class AccountServlet extends HttpServlet {
                 HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
                 session.setAttribute("auth",true);
                 session.setAttribute("authUser",user);
+                session.setAttribute("lev2",true);
                 //Kiem tra xem vao co pphai la admin hay ko
                 boolean ktra_ad = UserModel.findLevel(username);
                 if(ktra_ad) // Neu la Admin
                 {
-
-                    String url = (String) session.getAttribute("retUrl");
-                    ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
-
-
+                    //String url = (String) session.getAttribute("retUrl");
+                    ServletUtils.redirect("/AdminServlet", request, response);
                 }
                 //Neu la ng khac
                 else
@@ -138,39 +148,39 @@ public class AccountServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Invalid login.");
             ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
         }
-
     }
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
         session.setAttribute("auth",false);
         session.setAttribute("authUser",new User());
-        String url = request.getHeader("referer");
-        if (url == null)
-            url = "/Home";
-        ServletUtils.redirect(url,request,response);
+        session.setAttribute("lev2",false);
 
+//        String url = request.getHeader("referer");
+//        if (url == null)
+//            url = "/Home";
+        ServletUtils.redirect("/Home",request,response);
     }
     String codeOtp;
     private void sendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        registerUser(request,response);
         String email = request.getParameter("email");
         SendEmail sm = new SendEmail();
         String otp = sm.getRandom();
         codeOtp = otp;
         boolean test = sm.sendEmail(email,otp); //Gui email cho ngta
-        if(test) {
+        if(test)
+        {
             ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
             System.out.println("Ra roi");
         }else
             System.out.println("Khong ra");
 
-
-
     }
     private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //String otp = request.getParameter("otp");
+        String otp = request.getParameter("otp");
 
         HttpSession session = request.getSession();
         //String otp = session.getAttribute("otp");
@@ -180,11 +190,11 @@ public class AccountServlet extends HttpServlet {
 //
 //        String code = request.getParameter("authcode");
 
-//        if(otp.equals(codeOtp)){
-//
-//        }else{
-//
-//        }
+        if(otp.equals(codeOtp)){
+            UserModel.add(constant.userConstant);
+        }else{
+
+        }
 
     }
 

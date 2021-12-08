@@ -3,10 +3,10 @@
 <c:choose>
   <c:when test ="${lev2}"> <%--    neu la Admin--%>
     <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Sellers List</a>
-      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Bidder List</a>
-      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Product List</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Details</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="${pageContext.request.contextPath}/AdminServlet/SellerList" aria-controls="home" role="button">Sellers List</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="${pageContext.request.contextPath}/AdminServlet/BidderList" aria-controls="profile" role="button">Bidder List</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="" role="tab" aria-controls="messages">Product List</a>
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="" role="tab" aria-controls="settings">Details</a>
     </div>
 
   </c:when>
