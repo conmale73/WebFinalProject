@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 04:02 PM
+-- Generation Time: Dec 08, 2021 at 11:46 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -32,6 +32,14 @@ CREATE TABLE `category` (
   `TenDanhMuc` varchar(50) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`IDDanhMuc`, `TenDanhMuc`) VALUES
+(2, 'Đồ cổ'),
+(1, 'Đồ công nghệ');
+
 -- --------------------------------------------------------
 
 --
@@ -55,6 +63,7 @@ CREATE TABLE `hoadon` (
 
 CREATE TABLE `product` (
   `IDSanPham` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `TenSanPham` varchar(255) CHARACTER SET utf8 NOT NULL,
   `IDNguoiBan` int(11) NOT NULL,
   `GiaHienTai` double NOT NULL,
   `GiaMuaNgay` double DEFAULT NULL,
@@ -72,8 +81,8 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`IDSanPham`, `IDNguoiBan`, `GiaHienTai`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
-('PC001', 1, 10000000, 30000000, 500000, 2, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', NULL, NULL, NULL);
+INSERT INTO `product` (`IDSanPham`, `TenSanPham`, `IDNguoiBan`, `GiaHienTai`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
+('PC001', 'Máy tính Apple Mac Pro', 1, 10000000, 30000000, 500000, 1, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -99,7 +108,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `username`, `password`, `HoTen`, `NgaySinh`, `DiaChi`, `Email`, `DiemUyTin`, `Quyen`) VALUES
 (3, 'anything', '$2a$12$/GeXCmk0Ui.PcU/N/x0ej.1.hC/asP5dY3faHU.3X2vTkhZ/3awl.', 'Any', '2009-12-13', 'Quáº£ng NgÃ£i', 'abcxyz@gmail.com', 90, 0),
-(4, 'damn', '$2a$12$IdkOYvigeQO2.vNDyTyNHOsvGEpicUdBjiYO8Pxov.WgATAKNvhS2', 'Damn Bro', '2021-12-25', 'áº¥c351313', 'a1sd531@gmail.com', 90, 0);
+(4, 'damn', '$2a$12$IdkOYvigeQO2.vNDyTyNHOsvGEpicUdBjiYO8Pxov.WgATAKNvhS2', 'Damn Bro', '2021-12-25', 'áº¥c351313', 'a1sd531@gmail.com', 90, 0),
+(5, 'admin2', '$2a$12$ljL/vuh6tqr6mElrjeLpaO24foa6rx3zm8TzS44ISogVO97ph1k/q', 'Admin No.2', '2001-03-07', 'QN', 'conmalenumber2@gmail.com', 90, 2);
 
 --
 -- Indexes for dumped tables
@@ -140,7 +150,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
