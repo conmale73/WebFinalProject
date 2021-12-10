@@ -25,13 +25,15 @@ public class Home1Servlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
-                List<Category> listCat = CategoryModel.findAll();
-                request.setAttribute("category", listCat);
+                List<Product> list = ProductModel.findAll();
+                request.setAttribute("products", list);
+//                List<Category> listCat = CategoryModel.findAll();
+//                request.setAttribute("category", listCat);
                 ServletUtils.forward("/views/vwGuest/index.jsp", request,response);
                 break;
             case "/Product":
-                List<Product> list = ProductModel.findAll();
-                request.setAttribute("Product", list);
+//                List<Product> list = ProductModel.findAll();
+//                request.setAttribute("Product", list);
                 ServletUtils.forward("/views/vwGuest/Product.jsp", request,response);
                 break;
             default:

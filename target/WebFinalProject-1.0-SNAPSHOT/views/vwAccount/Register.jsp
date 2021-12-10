@@ -40,6 +40,7 @@
                         <label for="txtUsername">Username</label>
                         <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder="" required>
                     </div>
+                    <div id="#mess1"></div>
                     <div class="form-group">
                         <label for="txtPassword">Password</label>
                         <input type="password" class="form-control" id="txtPassword" name="rawpwd" required
@@ -47,7 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label for="txtConfirm">Confirm</label>
-                        <input type="password" class="form-control" id="txtConfirm" placeholder="Password" required>
+                        <input type="password" class="form-control" id="txtConfirm"  placeholder="Password" required>
                     </div>
                     <div class="form-group">
                         <label for="txtName">Name</label>
@@ -96,6 +97,32 @@
         }
         $('#frmRegister').off('submit').submit();
     });
+
+    $(document).ready(function(){
+        const pass = $('#txtPassword').val();
+        const confirm = $('#txtConfirm').val();
+        $("#txtPassword").on('input',function(){
+            if(pass.length < 7)
+                $("#mess1").html("<b>Password must have at least 6 characters</b>");
+        });
+        $("#txtConfirm").on("input", function(){
+            if (pass.equals(confirm)) {
+                $('#txtPassword').css("border-style", "solid");
+                $('#txtPassword').css("border-color", "green");
+
+                $('#txtConfirm').css("border-style", "solid");
+                $('#txtConfirm').css("border-color", "green");
+            }
+            else {
+                $('#txtPassword').css("border-style", "solid");
+                $('#txtPassword').css("border-color", "red");
+
+                $('#txtConfirm').css("border-style", "solid");
+                $('#txtConfirm').css("border-color", "red");
+            }
+        });
+    });
+
     $('#txtDOB').datetimepicker(
         {
             format: 'd/m/Y',
