@@ -38,7 +38,7 @@
                         <input type="text" class="form-control w-100" id="txtOTP" name="OTP" placeholder="">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a type="submit" class="btn btn-primary ">VeriFy</a>
+                        <button type="submit" class="btn btn-primary ">VeriFy</button>
                     </div>
             </form>
 
@@ -63,6 +63,7 @@
     //     }
     //     $('#frmRegister').off('submit').submit();
     // });
+
     // $('#txtDOB').datetimepicker(
     //     {
     //         format : 'd/m/Y',

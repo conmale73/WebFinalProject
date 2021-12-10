@@ -7,6 +7,7 @@ import com.onelineauction.webfinalproject.constant.constant;
 import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -152,18 +153,17 @@ public class AccountServlet extends HttpServlet {
 //            url = "/Home";
         ServletUtils.redirect("/Home",request,response);
     }
-    String codeOtp;
+
     private void sendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         registerUser(request,response);
         String email = request.getParameter("email");
         SendEmail sm = new SendEmail();
         String otp = sm.getRandom();
-        codeOtp = otp;
+        constant.codeOtp = otp;
         boolean test = sm.sendEmail(email,otp); //Gui email cho ngta
         if(test)
         {
-            //UserModel.add(constant.userConstant);
             ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
             System.out.println("Ra roi");
         }else
@@ -171,11 +171,13 @@ public class AccountServlet extends HttpServlet {
 
     }
     private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String otp = request.getParameter("OTP");
+        if(otp.equals(constant.codeOtp))    //so sánh chuỗi, 2 đối tượng
 
-        String otp = request.getParameter("otp");
-        if(otp.equals(codeOtp)){
+        {
             UserModel.add(constant.userConstant);
             ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+
         }else{
             ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
             System.out.println("Dang ky khong thanh cong");

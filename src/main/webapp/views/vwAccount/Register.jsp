@@ -40,7 +40,7 @@
                         <label for="txtUsername">Username</label>
                         <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder="" required>
                     </div>
-                    <div id="#mess1"></div>
+                    <div id="mess1"></div>
                     <div class="form-group">
                         <label for="txtPassword">Password</label>
                         <input type="password" class="form-control" id="txtPassword" name="rawpwd" required
@@ -50,6 +50,7 @@
                         <label for="txtConfirm">Confirm</label>
                         <input type="password" class="form-control" id="txtConfirm"  placeholder="Password" required>
                     </div>
+                    <span></span>
                     <div class="form-group">
                         <label for="txtName">Name</label>
                         <input type="text" class="form-control" id="txtName" name="name" placeholder="" required>
@@ -101,12 +102,17 @@
     $(document).ready(function(){
         const pass = $('#txtPassword').val();
         const confirm = $('#txtConfirm').val();
-        $("#txtPassword").on('input',function(){
-            if(pass.length < 7)
-                $("#mess1").html("<b>Password must have at least 6 characters</b>");
-        });
+        $("#txtPassword").on('input',function(e){
+            if(pass.length < 7) {
+                $("#mess1").innerHTML = ("<b>Password must have at least 6 characters</b>");
+                //alert("Password must have at least 6 characters")
+                e.preventDefault();
+
+            }
+            });
         $("#txtConfirm").on("input", function(){
-            if (pass.equals(confirm)) {
+            console.log(confirm);
+            if (pass === confirm) {
                 $('#txtPassword').css("border-style", "solid");
                 $('#txtPassword').css("border-color", "green");
 
@@ -114,6 +120,7 @@
                 $('#txtConfirm').css("border-color", "green");
             }
             else {
+
                 $('#txtPassword').css("border-style", "solid");
                 $('#txtPassword').css("border-color", "red");
 
