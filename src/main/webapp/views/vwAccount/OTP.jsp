@@ -32,16 +32,14 @@
                 <div class="col col-lg-2">
                 </div>
             </div>
-            <form action="" method="post" id="frmRegister">
-                <form class="dropdown-menu p-4 "  action="">
+            <form action="${pageContext.request.contextPath}/Account/Verify" method="post" id="">
                     <div class="form-group ">
                         <label for="txtOTP">Enter OTP</label>
                         <input type="text" class="form-control w-100" id="txtOTP" name="OTP" placeholder="">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a type="submit" class="btn btn-primary " href="${pageContext.request.contextPath}/Account/Register">VeriFy</a>
+                        <a type="submit" class="btn btn-primary ">VeriFy</a>
                     </div>
-                </form>
             </form>
 
         </div>
@@ -54,25 +52,25 @@
 <%--<jsp:invoke fragment="js"/>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    $('#frmRegister').on('submit',function (e)
-    {
-        e.preventDefault();
-        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-        if(username.length===0)
-        {
-            alert('Invalid username');
-            return;
-        }
-        $('#frmRegister').off('submit').submit();
-    });
-    $('#txtDOB').datetimepicker(
-        {
-            format : 'd/m/Y',
-            timepicker:false,
-            mask:true
-        }
-    );
-    $('#txtUsername').select(); //auto focus
+    // $('#frmRegister').on('submit',function (e)
+    // {
+    //     e.preventDefault();
+    //     const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
+    //     if(username.length===0)
+    //     {
+    //         alert('Invalid username');
+    //         return;
+    //     }
+    //     $('#frmRegister').off('submit').submit();
+    // });
+    // $('#txtDOB').datetimepicker(
+    //     {
+    //         format : 'd/m/Y',
+    //         timepicker:false,
+    //         mask:true
+    //     }
+    // );
+    // $('#txtUsername').select(); //auto focus
 
 </script>
 </body>

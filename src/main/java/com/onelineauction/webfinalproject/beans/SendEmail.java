@@ -1,15 +1,14 @@
 package com.onelineauction.webfinalproject.beans;
-import java.util.Properties;
-import java.util.Random;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import org.testng.annotations.Test;
+
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import java.util.Random;
+
 public class SendEmail {
-    //generate vrification code
+    //generate verification code
     public String getRandom() {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
@@ -20,23 +19,21 @@ public class SendEmail {
     public boolean sendEmail(String email,String code) {
         boolean test = false;
 
-        String toEmail = email;
-        String fromEmail = "swan4567890@gmail.com";
-        String password = "751953tT";
+
 
         try {
-
+            String toEmail = email;
+            String fromEmail = "tuantuan3455@gmail.com";
+            String password = "haodaubuoi";
             // your host email smtp server details
-            Properties pr = new Properties();
-            pr.setProperty("mail.smtp.host", "smtp.mail.com");
-            pr.setProperty("mail.smtp.port", "587");
-            pr.setProperty("mail.smtp.auth", "true");
-            pr.setProperty("mail.smtp.starttls.enable", "true");
-            //pr.put("mail.smtp.socketFactory.port", "587");
-            //pr.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            Properties properties = new Properties();
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.host", "smtp.gmail.com");
+            properties.put("mail.smtp.port", "587");
 
             //get session to authenticate the host email address and password
-            Session session = Session.getInstance(pr, new Authenticator() {
+            Session session = Session.getInstance(properties, new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(fromEmail, password);
@@ -67,4 +64,7 @@ public class SendEmail {
 
         return test;
     }
+
+
+
 }

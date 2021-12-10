@@ -38,32 +38,32 @@
                 <form class="dropdown-menu p-4 " action="">
                     <div class="form-group ">
                         <label for="txtUsername">Username</label>
-                        <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder="">
+                        <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder="" required>
                     </div>
                     <div class="form-group">
                         <label for="txtPassword">Password</label>
-                        <input type="password" class="form-control" id="txtPassword" name="rawpwd"
+                        <input type="password" class="form-control" id="txtPassword" name="rawpwd" required
                                placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label for="txtConfirm">Confirm</label>
-                        <input type="password" class="form-control" id="txtConfirm" placeholder="Password">
+                        <input type="password" class="form-control" id="txtConfirm" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                         <label for="txtName">Name</label>
-                        <input type="text" class="form-control" id="txtName" name="name" placeholder="">
+                        <input type="text" class="form-control" id="txtName" name="name" placeholder="" required>
                     </div>
                     <div class="form-group">
                         <label for="txtDOB">Date Of Birth</label>
-                        <input type="text" class="form-control" id="txtDOB" name="dob" placeholder="">
+                        <input type="text" class="form-control" id="txtDOB" name="dob" placeholder="" required>
                     </div>
                     <div class="form-group">
                         <label for="txtAddress">Address</label>
-                        <input type="text" class="form-control" id="txtAddress" name="address" placeholder="">
+                        <input type="text" class="form-control" id="txtAddress" name="address" placeholder="" required>
                     </div>
                     <div class="form-group ">
                         <label for="txtEmail">Email</label>
-                        <input type="email" class="form-control" id="txtEmail" name="email" placeholder="">
+                        <input type="email" class="form-control" id="txtEmail" name="email" placeholder="" required>
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">Register</button>

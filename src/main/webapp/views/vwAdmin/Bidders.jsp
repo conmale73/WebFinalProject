@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="bidders" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />
 
-<t:admin>
+<t:main>
     <jsp:body>
         <c:choose>
             <c:when test="${bidders.size() == 0}">
@@ -48,4 +48,4 @@
             </c:otherwise>
         </c:choose>
     </jsp:body>
-</t:admin>
+</t:main>

@@ -68,17 +68,15 @@ public class AccountServlet extends HttpServlet {
                 sendEmail(request,response);
                 //verify(request, response);
                 break;
+            case "/Verify":
+                verify(request,response);
+                break;
       default:
         ServletUtils.forward("/views/404.jsp", request, response);
         break;
         }
     }
     private void registerUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // String OTPcode = request.getParameter("OTP");
-       // HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
-        //String email = session.getParameter("email");
-        //String email = session.getAttribute("email");
-        //if (OTPcode.equals(codeOtp)) {
 
             String rawpwd = request.getParameter("rawpwd");
             String password = BCrypt.withDefaults().hashToString(12, rawpwd.toCharArray());//Ma hoa bCript
@@ -97,11 +95,6 @@ public class AccountServlet extends HttpServlet {
             User c = new User(0, username, password, name, dob, address, email, 90, permission);
             //UserModel.add(c);
             constant.userConstant= c;
-            ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
-//        } else
-//        {
-//
-//        }
 
     }
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -118,11 +111,9 @@ public class AccountServlet extends HttpServlet {
                 session.setAttribute("auth",true);
                 session.setAttribute("authUser",user);
                 session.setAttribute("lev2",true);
-                //Kiem tra xem vao co pphai la admin hay ko
                 boolean ktra_ad = UserModel.findLevel(username);
                 if(ktra_ad) // Neu la Admin
                 {
-                    //String url = (String) session.getAttribute("retUrl");
                     ServletUtils.redirect("/AdminServlet", request, response);
                 }
                 //Neu la ng khac
@@ -172,6 +163,7 @@ public class AccountServlet extends HttpServlet {
         boolean test = sm.sendEmail(email,otp); //Gui email cho ngta
         if(test)
         {
+            //UserModel.add(constant.userConstant);
             ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
             System.out.println("Ra roi");
         }else
@@ -181,19 +173,12 @@ public class AccountServlet extends HttpServlet {
     private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String otp = request.getParameter("otp");
-
-        HttpSession session = request.getSession();
-        //String otp = session.getAttribute("otp");
-
-
-//        User user= (User) session.getAttribute("authcode");
-//
-//        String code = request.getParameter("authcode");
-
         if(otp.equals(codeOtp)){
             UserModel.add(constant.userConstant);
+            ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
         }else{
-
+            ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
+            System.out.println("Dang ky khong thanh cong");
         }
 
     }
