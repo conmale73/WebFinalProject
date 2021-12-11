@@ -38,7 +38,8 @@
                 <form class="dropdown-menu p-4 " action="">
                     <div class="form-group ">
                         <label for="txtUsername">Username</label>
-                        <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder="" required>
+                        <input type="text" class="form-control w-100" id="txtUsername" name="username" placeholder=""
+                               required>
                     </div>
                     <div id="mess1"></div>
                     <div class="form-group">
@@ -46,11 +47,13 @@
                         <input type="password" class="form-control" id="txtPassword" name="rawpwd" required
                                placeholder="Password">
                     </div>
+                    <span id="pass_alert" style="color: red"></span>
                     <div class="form-group">
                         <label for="txtConfirm">Confirm</label>
-                        <input type="password" class="form-control" id="txtConfirm"  placeholder="Password" required>
+                        <input type="password" class="form-control" id="txtConfirm" name="confirmPassWord"
+                               placeholder="Password" required>
                     </div>
-                    <span></span>
+
                     <div class="form-group">
                         <label for="txtName">Name</label>
                         <input type="text" class="form-control" id="txtName" name="name" placeholder="" required>
@@ -67,6 +70,8 @@
                         <label for="txtEmail">Email</label>
                         <input type="email" class="form-control" id="txtEmail" name="email" placeholder="" required>
                     </div>
+                    <span id="email_alert" style="color: red"></span>
+
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">Register</button>
 
@@ -86,49 +91,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<script type="text/css">
+    .valid {
+        border: 1px solid green
+    }
+
+    .error {
+        color: red
+    }
+</script>
 <script>
-    $('#frmRegister').on('submit',function (e)
-    {
-        e.preventDefault();
-        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-        if(username.length===0)
-        {
-            alert('Invalid username');
-            return;
-        }
-        $('#frmRegister').off('submit').submit();
-    });
-
-    $(document).ready(function(){
-        const pass = $('#txtPassword').val();
-        const confirm = $('#txtConfirm').val();
-        $("#txtPassword").on('input',function(e){
-            if(pass.length < 7) {
-                $("#mess1").innerHTML = ("<b>Password must have at least 6 characters</b>");
-                //alert("Password must have at least 6 characters")
-                e.preventDefault();
-
-            }
-            });
-        $("#txtConfirm").on("input", function(){
-            console.log(confirm);
-            if (pass === confirm) {
-                $('#txtPassword').css("border-style", "solid");
-                $('#txtPassword').css("border-color", "green");
-
-                $('#txtConfirm').css("border-style", "solid");
-                $('#txtConfirm').css("border-color", "green");
-            }
-            else {
-
-                $('#txtPassword').css("border-style", "solid");
-                $('#txtPassword').css("border-color", "red");
-
-                $('#txtConfirm').css("border-style", "solid");
-                $('#txtConfirm').css("border-color", "red");
-            }
-        });
-    });
 
     $('#txtDOB').datetimepicker(
         {
@@ -139,6 +112,127 @@
     );
     $('#txtUsername').select(); //auto focus
 
+    $('#frmRegister').on('submit', function (e) {
+        // const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
+        // if(username.length===0)
+        // {
+        //     alert('Invalid username');
+        //     return;
+        // }
+        $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {
+            if (data === true) {
+                $('#frmRegister').off('submit').submit();
+            } else {
+                alert('Username is valid.');
+            }
+        });
+        if (!isValidEmailAddress($('#txtEmail').val())) {
+            $('#email_alert').html("Email is not correct!");
+            return;
+        }
+        $('#frmRegister').off('submit').submit();
+        // let kt=0;
+        // if ( $('#txtPassword').val().length < 6) {
+        //     $("#pass_alert").attr("class", "alert alert-primary mx-auto");
+        //     $("#pass_alert").attr("role", "alert");
+        //     $('#pass_alert').html("Password must have at least 6 characters");
+        //
+        //     $('#txtPassword').css("border-color", "red");
+        //     kt=1;
+        //
+        // }
+        // else if (!isValidEmailAddress($('#txtEmail').val()))
+        // {
+        //     $('#email_alert').html("Email is not correct!");
+        //     kt=1;
+        //
+        // }
+        // else
+        // {
+        // }
+        // if(kt===1) {
+        //     alert('Form is not correct');
+        //     $('#frmRegister').off('submit').submit();
+        //     e.preventDefault();
+        //
+        // }
+    })
+
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        // alert( pattern.test(emailAddress) );
+        return pattern.test(emailAddress);
+    }
+    $(document).ready(function () {
+        $('#frmRegister').validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 6
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                rawpwd: {
+                    required: true,
+                    minlength: 6
+
+                },
+                confirmPassWord: {
+                    required: true,
+                    equalTo: "#txtPassword"
+                }
+
+            },
+            messages: {
+                username: {
+                    required: "Name is required"
+                },
+                confirmPassWord:
+                    {
+                        equalTo: "PassWords do not match",
+                        required: "This is required"
+                    }
+            }
+
+        })
+
+
+    })
+    // $(document).ready(function(){
+    //     const pass = $('#txtPassword').val();
+    //     const confirm = $('#txtConfirm').val();
+    //     $("#txtPassword").on('input',function(e){
+    //         if(pass.length < 7) {
+    //             $("#mess1").innerHTML = ("<b>Password must have at least 6 characters</b>");
+    //             //alert("Password must have at least 6 characters")
+    //             e.preventDefault();
+    //
+    //         }
+    //         });
+    //     $("#txtConfirm").on("input", function(){
+    //         console.log(confirm);
+    //         if (pass === confirm) {
+    //             $('#txtPassword').css("border-style", "solid");
+    //             $('#txtPassword').css("border-color", "green");
+    //
+    //             $('#txtConfirm').css("border-style", "solid");
+    //             $('#txtConfirm').css("border-color", "green");
+    //         }
+    //         else {
+    //
+    //             $('#txtPassword').css("border-style", "solid");
+    //             $('#txtPassword').css("border-color", "red");
+    //
+    //             $('#txtConfirm').css("border-style", "solid");
+    //             $('#txtConfirm').css("border-color", "red");
+    //         }
+    //     });
+    // });
+
+
 </script>
+
 </body>
 </html>

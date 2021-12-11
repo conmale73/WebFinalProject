@@ -6,6 +6,7 @@ import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.constant.constant;
 import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
+import javafx.print.Printer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,6 +42,18 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "/OTP":
                 ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
+                break;
+            case "/IsAvailable":
+                String username = request.getParameter("user");
+                User user = UserModel.findByUsername(username);
+                boolean isAvailable = (user == null);
+
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                out.print(isAvailable);
+                out.flush();
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
