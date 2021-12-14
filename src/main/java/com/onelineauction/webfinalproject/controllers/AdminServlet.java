@@ -35,12 +35,14 @@ public class AdminServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/SellerList":
-                ServletUtils.forward("/views/vwAdmin/Sellers.jsp", request,response);
+                List<User> sellerlist = UserModel.findBidders();
+                request.setAttribute("sellers", sellerlist);
+                ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/BidderList":
-                List<User> list = UserModel.findBidders();
-                request.setAttribute("bidders", list);
-                ServletUtils.forward("/views/vwAdmin/Bidders.jsp", request,response);
+                List<User> bidderlist = UserModel.findBidders();
+                request.setAttribute("bidders", bidderlist);
+                ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
 
                 break;
             case "/Edit":
@@ -53,7 +55,7 @@ public class AdminServlet extends HttpServlet {
                 {
                 }
                 else {
-                    System.out.println(id_find_user.getName());
+                    //System.out.println(id_find_user.getName());
                     ServletUtils.forward("/views/Home/Edit.jsp", request, response);
                 }
                 break;
@@ -95,7 +97,7 @@ public class AdminServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         int pointId = Integer.parseInt(request.getParameter("point"));
-        System.out.println(pointId);
+        //System.out.println(pointId);
         int permission = Integer.parseInt(request.getParameter("permission"));
         User c = new User(constant.idUser,"","",name,dob,address,email,pointId,permission);
         UserModel.updateUser(c);

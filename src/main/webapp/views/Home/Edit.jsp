@@ -48,7 +48,7 @@
                     </select>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
             </form>
 
@@ -67,6 +67,9 @@
             mask: true
         }
     );
+    $( "#btnSave" ).click(function() {
+        alert( "Update Successfully" );
+    });
     $(document).ready(function () {
         $(".list-group-item").hover(function () {
                 $(this).css("background-color", "yellow");
