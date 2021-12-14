@@ -20,15 +20,25 @@
                     <table class="table table-hover">
                         <thread>
                             <tr>
-                                <th>#</th>
-                                <th>product</th>
-                                <th>&nbsp</th>
+                                <th>ID Sản Phẩm</th>
+<th>ID Sản Phẩm</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Giá Hiện Tại</th>
+                                <th>Thời Gian Kết Thúc</th>
+                                <th>Giá Hiện Tại</th>
+                                <th>Thời Gian Kết Thúc</th>
                             </tr>
                         </thread>
                         <tbody>
-                        <c:forEach items="${product}" var="c">
+<td>${p.IDSanPham}</td>
+                                <td>${p.tenSanPham}</td>
+                                <td>${p.giaHienTai}</td>
+                                <td>${p.thoiGianKetThuc}</td>
                             <tr>
-                                <td>${c.IDSanPham}</td>
+                                <td>${p.IDSanPham}</td>
+                                <td>${p.tenSanPham}</td>
+                                <td>${p.giaHienTai}</td>
+                                <td>${p.thoiGianKetThuc}</td>
                                 <td class="text-right">
                                     <a class="btn btn-outline-primaryprimary" href="#" role="button">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>

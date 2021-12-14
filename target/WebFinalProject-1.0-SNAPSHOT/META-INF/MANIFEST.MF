@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
+<<<<<<< HEAD
 Built-By: ACER
 Build-Jdk: 11.0.13
+=======
+Built-By: ducha
+Build-Jdk: 1.8.0_312
+>>>>>>> e57a9705f43de85b7e4bbea807f75f2a12e76c3f
 

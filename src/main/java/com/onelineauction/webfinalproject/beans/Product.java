@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Product {
     private String IDSanPham;
+    private String TenSanPham;
     private int IDNguoiBan;
     private double GiaHienTai;
     private double GiaMuaNgay;
@@ -20,19 +21,40 @@ public class Product {
 
     }
 
-    public Product(String IDSanPham, int IDNguoiBan, double GiaHienTai, double GiaMuaNgay, double BuocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter ThoiGianDangBan, DateTimeFormatter ThoiGianKetThuc, String ChiTiet, String AnhChinh, String AnhPhu){
+    public Product(String IDSanPham, String tenSanPham, int IDNguoiBan, double giaHienTai, double giaMuaNgay, double buocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter thoiGianDangBan, DateTimeFormatter thoiGianKetThuc, String chiTiet, String anhChinh, String anhPhu) {
         this.IDSanPham = IDSanPham;
+        TenSanPham = tenSanPham;
         this.IDNguoiBan = IDNguoiBan;
-        this.GiaHienTai = GiaHienTai;
-        this.GiaMuaNgay = GiaMuaNgay;
-        this.BuocGia = BuocGia;
+        GiaHienTai = giaHienTai;
+        GiaMuaNgay = giaMuaNgay;
+        BuocGia = buocGia;
         this.IDDanhMuc = IDDanhMuc;
         this.IDNguoiGiuGiaHienTai = IDNguoiGiuGiaHienTai;
-        this.ThoiGianDangBan = ThoiGianDangBan;
-        this.ThoiGianKetThuc = ThoiGianKetThuc;
-        this.ChiTiet = ChiTiet;
-        this.AnhChinh = AnhChinh;
-        this.AnhPhu = AnhPhu;
+        ThoiGianDangBan = thoiGianDangBan;
+        ThoiGianKetThuc = thoiGianKetThuc;
+        ChiTiet = chiTiet;
+        AnhChinh = anhChinh;
+        AnhPhu = anhPhu;
+    }
+
+    //    public Product(String IDSanPham, int IDNguoiBan, double GiaHienTai, double GiaMuaNgay, double BuocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter ThoiGianDangBan, DateTimeFormatter ThoiGianKetThuc, String ChiTiet, String AnhChinh, String AnhPhu){
+//        this.IDSanPham = IDSanPham;
+//        this.IDNguoiBan = IDNguoiBan;
+//        this.GiaHienTai = GiaHienTai;
+//        this.GiaMuaNgay = GiaMuaNgay;
+//        this.BuocGia = BuocGia;
+//        this.IDDanhMuc = IDDanhMuc;
+//        this.IDNguoiGiuGiaHienTai = IDNguoiGiuGiaHienTai;
+//        this.ThoiGianDangBan = ThoiGianDangBan;
+//        this.ThoiGianKetThuc = ThoiGianKetThuc;
+//        this.ChiTiet = ChiTiet;
+//        this.AnhChinh = AnhChinh;
+//        this.AnhPhu = AnhPhu;
+//    }
+
+
+    public String getTenSanPham() {
+        return TenSanPham;
     }
 
     public String getIDSanPham() {
