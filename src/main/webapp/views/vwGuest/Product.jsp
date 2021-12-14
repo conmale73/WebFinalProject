@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<jsp:useBean id="Product" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>"/>
+<jsp:useBean id="product" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>"/>
 
 <t:main>
     <jsp:body>
@@ -10,7 +10,7 @@
             Product
         </h4>
         <c:choose>
-            <c:when test="${Product()==0}">
+            <c:when test="${product()==0}">
                 <div class="card-body">
                     <p class="card-text">Không có dữ liệu</p>
                 </div>
@@ -21,12 +21,12 @@
                         <thread>
                             <tr>
                                 <th>#</th>
-                                <th>Product</th>
+                                <th>product</th>
                                 <th>&nbsp</th>
                             </tr>
                         </thread>
                         <tbody>
-                        <c:forEach items="${Product}" var="c">
+                        <c:forEach items="${product}" var="c">
                             <tr>
                                 <td>${c.IDSanPham}</td>
                                 <td class="text-right">

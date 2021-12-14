@@ -23,12 +23,13 @@ public class Home1Servlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
+                List<Product> list = ProductModel.findAll();
+                request.setAttribute("product", list);
                 ServletUtils.forward("/views/vwGuest/index.jsp", request,response);
                 break;
             case "/Product":
-                List<Product> list = ProductModel.findAll();
-                request.setAttribute("Product", list);
                 ServletUtils.forward("/views/vwGuest/Product.jsp", request,response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
