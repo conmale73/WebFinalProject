@@ -87,7 +87,7 @@
                     <tbody>
                     <c:forEach items="${sellers}" var="c">
                         <tr class="table-success">
-                            <td>${}</td>
+                            <td>${c.IDSanPham}</td>
                             <td>${c.name}</td>
                             <td>${c.dob}</td>
                             <td>${c.address}</td>

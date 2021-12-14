@@ -20,24 +20,20 @@
                     <table class="table table-hover">
                         <thread>
                             <tr>
-<<<<<<< HEAD
-                                <th>#</th>
-                                <th>product</th>
-                                <th>&nbsp</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                        <c:forEach items="${product}" var="c">
-=======
                                 <th>ID Sản Phẩm</th>
+<th>ID Sản Phẩm</th>
                                 <th>Tên Sản Phẩm</th>
+                                <th>Giá Hiện Tại</th>
+                                <th>Thời Gian Kết Thúc</th>
                                 <th>Giá Hiện Tại</th>
                                 <th>Thời Gian Kết Thúc</th>
                             </tr>
                         </thread>
                         <tbody>
-                        <c:forEach items="${Product}" var="p">
->>>>>>> e57a9705f43de85b7e4bbea807f75f2a12e76c3f
+<td>${p.IDSanPham}</td>
+                                <td>${p.tenSanPham}</td>
+                                <td>${p.giaHienTai}</td>
+                                <td>${p.thoiGianKetThuc}</td>
                             <tr>
                                 <td>${p.IDSanPham}</td>
                                 <td>${p.tenSanPham}</td>

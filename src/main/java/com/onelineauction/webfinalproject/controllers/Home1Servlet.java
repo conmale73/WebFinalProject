@@ -26,7 +26,6 @@ public class Home1Servlet extends HttpServlet {
         switch (path) {
             case "/Index":
                 List<Product> list = ProductModel.findAll();
-List<Product> list = ProductModel.findAll();
                 request.setAttribute("products", list);
 //                List<Category> listCat = CategoryModel.findAll();
 //                request.setAttribute("category", listCat);
