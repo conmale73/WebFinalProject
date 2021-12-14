@@ -1,5 +1,10 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Category>"/>
+
 <c:choose>
   <c:when test ="${lev2}"> <%--    neu la Admin--%>
     <div class="list-group" id="list-tab" role="tablist">
@@ -13,31 +18,23 @@
   <c:otherwise>
     <div class="card mt-3">
       <h4 class="card-header">
-        Laptop
+        Danh Mục
       </h4>
-      <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-          The current link item (edited)
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">Lenovo</a>
-        <a href="#" class="list-group-item list-group-item-action">Apple</a>
-        <a href="#" class="list-group-item list-group-item-action">Razer</a>
-        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-      </div>
-    </div>
-    <div class="card mt-3">
-      <h4 class="card-header">
-        Phone
-      </h4>
-      <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-          The current link item (edited)
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">Oppo</a>
-        <a href="#" class="list-group-item list-group-item-action">Samsung</a>
-        <a href="#" class="list-group-item list-group-item-action">Apple</a>
-        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-      </div>
+      <c:choose>
+        <c:when test="${categoriesWithDetails.size()==0}">
+          <div class="card-body">
+            <p class="card-text">Không có dữ liệu</p>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <c:forEach items="${categoriesWithDetails}" var="c">
+            <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+                ${c.tenDanhMuc}
+            </a>
+          </c:forEach>
+        </c:otherwise>
+      </c:choose>
     </div>
   </c:otherwise>
 </c:choose>
