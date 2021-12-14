@@ -50,11 +50,14 @@
           <div class="col-2">
             <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post"></form>
             <ul class="navbar-nav ">
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown " >
+
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                  Hi <b>${authUser.name}</b>
+                   aria-haspopup="true" aria-expanded="false" style="right: 0">
+
+                    Hi <b>${authUser.name}</b>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="${pageContext.request.contextPath}/Account/Profile">
                     <i class="fa fa-user" aria-hidden="true"></i>

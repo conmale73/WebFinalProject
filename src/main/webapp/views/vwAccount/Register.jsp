@@ -113,7 +113,7 @@
     $('#txtUsername').select(); //auto focus
 
     $('#frmRegister').on('submit', function (e) {
-        // const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
+         const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
         // if(username.length===0)
         // {
         //     alert('Invalid username');
