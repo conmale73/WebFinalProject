@@ -6,7 +6,7 @@
       <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/SellerList" aria-controls="home" >Sellers List</a>
       <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/BidderList" aria-controls="profile" >Bidder List</a>
       <a class="list-group-item list-group-item-action"  href="" role="tab" aria-controls="messages">Product List</a>
-      <a class="list-group-item list-group-item-action"  href="" role="tab" aria-controls="settings">Details</a>
+      <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/User" role="tab" aria-controls="settings">User List</a>
     </div>
 
   </c:when>

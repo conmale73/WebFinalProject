@@ -44,7 +44,7 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
                 break;
             case "/IsAvailable":
-                String username = request.getParameter("user");
+                String username = request.getParameter("user");//username
                 User user = UserModel.findByUsername(username);
                 boolean isAvailable = (user == null);
 
@@ -187,7 +187,6 @@ public class AccountServlet extends HttpServlet {
     private void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String otp = request.getParameter("OTP");
         if(otp.equals(constant.codeOtp))    //so sánh chuỗi, 2 đối tượng
-
         {
             UserModel.add(constant.userConstant);
             ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
