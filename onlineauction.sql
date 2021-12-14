@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 04:02 AM
+-- Generation Time: Dec 14, 2021 at 04:29 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -85,7 +85,7 @@ CREATE TABLE `product` (
   `IDSanPham` varchar(10) CHARACTER SET utf8 NOT NULL,
   `TenSanPham` varchar(255) CHARACTER SET utf8 NOT NULL,
   `IDNguoiBan` int(11) NOT NULL,
-  `GiaKhoiDiem` double NOT NULL,
+  `GiaHienTai` double NOT NULL,
   `GiaMuaNgay` double DEFAULT NULL,
   `BuocGia` double NOT NULL,
   `IDDanhMuc` int(11) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`IDSanPham`, `TenSanPham`, `IDNguoiBan`, `GiaKhoiDiem`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
+INSERT INTO `product` (`IDSanPham`, `TenSanPham`, `IDNguoiBan`, `GiaHienTai`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
 ('PC001', 'Máy tính Apple Mac Pro', 1, 10000000, 30000000, 500000, 1, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
