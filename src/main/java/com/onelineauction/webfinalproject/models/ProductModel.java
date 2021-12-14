@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ProductModel {
     public static List<Product> findAll() {
-        //Sql2o sql2o = new Sql2o("jdbc:mysql://localhost:3306/onlineauction", "root", "");
         final String query =
                 "SELECT * FROM product";
         try (Connection con = DbUtils.getConnection()) {
