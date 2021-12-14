@@ -17,4 +17,26 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+    public static List<Product> findByCatId(int catId) {
+        final String query = "select * from product where IDDanhMuc = :IDDanhMuc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("IDDanhMuc", catId)
+                    .executeAndFetch(Product.class);
+        }
+    }
+    public static Product findById(int id) {
+        final String query = "select * from product where IDSanPham = :IDSanPham";
+        try (Connection con = DbUtils.getConnection()) {
+            List<Product> list = con.createQuery(query)
+                    .addParameter("IDSanPham", id)
+                    .executeAndFetch(Product.class);
+
+            if (list.size() == 0) {
+                return null;
+            }
+
+            return list.get(0);
+        }
+    }
 }
