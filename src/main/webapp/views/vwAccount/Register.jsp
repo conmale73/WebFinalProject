@@ -113,7 +113,9 @@
     $('#txtUsername').select(); //auto focus
 
     $('#frmRegister').on('submit', function (e) {
-         const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
+        e.preventDefault();
+
+        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
         // if(username.length===0)
         // {
         //     alert('Invalid username');
@@ -123,39 +125,15 @@
             if (data === true) {
                 $('#frmRegister').off('submit').submit();
             } else {
-                alert('Username is valid.');
+                alert('Username is invalid.');
             }
         });
         if (!isValidEmailAddress($('#txtEmail').val())) {
             $('#email_alert').html("Email is not correct!");
             return;
         }
-        $('#frmRegister').off('submit').submit();
-        // let kt=0;
-        // if ( $('#txtPassword').val().length < 6) {
-        //     $("#pass_alert").attr("class", "alert alert-primary mx-auto");
-        //     $("#pass_alert").attr("role", "alert");
-        //     $('#pass_alert').html("Password must have at least 6 characters");
-        //
-        //     $('#txtPassword').css("border-color", "red");
-        //     kt=1;
-        //
-        // }
-        // else if (!isValidEmailAddress($('#txtEmail').val()))
-        // {
-        //     $('#email_alert').html("Email is not correct!");
-        //     kt=1;
-        //
-        // }
-        // else
-        // {
-        // }
-        // if(kt===1) {
-        //     alert('Form is not correct');
-        //     $('#frmRegister').off('submit').submit();
-        //     e.preventDefault();
-        //
-        // }
+        // $('#frmRegister').off('submit').submit();
+
     })
 
     function isValidEmailAddress(emailAddress) {

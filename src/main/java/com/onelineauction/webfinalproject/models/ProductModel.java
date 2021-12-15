@@ -4,6 +4,7 @@ import com.onelineauction.webfinalproject.beans.Product;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
     public static List<Product> findByCatId(int catId) {
         final String query = "select * from product where IDDanhMuc = :IDDanhMuc";
         try (Connection con = DbUtils.getConnection()) {

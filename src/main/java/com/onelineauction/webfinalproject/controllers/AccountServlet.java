@@ -190,7 +190,6 @@ public class AccountServlet extends HttpServlet {
         {
             UserModel.add(constant.userConstant);
             ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
-
         }else{
             ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
             System.out.println("Dang ky khong thanh cong");

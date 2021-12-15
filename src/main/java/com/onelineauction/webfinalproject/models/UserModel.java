@@ -1,11 +1,11 @@
 package com.onelineauction.webfinalproject.models;
 
+import com.onelineauction.webfinalproject.DTO.SellerListDTO;
 import com.onelineauction.webfinalproject.beans.User;
-import com.onelineauction.webfinalproject.constant.constant;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
+import org.testng.annotations.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class UserModel {
@@ -95,17 +95,23 @@ public class UserModel {
         }
     }
     public static List<User> findBidders()  {
-        final String query = "select * from users where Quyen = 0";
+        final String query = "select * from daugia , users where Quyen=0 and users.ID =daugia.IDNguoiDatGia";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(User.class);
         }
     }
-    public static List<User> findSellers()  {
-        final String query = "select * from users where Quyen = 1";
+    @Test
+    public void testJDBC() {
+        List<SellerListDTO> findSellers = UserModel.findSellers();
+        for (SellerListDTO user : findSellers) {
+            System.out.println(user.getTenSanPham());
+        }
+    }
+    public static List<SellerListDTO> findSellers()  {
+        final String query = "select * from product , users where Quyen=1 and users.ID = product.IDNguoiBan";
         try (Connection con = DbUtils.getConnection()) {
-            return con.createQuery(query)
-                    .executeAndFetch(User.class);
+            return con.createQuery(query).executeAndFetch(SellerListDTO.class);
         }
     }
 }
