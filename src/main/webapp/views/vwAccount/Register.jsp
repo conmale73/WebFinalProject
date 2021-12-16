@@ -13,6 +13,15 @@
             background-color: #92a8d1;
         }
     </style>
+    <script type="text/css">
+        .valid {
+            border: 1px solid green
+        }
+
+        .error {
+            color: red
+        }
+    </script>
 </head>
 <body>
 
@@ -73,7 +82,7 @@
                     <span id="email_alert" style="color: red"></span>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-primary" id="register">Register</button>
 
                     </div>
 
@@ -92,15 +101,8 @@
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-<script type="text/css">
-    .valid {
-        border: 1px solid green
-    }
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    .error {
-        color: red
-    }
-</script>
 <script>
 
     $('#txtDOB').datetimepicker(
@@ -116,16 +118,19 @@
         e.preventDefault();
 
         const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-        // if(username.length===0)
-        // {
-        //     alert('Invalid username');
-        //     return;
-        // }
         $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {
             if (data === true) {
                 $('#frmRegister').off('submit').submit();
-            } else {
-                alert('Username is invalid.');
+            }
+            else {
+                $('#register').click(function ()
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Invalid User!',
+                    })
+                })
             }
         });
         if (!isValidEmailAddress($('#txtEmail').val())) {
@@ -165,7 +170,8 @@
             },
             messages: {
                 username: {
-                    required: "Name is required"
+                    required: "Name is required",
+                    color: red
                 },
                 confirmPassWord:
                     {

@@ -22,12 +22,11 @@
                 <div class="form-group">
                     <label for="txtDOB">Date Of Birth</label>
 <%--                    value="<c:out value='${user.dob}'/>"--%>
-                    <input type="text" value="<c:out value='${user.dob}'/>" class="form-control" id="txtDOB" name="dob"
-                           placeholder="" required>
+                    <input type="text" value="${dob}" class="form-control" id="txtDOB" name="dob" required>
                 </div>
                 <div class="form-group">
                     <label for="txtAddress">Address</label>
-                    <input type="text" value="<c:out value='${user.address}'/>" class="form-control" id="txtAddress"
+                    <input type="text" value="${user.address}" class="form-control" id="txtAddress"
                            name="address" placeholder="" required>
                 </div>
                 <div class="form-group ">

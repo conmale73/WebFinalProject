@@ -1,11 +1,21 @@
-package com.onelineauction.webfinalproject.DTO;
+package com.onelineauction.webfinalproject.beans;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-public class SellerListDTO {
-    private String IDSanPham;
+public class BidderListDTO {
+    //User
+    private int id;
+    private String username,password,HoTen,Email,DiaChi;
+    private LocalDate NgaySinh;
+    private int DiemUyTin, Quyen;
+    //Dau gia
+    String IDSanPham;
+    int LuotDauGia;
+    double GiaDat;
+    int IDNguoiDatGia;
+    //Product
+
     private String TenSanPham;
     private int IDNguoiBan;
     private double GiaHienTai;
@@ -18,21 +28,21 @@ public class SellerListDTO {
     private String ChiTiet;
     private String AnhChinh;
     private String AnhPhu;
-    private int ID;
-    private String username;
-    private String password;
-    private String HoTen;
-    private LocalDate NgaySinh;
-    private String DiaChi;
-    private String Email;
-    private int DiemUyTin;
-    private int Quyen;
-    public SellerListDTO() {
 
-    }
-
-    public SellerListDTO(String IDSanPham, String tenSanPham, int IDNguoiBan, double giaHienTai, double giaMuaNgay, double buocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter thoiGianDangBan, DateTimeFormatter thoiGianKetThuc, String chiTiet, String anhChinh, String anhPhu, int ID, String username, String password, String hoTen, LocalDate ngaySinh, String diaChi, String email, int diemUyTin, int quyen) {
+    public BidderListDTO(int id, String username, String password, String hoTen, String email, String diaChi, LocalDate ngaySinh, int diemUyTin, int quyen, String IDSanPham, int luotDauGia, double giaDat, int IDNguoiDatGia, String tenSanPham, int IDNguoiBan, double giaHienTai, double giaMuaNgay, double buocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter thoiGianDangBan, DateTimeFormatter thoiGianKetThuc, String chiTiet, String anhChinh, String anhPhu) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        HoTen = hoTen;
+        Email = email;
+        DiaChi = diaChi;
+        NgaySinh = ngaySinh;
+        DiemUyTin = diemUyTin;
+        Quyen = quyen;
         this.IDSanPham = IDSanPham;
+        LuotDauGia = luotDauGia;
+        GiaDat = giaDat;
+        this.IDNguoiDatGia = IDNguoiDatGia;
         TenSanPham = tenSanPham;
         this.IDNguoiBan = IDNguoiBan;
         GiaHienTai = giaHienTai;
@@ -45,19 +55,6 @@ public class SellerListDTO {
         ChiTiet = chiTiet;
         AnhChinh = anhChinh;
         AnhPhu = anhPhu;
-        this.ID = ID;
-        this.username = username;
-        this.password = password;
-        HoTen = hoTen;
-        NgaySinh = ngaySinh;
-        DiaChi = diaChi;
-        Email = email;
-        DiemUyTin = diemUyTin;
-        Quyen = quyen;
-    }
-
-    public String getIDSanPham() {
-        return IDSanPham;
     }
 
     public String getTenSanPham() {
@@ -108,8 +105,12 @@ public class SellerListDTO {
         return AnhPhu;
     }
 
-    public int getID() {
-        return ID;
+    public BidderListDTO() {
+
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -124,16 +125,16 @@ public class SellerListDTO {
         return HoTen;
     }
 
-    public LocalDate getNgaySinh() {
-        return NgaySinh;
+    public String getEmail() {
+        return Email;
     }
 
     public String getDiaChi() {
         return DiaChi;
     }
 
-    public String getEmail() {
-        return Email;
+    public LocalDate getNgaySinh() {
+        return NgaySinh;
     }
 
     public int getDiemUyTin() {
@@ -142,5 +143,21 @@ public class SellerListDTO {
 
     public int getQuyen() {
         return Quyen;
+    }
+
+    public String getIDSanPham() {
+        return IDSanPham;
+    }
+
+    public int getLuotDauGia() {
+        return LuotDauGia;
+    }
+
+    public double getGiaDat() {
+        return GiaDat;
+    }
+
+    public int getIDNguoiDatGia() {
+        return IDNguoiDatGia;
     }
 }

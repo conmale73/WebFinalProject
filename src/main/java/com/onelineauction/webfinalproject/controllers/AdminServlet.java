@@ -1,13 +1,15 @@
 package com.onelineauction.webfinalproject.controllers;
 
 
-import com.onelineauction.webfinalproject.DTO.SellerListDTO;
+import com.onelineauction.webfinalproject.beans.BidderListDTO;
+import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.beans.SellerListDTO;
 import com.onelineauction.webfinalproject.constant.constant;
+import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.beans.User;
 
 import com.onelineauction.webfinalproject.utils.ServletUtils;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -40,32 +42,48 @@ public class AdminServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/BidderList":
-                List<User> bidderlist = UserModel.findBidders();
+                List<BidderListDTO> bidderlist = UserModel.findBidders();
                 request.setAttribute("bidders", bidderlist);
                 request.setAttribute("bid", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
-
                 break;
-            case "/Edit":
+            case "/ProductList":
+                List<Product> productList = ProductModel.findAll();
+                request.setAttribute("products", productList);
+                request.setAttribute("pro", true);
+                ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
+                break;
+            case "/EditUser":
                 int userId = Integer.parseInt(request.getParameter("id"));
                 constant.idUser=userId;
                 User id_find_user = UserModel.findById(userId);
-                request.setAttribute("user", id_find_user); //Day la đối tượng user sau khi cần edit
-                if(id_find_user == null)
-                {
-                }
-                else {
+                String dob= "";
+                try {
 
-                    ServletUtils.forward("/views/Home/Edit.jsp", request, response);
+                    LocalDate lcd = id_find_user.getDob();
+
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
                 }
+                request.setAttribute("user", id_find_user); //Day la đối tượng user sau khi cần edit
+                request.setAttribute("dob", dob);
+                ServletUtils.forward("/views/Home/Edit.jsp", request, response);
                 break;
-            case "/User":
+            case "/RemoveUser":
+                int userRemove = Integer.parseInt(request.getParameter("id"));
+                UserModel.deleteUser(userRemove);
+                List<User> userlistX = UserModel.showUsers();
+                request.setAttribute("users", userlistX);
+                request.setAttribute("user", true);
+                ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
+
+                break;
+            case "/UserList":
                 List<User> userlist = UserModel.showUsers();
                 request.setAttribute("users", userlist);
                 request.setAttribute("user", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
-
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;

@@ -38,7 +38,7 @@
                         <input type="text" class="form-control w-100" id="txtOTP" name="OTP" placeholder="">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary ">VeriFy</button>
+                        <button type="submit" class="btn btn-primary " id="verify">VeriFy</button>
                     </div>
             </form>
 
@@ -51,27 +51,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <%--<jsp:invoke fragment="js"/>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    // $('#frmRegister').on('submit',function (e)
-    // {
-    //     e.preventDefault();
-    //     const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-    //     if(username.length===0)
-    //     {
-    //         alert('Invalid username');
-    //         return;
-    //     }
-    //     $('#frmRegister').off('submit').submit();
-    // });
 
-    // $('#txtDOB').datetimepicker(
-    //     {
-    //         format : 'd/m/Y',
-    //         timepicker:false,
-    //         mask:true
-    //     }
-    // );
-    // $('#txtUsername').select(); //auto focus
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('#verify').click(function ()
+    {
+        Swal.fire({
+
+            'title': 'Good job!',
+            'text': 'Register succesfully',
+            'icon':'success',
+            timer: 5000
+        })
+    })
 
 </script>
 </body>
