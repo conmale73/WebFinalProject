@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 04:29 AM
+-- Generation Time: Dec 16, 2021 at 02:58 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -58,7 +58,9 @@ CREATE TABLE `daugia` (
 --
 
 INSERT INTO `daugia` (`IDSanPham`, `LuotDauGia`, `GiaDat`, `IDNguoiDatGia`) VALUES
-('PC001', 1, 11000000, 2);
+('CN001', 1, 71000000, 2),
+('CN001', 2, 73000000, 1),
+('CN001', 2, 73000000, 1);
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,7 @@ CREATE TABLE `product` (
   `IDSanPham` varchar(10) CHARACTER SET utf8 NOT NULL,
   `TenSanPham` varchar(255) CHARACTER SET utf8 NOT NULL,
   `IDNguoiBan` int(11) NOT NULL,
-  `GiaHienTai` double NOT NULL,
+  `GiaHienTai` int(11) NOT NULL,
   `GiaMuaNgay` double DEFAULT NULL,
   `BuocGia` double NOT NULL,
   `IDDanhMuc` int(11) NOT NULL,
@@ -102,7 +104,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`IDSanPham`, `TenSanPham`, `IDNguoiBan`, `GiaHienTai`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
-('PC001', 'Máy tính Apple Mac Pro', 1, 10000000, 30000000, 500000, 1, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', NULL, NULL, NULL);
+('CN001', 'Máy tính Apple Mac Pro', 1, 73000000, 150000000, 1000000, 1, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', 'Phiên bản Mac Pro 2019 tiêu chuẩn với chip Intel Xeon W 8 nhân 3.5GHz, RAM 48GB, SSD 256GB và VGA Radeon Pro 580X có giá bán 5.999 USD, nhưng được bán trong cửa hàng tân trang của Apple với giá 5.349 USD. ', 'anhchinh.jpg', 'anhphu1.jpg'),
+('DC001', 'Thánh chỉ vua Càn Long', 1, 300000000, 500000000, 10000000, 2, 2, '2021-12-14 10:01:49', '2021-12-21 16:01:50', 'Thánh Chỉ niên hiệu vua Càn Long', 'anhchinh.jpg', 'anhphu1.jpg');
 
 -- --------------------------------------------------------
 
@@ -127,6 +130,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `username`, `password`, `HoTen`, `NgaySinh`, `DiaChi`, `Email`, `DiemUyTin`, `Quyen`) VALUES
+(1, 'helloworld1', '$2a$12$i2hAfx0keY737E7d9NHfQeZyJJ0Hxc0cB8f6553QYoUy0zc80fiqa', 'Dương Quá', '2001-12-11', 'TP Hồ Chí Minh', 'quanhi@gmail.com', 90, 1),
+(2, 'femaletieulong', '$2a$12$i2hAfx0keY737E7d9NHfQeZyJJ0Hxc0cB8f6553QYoUy0zc80fiqa', 'Tiểu Long Nữ Cute', '1995-12-14', 'TP Hồ Chí Minh', 'coco@gmail.com', 90, 0),
 (3, 'anything', '$2a$12$/GeXCmk0Ui.PcU/N/x0ej.1.hC/asP5dY3faHU.3X2vTkhZ/3awl.', 'Any', '2009-12-13', 'Quáº£ng NgÃ£i', 'abcxyz@gmail.com', 90, 0),
 (4, 'damn', '$2a$12$IdkOYvigeQO2.vNDyTyNHOsvGEpicUdBjiYO8Pxov.WgATAKNvhS2', 'Damn Bro', '2021-12-25', 'áº¥c351313', 'a1sd531@gmail.com', 90, 0),
 (5, 'admin2', '$2a$12$ljL/vuh6tqr6mElrjeLpaO24foa6rx3zm8TzS44ISogVO97ph1k/q', 'Admin No.2', '2001-03-07', 'QN', 'conmalenumber2@gmail.com', 90, 2);
