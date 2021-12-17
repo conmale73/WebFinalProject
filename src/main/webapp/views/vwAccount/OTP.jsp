@@ -38,7 +38,7 @@
                         <input type="text" class="form-control w-100" id="txtOTP" name="OTP" placeholder="">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary " id="verify">VeriFy</button>
+                        <button type="submit" class="btn btn-primary "  onclick="onVerify()">VeriFy</button>
                     </div>
             </form>
 
@@ -54,17 +54,14 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    $('#verify').click(function ()
-    {
-        Swal.fire({
-
-            'title': 'Good job!',
-            'text': 'Register succesfully',
-            'icon':'success',
-            timer: 5000
-        })
-    })
-
+    function onVerify() {
+            Swal.fire({
+                'title': 'Good job!',
+                'text': 'Register succesfully',
+                'icon': 'success',
+                timer: 5000
+            })
+    }
 </script>
 </body>
 </html>

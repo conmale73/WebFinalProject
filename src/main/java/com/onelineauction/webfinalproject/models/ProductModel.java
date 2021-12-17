@@ -1,6 +1,7 @@
 package com.onelineauction.webfinalproject.models;
 
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -38,6 +39,14 @@ public class ProductModel {
             }
 
             return list.get(0);
+        }
+    }
+    public static List<ProductCategoryDTO> findCategoryAndProduct() {
+        final String query =
+                "SELECT * FROM product,category where product.IDDanhMuc = category.IDDanhMuc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(ProductCategoryDTO.class);
         }
     }
 }

@@ -3,14 +3,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%--<jsp:useBean id="users" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />--%>
 <%--<jsp:useBean id="bidders" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.BidderListDTO>" />--%>
 <%--<jsp:useBean id="sellers" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.SellerListDTO>" />--%>
-<%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>" />--%>
+<%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
 
 <t:main>
     <jsp:body>
+<%--<jsp:attribute name="css">--%>
 
+<%--  </jsp:attribute>--%>
 <%--        User List--%>
 
         <c:if test = "${user==true}">
@@ -59,16 +63,19 @@
                                 </c:if>
                             </td>
                             <td>
+
                                 <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Edit
                                 </a>
+
                             </td>
                             <td>
-                                <a onclick="appearRemove()" class="btn btn-danger"  role="button" href="${pageContext.request.contextPath}/AdminServlet/RemoveUser?id=${c.id}" id="remove">
+                                <a onclick="appearRemove(${c.id})" class="btn btn-danger"  role="button"  id="remove" >
                                     <i class="fa fa-times" aria-hidden="true"></i>
                                     Remove
                                 </a>
+
                             </td>
                         </tr>
                     </c:forEach>
@@ -110,18 +117,14 @@
                         <tr class="table-success">
                             <td>${s.IDNguoiBan}</td>
                             <td>${s.IDSanPham}</td>
-                            <td>${s.tenSanPham}</td>
-                            <td>${s.giaHienTai}</td>
-                            <td>${s.giaMuaNgay}</td>
+                            <td>${s.tenSanPham }</td>
+                            <td><fmt:formatNumber value="${s.giaHienTai}" type="number" /></td>
+                            <td><fmt:formatNumber value="${s.giaMuaNgay}" type="number" /></td>
+<%--                            <td>${s.giaHienTai}</td>--%>
+<%--                            <td>${s.giaMuaNgay}</td>--%>
                             <td>${s.buocGia}</td>
                             <td>${s.thoiGianDangBan}</td>
                             <td>${s.thoiGianKetThuc}</td>
-<%--                            <td>--%>
-<%--                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/Edit?id=${c.id}">--%>
-<%--                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>--%>
-<%--                                    Edit--%>
-<%--                                </a>--%>
-<%--                            </td>--%>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -161,7 +164,7 @@
                                 <td>${b.hoTen}</td>
                                 <td>${b.IDSanPham}</td>
                                 <td>${b.tenSanPham}</td>
-                                <td>${b.giaDat}</td>
+                                <td><fmt:formatNumber value="${b.giaDat}" type="number" /></td>
                                 <td>${b.luotDauGia}</td>
                             </tr>
                         </c:forEach>
@@ -198,9 +201,9 @@
                         <c:forEach items="${products}" var="p">
                             <tr class="table-success">
                                 <td>${p.tenSanPham}</td>
-                                <td></td>
-                                <td></td>
-                                <td>${p.giaMuaNgay}</td>
+                                <td>${p.tenDanhMuc}</td>
+                                <td><fmt:formatNumber value="${p.giaHienTai}" type="number" /></td>
+                                <td><fmt:formatNumber value="${p.giaMuaNgay}" type="number" /></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -228,7 +231,7 @@
             }
         );
     });
-    function appearRemove()
+    function appearRemove(idUser)
     {
         Swal.fire({
             title: 'Are you sure?',
@@ -240,31 +243,17 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
+
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
                     'success'
                 )
+                console.log("/AdminServlet/RemoveUser?id=" + idUser);
+                window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveUser?id="+ idUser ;
             }
         })
     }
-    // $('#remove').click(function () {
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             Swal.fire(
-    //                 'Deleted!',
-    //                 'Your file has been deleted.',
-    //                 'success'
-    //             )
-    //         }
-    //     })
-    // })
+
+
 </script>

@@ -14,7 +14,12 @@ public class BidderListDTO {
     int LuotDauGia;
     double GiaDat;
     int IDNguoiDatGia;
+    private LocalDate ThoiGian;
     //Product
+
+    public LocalDate getThoiGian() {
+        return ThoiGian;
+    }
 
     private String TenSanPham;
     private int IDNguoiBan;

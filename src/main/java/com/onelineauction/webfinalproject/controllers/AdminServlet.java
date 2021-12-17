@@ -1,13 +1,10 @@
 package com.onelineauction.webfinalproject.controllers;
 
 
-import com.onelineauction.webfinalproject.beans.BidderListDTO;
-import com.onelineauction.webfinalproject.beans.Product;
-import com.onelineauction.webfinalproject.beans.SellerListDTO;
+import com.onelineauction.webfinalproject.beans.*;
 import com.onelineauction.webfinalproject.constant.constant;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.models.UserModel;
-import com.onelineauction.webfinalproject.beans.User;
 
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 import javax.servlet.*;
@@ -48,7 +45,7 @@ public class AdminServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/ProductList":
-                List<Product> productList = ProductModel.findAll();
+                List<ProductCategoryDTO> productList = ProductModel.findCategoryAndProduct();
                 request.setAttribute("products", productList);
                 request.setAttribute("pro", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);

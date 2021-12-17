@@ -67,7 +67,7 @@
         }
     );
     $( "#btnSave" ).click(function() {
-        alert( "Update Successfully" );
+        Swal.fire('Update successfully')
     });
     $(document).ready(function () {
         $(".list-group-item").hover(function () {

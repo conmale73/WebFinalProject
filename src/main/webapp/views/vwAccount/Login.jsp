@@ -15,6 +15,7 @@
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }
+
   </style>
 </head>
 <body>
@@ -60,14 +61,17 @@
             </a>
           </div>
           <div class="flex-fill ml-1">
-            <button type="submit" class="btn btn-lg btn-outline-primary btn-block">
+            <button type="submit" class="btn btn-lg btn-outline-primary btn-block" onclick="signIn()" id="login">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               Sign In
+
             </button>
+
           </div>
         </div>
       </form>
     </div>
+
 
   </div>
 
@@ -76,6 +80,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<script>
 
+
+</script>
 </body>
 </html>
