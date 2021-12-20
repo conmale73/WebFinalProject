@@ -5,14 +5,9 @@
 
 <jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>"/>
 
-<jsp:useBean id="product" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>"/>
-
 <t:main>
     <jsp:body>
-        <h4 class="card-header">
-<h4 class="card-header">
-            Sản Phẩm
-        </h4>
+        <h4 class="card-header">Sản Phẩm</h4>
         <c:choose>
             <c:when test="${products.size()==0}">
                 <div class="card-body">
@@ -46,11 +41,6 @@
 <%--                                    </div>--%>
                                 </div>
                             </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </c:otherwise>
-        </c:choose>
                         </c:forEach>
                     </div>
                 </div>
