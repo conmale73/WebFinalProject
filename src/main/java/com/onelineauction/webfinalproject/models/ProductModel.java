@@ -19,6 +19,20 @@ public class ProductModel {
         }
     }
 
+    public static List<Product> findTop5KetThuc() {
+        final String query =
+                "select IDSanPham, TenSanPham, IDNguoiBan, GiaHienTai, GiaMuaNgay, BuocGia, IDDanhMuc, IDNguoiGiuGiaHienTai, ThoiGianDangBan, ThoiGianKetThuc, ChiTiet, AnhChinh, AnhPhu  from product\n" +
+                        "WHERE datediff(ThoiGianKetThuc,CURDATE())>=0\n" +
+                        "ORDER BY datediff(ThoiGianKetThuc,CURDATE()) ASC\n" +
+                        "LIMIT 5";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(Product.class);
+        }
+    }
+
+
+
     public static List<Product> findByCatId(int catId) {
         final String query = "select * from product where IDDanhMuc = :IDDanhMuc";
         try (Connection con = DbUtils.getConnection()) {

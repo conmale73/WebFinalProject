@@ -8,7 +8,7 @@
 <t:main>
     <jsp:body>
         <h4 class="card-header">
-            Sản Phẩm
+            Top 5 Sản Phẩm Gần Kết Thúc
         </h4>
         <c:choose>
             <c:when test="${products.size()==0}">
@@ -18,7 +18,9 @@
             </c:when>
             <c:otherwise>
                 <div class="card-body">
+                    <div></div>
                     <div class="row">
+
                         <c:forEach items="${products}" var="c">
                             <div class="col-sm-4 mb-3">
                                 <div class="card h-100">
