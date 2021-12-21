@@ -22,7 +22,7 @@ public class ProductFEServlet extends HttpServlet {
                 int catId = Integer.parseInt(request.getParameter("id"));
                 List<Product> list = ProductModel.findByCatId(catId);
                 request.setAttribute("productsByCat", list);
-                ServletUtils.forward("/views/vwGuess/ProductByCat.jsp", request, response);
+                ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
                 break;
 //
 //            case "/Detail":

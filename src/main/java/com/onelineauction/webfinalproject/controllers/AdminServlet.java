@@ -1,13 +1,12 @@
 package com.onelineauction.webfinalproject.controllers;
 
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.onelineauction.webfinalproject.beans.*;
 import com.onelineauction.webfinalproject.constant.constant;
+import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.models.UserModel;
-import com.onelineauction.webfinalproject.beans.User;
 
 import com.onelineauction.webfinalproject.utils.ServletUtils;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -28,46 +27,60 @@ public class AdminServlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
-//                List<User> list = UserModel.findBidders();
-//                request.setAttribute("products", list);
                 List<User> userlistx = UserModel.showUsers();
                 request.setAttribute("users", userlistx);
+                request.setAttribute("user", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/SellerList":
-                List<User> sellerlist = UserModel.findBidders();
+                List<SellerListDTO> sellerlist = UserModel.findSellers();
                 request.setAttribute("sellers", sellerlist);
+                request.setAttribute("sell", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/BidderList":
-                List<User> bidderlist = UserModel.findBidders();
+                List<BidderListDTO> bidderlist = UserModel.findBidders();
                 request.setAttribute("bidders", bidderlist);
+                request.setAttribute("bid", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
-
                 break;
-            case "/Edit":
+            case "/ProductList":
+                List<ProductCategoryDTO> productList = ProductModel.findCategoryAndProduct();
+                request.setAttribute("products", productList);
+                request.setAttribute("pro", true);
+                ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
+                break;
+            case "/EditUser":
                 int userId = Integer.parseInt(request.getParameter("id"));
                 constant.idUser=userId;
                 User id_find_user = UserModel.findById(userId);
-                request.setAttribute("user", id_find_user); //Day la đối tượng user sau khi cần edit
-                request.setAttribute("lev2",true);
-                if(id_find_user == null)
-                {
-                }
-                else {
-                    //System.out.println(id_find_user.getName());
-                    ServletUtils.forward("/views/Home/Edit.jsp", request, response);
-                }
-                break;
-            case "/User":
+                String dob= "";
+                try {
 
-                List<User> userlist = UserModel.showUsers();
-                request.setAttribute("users", userlist);
-                request.setAttribute("lev2",true);
+                    LocalDate lcd = id_find_user.getDob();
+
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                request.setAttribute("user", id_find_user); //Day la đối tượng user sau khi cần edit
+                request.setAttribute("dob", dob);
+                ServletUtils.forward("/views/Home/Edit.jsp", request, response);
+                break;
+            case "/RemoveUser":
+                int userRemove = Integer.parseInt(request.getParameter("id"));
+                UserModel.deleteUser(userRemove);
+                List<User> userlistX = UserModel.showUsers();
+                request.setAttribute("users", userlistX);
+                request.setAttribute("user", true);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
 
                 break;
-
+            case "/UserList":
+                List<User> userlist = UserModel.showUsers();
+                request.setAttribute("users", userlist);
+                request.setAttribute("user", true);
+                ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;

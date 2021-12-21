@@ -37,20 +37,7 @@ public class Product {
         AnhPhu = anhPhu;
     }
 
-    //    public Product(String IDSanPham, int IDNguoiBan, double GiaHienTai, double GiaMuaNgay, double BuocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, DateTimeFormatter ThoiGianDangBan, DateTimeFormatter ThoiGianKetThuc, String ChiTiet, String AnhChinh, String AnhPhu){
-//        this.IDSanPham = IDSanPham;
-//        this.IDNguoiBan = IDNguoiBan;
-//        this.GiaHienTai = GiaHienTai;
-//        this.GiaMuaNgay = GiaMuaNgay;
-//        this.BuocGia = BuocGia;
-//        this.IDDanhMuc = IDDanhMuc;
-//        this.IDNguoiGiuGiaHienTai = IDNguoiGiuGiaHienTai;
-//        this.ThoiGianDangBan = ThoiGianDangBan;
-//        this.ThoiGianKetThuc = ThoiGianKetThuc;
-//        this.ChiTiet = ChiTiet;
-//        this.AnhChinh = AnhChinh;
-//        this.AnhPhu = AnhPhu;
-//    }
+
 
 
     public String getTenSanPham() {

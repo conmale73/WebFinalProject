@@ -189,11 +189,11 @@ public class AccountServlet extends HttpServlet {
         if(otp.equals(constant.codeOtp))    //so sánh chuỗi, 2 đối tượng
         {
             UserModel.add(constant.userConstant);
+            request.setAttribute("yesOTP",constant.codeOtp);
             ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
-
         }else{
-            ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
-            System.out.println("Dang ky khong thanh cong");
+            ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
+
         }
 
     }

@@ -21,6 +21,7 @@
                         <thread>
                             <tr>
                                 <th>ID Sản Phẩm</th>
+<th>ID Sản Phẩm</th>
                                 <th>Tên Sản Phẩm</th>
                                 <th>Giá Hiện Tại</th>
                                 <th>Thời Gian Kết Thúc</th>
@@ -29,7 +30,7 @@
                             </tr>
                         </thread>
                         <tbody>
-                                <td>${p.IDSanPham}</td>
+<td>${p.IDSanPham}</td>
                                 <td>${p.tenSanPham}</td>
                                 <td>${p.giaHienTai}</td>
                                 <td>${p.thoiGianKetThuc}</td>
@@ -44,10 +45,11 @@
                                     </a>
                                 </td>
                             </tr>
-                        </c:otherwise>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
-            </c:choose>
-        </jsp:body>
+            </c:otherwise>
+        </c:choose>
+    </jsp:body>
 </t:main>

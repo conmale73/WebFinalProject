@@ -24,7 +24,7 @@ public class SendEmail {
         try {
             String toEmail = email;
             String fromEmail = "tuantuan3455@gmail.com";
-            String password = "haodaubuoi";
+            String password = "751953tT";
             // your host email smtp server details
             Properties properties = new Properties();
             properties.put("mail.smtp.auth", "true");

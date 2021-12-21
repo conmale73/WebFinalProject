@@ -7,7 +7,9 @@
 
 <t:main>
     <jsp:body>
-        <h4 class="card-header">Sản Phẩm</h4>
+        <h4 class="card-header">
+            Sản Phẩm
+        </h4>
         <c:choose>
             <c:when test="${products.size()==0}">
                 <div class="card-body">
