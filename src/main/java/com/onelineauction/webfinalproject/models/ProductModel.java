@@ -31,7 +31,16 @@ public class ProductModel {
         }
     }
 
-
+    public static List<Product> findTop5GiaCao() {
+        final String query =
+                "Select * from product\n" +
+                        "order by GiaMuaNgay DESC\n" +
+                        "LIMIT 5";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(Product.class);
+        }
+    }
 
     public static List<Product> findByCatId(int catId) {
         final String query = "select * from product where IDDanhMuc = :IDDanhMuc";

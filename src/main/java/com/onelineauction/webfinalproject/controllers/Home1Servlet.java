@@ -34,10 +34,10 @@ public class Home1Servlet extends HttpServlet {
 //                request.setAttribute("category", listCat);
                 ServletUtils.forward("/views/vwGuest/index.jsp", request,response);
                 break;
-            case "/Product":
-//                List<Product> list = ProductModel.findAll();
-//                request.setAttribute("Product", list);
-                ServletUtils.forward("/views/vwGuest/Product.jsp", request,response);
+            case "/GiaCao":
+                List<Product> lists = ProductModel.findTop5GiaCao();
+                request.setAttribute("products", lists);
+                ServletUtils.forward("/views/vwGuest/GiaCao.jsp", request,response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
