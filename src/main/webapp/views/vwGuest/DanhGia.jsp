@@ -15,7 +15,7 @@
 <t:main>
     <jsp:body>
         <h4 class="card-header">
-            Top 5 Sản Phẩm Gần Kết Thúc
+            Top 5 Sản Phẩm Được Ra Giá Nhiều Nhất
         </h4>
         <c:choose>
             <c:when test="${products.size()==0}">
@@ -60,10 +60,7 @@
         <a href="http://localhost:8080/WebFinalProject/Home" class="list-group-item list-group-item-action">
             Top 5 sản phẩm sắp hết hạn đấu giá
         </a>
-        <a href="http://localhost:8080/WebFinalProject/DanhGia" class="list-group-item list-group-item-action">
-            Top 5 sản phẩm có nhiều lượt ra giá nhất
-        </a>
-        <a href="http://localhost:8080/WebFinalProject/GiaCao" class="list-group-item list-group-item-action">
+        <a href="http://localhost:8080/WebFinalProject/Home/GiaCao" class="list-group-item list-group-item-action">
             Top 5 sản phẩm có giá cao nhất
         </a>
     </jsp:body>

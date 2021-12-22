@@ -39,6 +39,11 @@ public class Home1Servlet extends HttpServlet {
                 request.setAttribute("products", lists);
                 ServletUtils.forward("/views/vwGuest/GiaCao.jsp", request,response);
                 break;
+            case "/DanhGia":
+                List<Product> listing = ProductModel.findTop5DanhGia();
+                request.setAttribute("products", listing);
+                ServletUtils.forward("/views/vwGuest/DanhGia.jsp", request,response);
+                break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
                 break;
