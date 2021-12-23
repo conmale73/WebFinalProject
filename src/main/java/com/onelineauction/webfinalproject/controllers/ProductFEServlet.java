@@ -29,7 +29,7 @@ public class ProductFEServlet extends HttpServlet {
                 String proId = request.getParameter("id");
                 Product product = ProductModel.findById(proId);
                 if (product == null) {
-                    ServletUtils.redirect("/Home", request, response);
+                    ServletUtils.redirect("/Index", request, response);
                 } else {
                     request.setAttribute("product", product);
                     ServletUtils.forward("/views/vwGuest/ProductDetail.jsp", request, response);

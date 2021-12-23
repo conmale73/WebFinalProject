@@ -89,10 +89,10 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContentBidder">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Home/Index">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Home/Index">Trang Chủ <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Auction">Đấu Giá</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBidder" role="button" data-toggle="dropdown"
