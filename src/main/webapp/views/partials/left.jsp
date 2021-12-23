@@ -29,9 +29,9 @@
         <c:otherwise>
           <c:forEach items="${categoriesWithDetails}" var="c">
             <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
-              <i class="fa fa-caret-right" aria-hidden="true"></i>
-                ${c.tenDanhMuc}
-            </a>
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+              ${c.tenDanhMuc}
+          </a>
           </c:forEach>
         </c:otherwise>
       </c:choose>

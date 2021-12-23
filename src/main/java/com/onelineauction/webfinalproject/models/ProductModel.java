@@ -54,6 +54,23 @@ public class ProductModel {
         }
     }
 
+    public static List<Product> findPhanTrang(int catId, int a) {
+        String query = "select * from product where IDDanhMuc = :IDDanhMuc Limit 0,3";
+        if (a==3)
+        {query = "select * from product where IDDanhMuc = :IDDanhMuc Limit 3,3";}
+        else
+            if (a==6)
+            {query = "select * from product where IDDanhMuc = :IDDanhMuc Limit 6,3";}
+            else
+                if (a==9)
+                {query = "select * from product where IDDanhMuc = :IDDanhMuc Limit 9,3";}
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("IDDanhMuc", catId)
+                    .executeAndFetch(Product.class);
+        }
+    }
+
     public static List<Product> findByCatId(int catId) {
         final String query = "select * from product where IDDanhMuc = :IDDanhMuc";
         try (Connection con = DbUtils.getConnection()) {
