@@ -84,7 +84,7 @@ public class AdminServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             default:
-                ServletUtils.forward("/views/404.jsp", request, response);
+                ServletUtils.forward("/views/vwAdmin/404.jsp", request, response);
                 break;
         }
     }

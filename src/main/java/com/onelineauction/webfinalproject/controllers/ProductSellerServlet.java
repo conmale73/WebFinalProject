@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductFEServlet", value = "/Guest/Product/*")
-public class ProductFEServlet extends HttpServlet {
+@WebServlet(name = "ProductSellerServlet", value = "/Seller/Product/*")
+public class ProductSellerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
         switch (path) {
             case "/ByCat":
                 int catId = Integer.parseInt(request.getParameter("id"));
-                List<Product> list = ProductModel.findPhanTrang(catId, 0);
+                List<Product> list = ProductModel.findByCatId(catId);
                 request.setAttribute("productsByCat", list);
-                ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
+                ServletUtils.forward("/views/vwSeller/ProductByCat.jsp", request, response);
                 break;
 
             case "/Detail":
@@ -32,32 +32,12 @@ public class ProductFEServlet extends HttpServlet {
                     ServletUtils.redirect("/Index", request, response);
                 } else {
                     request.setAttribute("product", product);
-                    ServletUtils.forward("/views/vwGuest/ProductDetail.jsp", request, response);
+                    ServletUtils.forward("/views/vwSeller/ProductDetail.jsp", request, response);
                 }
-                break;
-            case "/ByCat_Trang2":
-                catId = Integer.parseInt(request.getParameter("id"));
-                list = ProductModel.findPhanTrang(catId, 3);
-                request.setAttribute("productsByCat", list);
-                ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
-                break;
-
-            case "/ByCat_Trang3":
-                catId = Integer.parseInt(request.getParameter("id"));
-                list = ProductModel.findPhanTrang(catId, 6);
-                request.setAttribute("productsByCat", list);
-                ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
-                break;
-
-            case "/ByCat_Trang4":
-                catId = Integer.parseInt(request.getParameter("id"));
-                list = ProductModel.findPhanTrang(catId, 9);
-                request.setAttribute("productsByCat", list);
-                ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
                 break;
 
             default:
-                ServletUtils.forward("/views/vwGuest/404.jsp", request, response);
+                ServletUtils.forward("/views/vwSeller/404.jsp", request, response);
                 break;
         }
     }

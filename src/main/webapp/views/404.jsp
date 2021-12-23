@@ -26,7 +26,7 @@
               Sorry, an error has occured. The requested page not found.
             </p>
             <div>
-              <a class="btn btn-primary" href="${pageContext.request.contextPath}" role="button">
+              <a class="btn btn-primary" href="${pageContext.request.contextPath}/Guest/Home/Index" role="button">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 Home
               </a>

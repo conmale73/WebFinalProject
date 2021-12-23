@@ -79,9 +79,39 @@ public class UserModel {
                     .executeUpdate();
         }
     }
-    public static boolean findLevel(String username)
+    public static boolean findLevelAdmin(String username)
     {
         final String query = "select * from users where username =:username and Quyen =2 ";
+        try (Connection con = DbUtils.getConnection()) {
+            List<User> list = con.createQuery(query)
+                    .addParameter("username", username)
+                    .executeAndFetch(User.class);
+
+            if (list.size() == 0) {
+                return false;
+            }
+            else
+                return true;
+        }
+    }
+    public static boolean findLevelBidder(String username)
+    {
+        final String query = "select * from users where username =:username and Quyen =0 ";
+        try (Connection con = DbUtils.getConnection()) {
+            List<User> list = con.createQuery(query)
+                    .addParameter("username", username)
+                    .executeAndFetch(User.class);
+
+            if (list.size() == 0) {
+                return false;
+            }
+            else
+                return true;
+        }
+    }
+    public static boolean findLevelSeller(String username)
+    {
+        final String query = "select * from users where username =:username and Quyen =1 ";
         try (Connection con = DbUtils.getConnection()) {
             List<User> list = con.createQuery(query)
                     .addParameter("username", username)

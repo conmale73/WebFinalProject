@@ -55,7 +55,7 @@
         </div>
         <div class="form-group d-flex">
           <div>
-            <a class="btn btn-lg btn-outline-danger " href="${pageContext.request.contextPath}/Home/Index" role="button">
+            <a class="btn btn-lg btn-outline-danger " href="${pageContext.request.contextPath}/Guest/Home/Index" role="button">
               <i class="fa fa-home" aria-hidden="true"></i>
               Home
             </a>

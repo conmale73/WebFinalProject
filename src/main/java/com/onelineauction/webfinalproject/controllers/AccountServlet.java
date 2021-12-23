@@ -125,20 +125,27 @@ public class AccountServlet extends HttpServlet {
                 HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
                 session.setAttribute("auth",true);
                 session.setAttribute("authUser",user);
-                session.setAttribute("lev2",true);
-                boolean ktra_ad = UserModel.findLevel(username);
+
+                boolean ktra_ad = UserModel.findLevelAdmin(username);
+                boolean ktra_bidder = UserModel.findLevelBidder(username);
+                boolean ktra_seller = UserModel.findLevelSeller(username);
+
                 if(ktra_ad) // Neu la Admin
                 {
+                    session.setAttribute("lev2",true);
                     ServletUtils.redirect("/AdminServlet", request, response);
                 }
-                //Neu la ng khac
-                else
+
+                if(ktra_seller) //Neu la Seller
                 {
-                    //String url = "/Home/Index";
-                    String url = (String) session.getAttribute("retUrl");
-                    if (url == null)
-                        url = "/Home";
-                    ServletUtils.redirect(url, request, response);
+                    session.setAttribute("lev1",true);
+                    ServletUtils.redirect("/Seller/Home", request, response);
+                }
+
+                if(ktra_bidder) //Neu la Bidder
+                {
+                    session.setAttribute("lev0",true);
+                    ServletUtils.redirect("/Bidder/Home", request, response);
                 }
             }
             else
@@ -160,12 +167,14 @@ public class AccountServlet extends HttpServlet {
         HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
         session.setAttribute("auth",false);
         session.setAttribute("authUser",new User());
-        session.setAttribute("lev2",false);
 
+        session.setAttribute("lev0",false);
+        session.setAttribute("lev1",false);
+        session.setAttribute("lev2",false);
 //        String url = request.getHeader("referer");
 //        if (url == null)
 //            url = "/Home";
-        ServletUtils.redirect("/Home",request,response);
+        ServletUtils.redirect("/Guest/Home",request,response);
     }
 
     private void sendEmail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
