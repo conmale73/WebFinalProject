@@ -47,5 +47,11 @@
                 </c:otherwise>
             </c:choose>
         </div>
+        <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
+            <i class="fa fa-caret-right" aria-hidden="true">Trang 1</i>
+        </a>
+        <a href="${pageContext.request.contextPath}/Product/ByCat_Trang2?id=1" class="list-group-item list-group-item-action">
+            <i class="fa fa-caret-right" aria-hidden="true">Trang 2</i>
+        </a>
     </jsp:body>
 </t:main>
