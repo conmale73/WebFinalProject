@@ -13,12 +13,12 @@
       <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab" aria-controls="messages">Product List</a>
       <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/UserList" role="tab" aria-controls="settings">User List</a>
     </div>
-
   </c:when>
-  <c:otherwise>
+
+  <c:when test="${lev1}"> <%--Neu la seller--%>
     <div class="card mt-3">
       <h4 class="card-header">
-        Danh Mục
+        Danh Mục seller
       </h4>
       <c:choose>
         <c:when test="${categoriesWithDetails.size()==0}">
@@ -28,7 +28,7 @@
         </c:when>
         <c:otherwise>
           <c:forEach items="${categoriesWithDetails}" var="c">
-            <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
+            <a href="${pageContext.request.contextPath}/Seller/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
               <i class="fa fa-caret-right" aria-hidden="true"></i>
                 ${c.tenDanhMuc}
             </a>
@@ -36,5 +36,51 @@
         </c:otherwise>
       </c:choose>
     </div>
-  </c:otherwise>
+  </c:when>
+
+  <c:when test="${lev0}"> <%--Neu la bidder--%>
+    <div class="card mt-3">
+      <h4 class="card-header">
+        Danh Mục bidder
+      </h4>
+      <c:choose>
+        <c:when test="${categoriesWithDetails.size()==0}">
+          <div class="card-body">
+            <p class="card-text">Không có dữ liệu</p>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <c:forEach items="${categoriesWithDetails}" var="c">
+            <a href="${pageContext.request.contextPath}/Bidder/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+                ${c.tenDanhMuc}
+            </a>
+          </c:forEach>
+        </c:otherwise>
+      </c:choose>
+    </div>
+  </c:when>
+
+<c:otherwise>
+  <div class="card mt-3">
+    <h4 class="card-header">
+      Danh Mục guest
+    </h4>
+    <c:choose>
+      <c:when test="${categoriesWithDetails.size()==0}">
+        <div class="card-body">
+          <p class="card-text">Không có dữ liệu</p>
+        </div>
+      </c:when>
+      <c:otherwise>
+        <c:forEach items="${categoriesWithDetails}" var="c">
+          <a href="${pageContext.request.contextPath}/Guest/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+              ${c.tenDanhMuc}
+          </a>
+        </c:forEach>
+      </c:otherwise>
+    </c:choose>
+  </div>
+</c:otherwise>
 </c:choose>

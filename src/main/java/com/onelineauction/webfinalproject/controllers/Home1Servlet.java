@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Home1Servlet", value = "/Home/*")
+@WebServlet(name = "Home1Servlet", value = "/Guest/Home/*")
 public class Home1Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,13 +25,8 @@ public class Home1Servlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
-                List<Product> list = ProductModel.findTop5KetThuc();
-
+                List<Product> list = ProductModel.findAll();
                 request.setAttribute("products", list);
-//                List<Category> listCat = CategoryModel.findAll();
-//                request.setAttribute("category", listCat);
-//                List<Category> listCat = CategoryModel.findAll();
-//                request.setAttribute("category", listCat);
                 ServletUtils.forward("/views/vwGuest/index.jsp", request,response);
                 break;
             case "/GiaCao":
@@ -45,7 +40,7 @@ public class Home1Servlet extends HttpServlet {
                 ServletUtils.forward("/views/vwGuest/DanhGia.jsp", request,response);
                 break;
             default:
-                ServletUtils.forward("/views/404.jsp", request, response);
+                ServletUtils.forward("/views/Guest/404.jsp", request, response);
                 break;
         }
     }

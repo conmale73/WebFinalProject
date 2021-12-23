@@ -62,7 +62,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
-    public static Product findById(int id) {
+    public static Product findById(String id) {
         final String query = "select * from product where IDSanPham = :IDSanPham";
         try (Connection con = DbUtils.getConnection()) {
             List<Product> list = con.createQuery(query)

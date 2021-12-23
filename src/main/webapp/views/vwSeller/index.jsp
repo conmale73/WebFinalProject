@@ -34,9 +34,13 @@
                                         <p class="card-text">${c.chiTiet}</p>
                                     </div>
                                     <div class="card-footer text-muted">
-                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Guest/Product/Detail?id=${c.IDSanPham}" role="button">
+                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Seller/Product/Detail?id=${c.IDSanPham}" role="button">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                             Chi tiết
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/Seller/Product/Auction?id=${c.IDSanPham}" role="button">
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            Đấu giá
                                         </a>
                                     </div>
                                 </div>
@@ -46,11 +50,11 @@
                 </div>
             </c:otherwise>
         </c:choose>
-<%--        <a href="http://localhost:8080/WebFinalProject/Home/DanhGia" class="list-group-item list-group-item-action">--%>
-<%--            Top 5 sản phẩm có nhiều lượt ra giá nhất--%>
-<%--        </a>--%>
-<%--        <a href="http://localhost:8080/WebFinalProject/Home/GiaCao" class="list-group-item list-group-item-action">--%>
-<%--            Top 5 sản phẩm có giá cao nhất--%>
-<%--        </a>--%>
+        <a href="http://localhost:8080/WebFinalProject/Home/DanhGia" class="list-group-item list-group-item-action">
+            Top 5 sản phẩm có nhiều lượt ra giá nhất
+        </a>
+        <a href="http://localhost:8080/WebFinalProject/Home/GiaCao" class="list-group-item list-group-item-action">
+            Top 5 sản phẩm có giá cao nhất
+        </a>
     </jsp:body>
 </t:main>

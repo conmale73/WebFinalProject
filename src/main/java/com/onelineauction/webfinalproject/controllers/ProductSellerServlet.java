@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductFEServlet", value = "/Guest/Product/*")
-public class ProductFEServlet extends HttpServlet {
+@WebServlet(name = "ProductSellerServlet", value = "/Seller/Product/*")
+public class ProductSellerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getPathInfo();
@@ -22,22 +22,22 @@ public class ProductFEServlet extends HttpServlet {
                 int catId = Integer.parseInt(request.getParameter("id"));
                 List<Product> list = ProductModel.findByCatId(catId);
                 request.setAttribute("productsByCat", list);
-                ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
+                ServletUtils.forward("/views/vwSeller/ProductByCat.jsp", request, response);
                 break;
 
             case "/Detail":
                 String proId = request.getParameter("id");
                 Product product = ProductModel.findById(proId);
                 if (product == null) {
-                    ServletUtils.redirect("/Home", request, response);
+                    ServletUtils.redirect("/Index", request, response);
                 } else {
                     request.setAttribute("product", product);
-                    ServletUtils.forward("/views/vwGuest/ProductDetail.jsp", request, response);
+                    ServletUtils.forward("/views/vwSeller/ProductDetail.jsp", request, response);
                 }
                 break;
 
             default:
-                ServletUtils.forward("/views/vwGuest/404.jsp", request, response);
+                ServletUtils.forward("/views/vwSeller/404.jsp", request, response);
                 break;
         }
     }

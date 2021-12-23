@@ -9,7 +9,7 @@
     <jsp:body>
         <div class="card">
             <h4 class="card-header">
-                Sản Phẩm
+                Products
             </h4>
             <c:choose>
                 <c:when test="${productsByCat.size() == 0}">
@@ -20,7 +20,6 @@
                 <c:otherwise>
                     <div class="card-body">
                         <div class="row">
-
                             <c:forEach items="${productsByCat}" var="c">
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">
@@ -33,11 +32,14 @@
                                             <p class="card-text">${c.chiTiet}</p>
                                         </div>
                                         <div class="card-footer text-muted">
-                                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Guest/Product/Detail?id=${c.IDSanPham}" role="button">
+                                            <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Bidder/Product/Detail?id=${c.IDSanPham}" role="button">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
-                                                Chi tiết
+                                                Chi Tiết
                                             </a>
-                                        </div>
+                                            <a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/Bidder/Product/Auction?id=${c.IDSanPham}" role="button">
+                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                Đấu Giá
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
