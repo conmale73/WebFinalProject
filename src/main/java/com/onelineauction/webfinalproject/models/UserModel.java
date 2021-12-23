@@ -114,6 +114,20 @@ public class UserModel {
             return con.createQuery(query).executeAndFetch(SellerListDTO.class);
         }
     }
+    public static List<User> findAll()  {
+        final String query = "select * from users  ";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query).executeAndFetch(User.class);
+        }
+    }
+    public static List<User> paginationUser(int offset, int limit)  {
+        final String query = "select * from users  LIMIT "+offset+" ," +limit;
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(User.class);
+        }
+    }
+
     public static void deleteUser(int id)
     {
         String sql = "delete from users where ID =:ID";

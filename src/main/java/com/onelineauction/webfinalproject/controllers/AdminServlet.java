@@ -27,9 +27,11 @@ public class AdminServlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
-                List<User> userlistx = UserModel.showUsers();
+                List<User> userlistx = UserModel.paginationUser(0,6);
                 request.setAttribute("users", userlistx);
                 request.setAttribute("user", true);
+                double totalPages = Math.ceil((double)UserModel.findAll().size() / 6); // trả ra 6 sản phẩm mỗi trang
+                request.setAttribute("totalPageUser",totalPages);
                 ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
                 break;
             case "/SellerList":

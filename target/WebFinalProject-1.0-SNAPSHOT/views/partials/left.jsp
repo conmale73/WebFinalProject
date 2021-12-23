@@ -8,10 +8,10 @@
 <c:choose>
   <c:when test ="${lev2}"> <%--    neu la Admin--%>
     <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/SellerList" aria-controls="home" >Sellers List</a>
-      <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/BidderList" aria-controls="profile" >Bidder List</a>
-      <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab" aria-controls="messages">Product List</a>
-      <a class="list-group-item list-group-item-action"  href="${pageContext.request.contextPath}/AdminServlet/UserList" role="tab" aria-controls="settings">User List</a>
+      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/SellerList" onclick="clickNav()" role="tab" data-toggle="list" >Sellers List</a>
+      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/BidderList" onclick="clickNav()" role="tab" data-toggle="list" >Bidder List</a>
+      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/ProductList"onclick="clickNav()" role="tab" data-toggle="list" >Product List</a>
+      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/UserList"   onclick="clickNav()" role="tab" data-toggle="list" >User List</a>
     </div>
 
   </c:when>
@@ -29,9 +29,9 @@
         <c:otherwise>
           <c:forEach items="${categoriesWithDetails}" var="c">
             <a href="${pageContext.request.contextPath}/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
-              <i class="fa fa-caret-right" aria-hidden="true"></i>
-                ${c.tenDanhMuc}
-            </a>
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+              ${c.tenDanhMuc}
+          </a>
           </c:forEach>
         </c:otherwise>
       </c:choose>
