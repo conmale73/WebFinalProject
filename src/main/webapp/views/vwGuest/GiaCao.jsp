@@ -57,10 +57,10 @@
                 </div>
             </c:otherwise>
         </c:choose>
-        <a href="http://localhost:8080/WebFinalProject/Home" class="list-group-item list-group-item-action">
+        <a href="${pageContext.request.contextPath}/Guest/Home" class="list-group-item list-group-item-action">
             Top 5 sản phẩm sắp hết hạn đấu giá
         </a>
-        <a href="http://localhost:8080/WebFinalProject/Home/DanhGia" class="list-group-item list-group-item-action">
+        <a href="${pageContext.request.contextPath}/Guest/Home/DanhGia" class="list-group-item list-group-item-action">
             Top 5 sản phẩm có nhiều lượt ra giá nhất
         </a>
     </jsp:body>

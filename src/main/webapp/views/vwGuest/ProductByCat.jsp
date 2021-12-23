@@ -20,7 +20,6 @@
                 <c:otherwise>
                     <div class="card-body">
                         <div class="row">
-
                             <c:forEach items="${productsByCat}" var="c">
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">

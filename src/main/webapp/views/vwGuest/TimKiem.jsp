@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ACER
-  Date: 22-Dec-21
-  Time: 7:24 AM
+  Date: 24-Dec-21
+  Time: 5:18 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,7 +15,7 @@
 <t:main>
     <jsp:body>
         <h4 class="card-header">
-            Top 5 Sản Phẩm Được Ra Giá Nhiều Nhất
+            Sản Phẩm
         </h4>
         <c:choose>
             <c:when test="${products.size()==0}">
@@ -40,16 +40,12 @@
                                         </h5>
                                         <p class="card-text">${c.chiTiet}</p>
                                     </div>
-                                        <%--                                    <div class="card-footer text-muted">--%>
-                                        <%--                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Product/Detail?id=${c.IDSanPham}" role="button">--%>
-                                        <%--                                            <i class="fa fa-eye" aria-hidden="true"></i>--%>
-                                        <%--                                            Details--%>
-                                        <%--                                        </a>--%>
-                                        <%--                                        <a class="btn btn-sm btn-outline-success" href="#" role="button">--%>
-                                        <%--                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>--%>
-                                        <%--                                            Add to cart--%>
-                                        <%--                                        </a>--%>
-                                        <%--                                    </div>--%>
+                                    <div class="card-footer text-muted">
+                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Guest/Product/Detail?id=${c.IDSanPham}" role="button">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            Chi tiết
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </c:forEach>
@@ -59,6 +55,9 @@
         </c:choose>
         <a href="${pageContext.request.contextPath}/Guest/Home" class="list-group-item list-group-item-action">
             Top 5 sản phẩm sắp hết hạn đấu giá
+        </a>
+        <a href="${pageContext.request.contextPath}/Guest/Home/DanhGia" class="list-group-item list-group-item-action">
+            Top 5 sản phẩm có nhiều lượt ra giá nhất
         </a>
         <a href="${pageContext.request.contextPath}/Guest/Home/GiaCao" class="list-group-item list-group-item-action">
             Top 5 sản phẩm có giá cao nhất
