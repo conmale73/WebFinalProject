@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="users" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />
+<%--<jsp:useBean id="users" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />--%>
 <%--<jsp:useBean id="bidders" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.BidderListDTO>" />--%>
 <%--<jsp:useBean id="sellers" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.SellerListDTO>" />--%>
 <%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
@@ -14,8 +14,8 @@
     <jsp:attribute name="css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+        <style>
         body {
             height: 100vh;
             background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-soft-purple-and-pink-watercolor-paint-background-image_402197.jpg);
@@ -93,7 +93,8 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <ul class="pagination">
+                <div class="d-flex justify-content-center">
+                <ul class="pagination ">
                     <c:set var = "i" scope = "session" value = "${1}"/>
                     <c:forEach var="tolUser " begin ='1' end = '${totalPageUser}'>
                         <li class="page-item list-group" id="list-tab" role="tablist">
@@ -104,6 +105,7 @@
                         </li>
                     </c:forEach>
                 </ul>
+                </div>
             </c:otherwise>
         </c:choose>
         </c:if>
@@ -123,7 +125,7 @@
                 <table class="table table-striped">
                     <thead class="thead-dark">
                     <tr >
-                        <th>ID User</th>
+                        <th>User Name</th>
                         <th>ID Sản Phẩm</th> <%--Day la id ng mua--%>
                         <th>Tên Sản Phẩm</th>
                         <th>Giá Hiện tại</th>
@@ -134,16 +136,14 @@
 
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="content-seller">
                     <c:forEach items="${sellers}" var="s">
                         <tr class="table-success">
-                            <td>${s.IDNguoiBan}</td>
+                            <td>${s.username}</td>
                             <td>${s.IDSanPham}</td>
                             <td>${s.tenSanPham }</td>
                             <td><fmt:formatNumber value="${s.giaHienTai}" type="number" /></td>
                             <td><fmt:formatNumber value="${s.giaMuaNgay}" type="number" /></td>
-<%--                            <td>${s.giaHienTai}</td>--%>
-<%--                            <td>${s.giaMuaNgay}</td>--%>
                             <td>${s.buocGia}</td>
                             <td>${s.thoiGianDangBan}</td>
                             <td>${s.thoiGianKetThuc}</td>
@@ -151,7 +151,19 @@
                     </c:forEach>
                     </tbody>
                 </table>
-
+                <div class="d-flex justify-content-center">
+                    <ul class="pagination ">
+                        <c:set var = "i" scope = "session" value = "${1}"/>
+                        <c:forEach var="tolSeller " begin ='1' end = '${totalPageSeller}'>
+                            <li class="page-item list-group" id="list-tab" role="tablist">
+                                <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickSeller(${i})">
+                                    <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
+                                    <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </c:otherwise>
         </c:choose>
         </c:if>
@@ -171,7 +183,7 @@
                     <table class="table table-striped">
                         <thead class="thead-dark">
                         <tr >
-                            <th>ID User</th>
+<%--                            <th>ID User</th>--%>
                             <th>Tên Người Đấu Giá</th>
                             <th>ID Sản Phẩm</th>
                             <th>Tên Sản Phẩm</th>
@@ -179,10 +191,10 @@
                             <th>Lượt đặt giá </th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="content-bidder">
                         <c:forEach items="${bidders}" var="b">
                             <tr class="table-success">
-                                <td>${b.IDNguoiDatGia}</td>
+<%--                                <td>${b.IDNguoiDatGia}</td>--%>
                                 <td>${b.hoTen}</td>
                                 <td>${b.IDSanPham}</td>
                                 <td>${b.tenSanPham}</td>
@@ -192,7 +204,19 @@
                         </c:forEach>
                         </tbody>
                     </table>
-
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination ">
+                            <c:set var = "i" scope = "session" value = "${1}"/>
+                            <c:forEach var="tolBidder " begin ='1' end = '${totalPagesBidder}'>
+                                <li class="page-item list-group" id="list-tab" role="tablist">
+                                    <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickBidder(${i})">
+                                        <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
+                                        <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </c:if>
@@ -219,7 +243,7 @@
 
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="content-product">
                         <c:forEach items="${products}" var="p">
                             <tr class="table-success">
                                 <td>${p.tenSanPham}</td>
@@ -230,7 +254,19 @@
                         </c:forEach>
                         </tbody>
                     </table>
-
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination ">
+                            <c:set var = "i" scope = "session" value = "${1}"/>
+                            <c:forEach var="tolProduct " begin ='1' end = '${totalPageProduct}'>
+                                <li class="page-item list-group" id="list-tab" role="tablist">
+                                    <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickProduct(${i})">
+                                        <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
+                                        <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </c:if>
@@ -264,7 +300,72 @@
             }
         })
     }
+    function clickSeller(page)
+    {
+        $('.page-link').removeClass("active");
+        $(this).addClass("active");
+        <%--"<c:url value="/api-user" />"--%>
+        event.preventDefault();
+        $.ajax({
+            url: "<c:url value="/api-seller" />",
+            type: "get",
+            data:{
+                page_exist:page
+            },
+            success: function (response) {
+                document.getElementById("content-seller").innerHTML = response;
 
+                // $('#content-user').innerHTML=response $(selector).html(content)
+            },
+            error: function (xhr) {
+                alert("Loading data not success. Please comeback later <3")
+            }
+        })
+    }
+    function clickBidder(page)
+    {
+        $('.page-link').removeClass("active");
+        $(this).addClass("active");
+        <%--"<c:url value="/api-user" />"--%>
+        event.preventDefault();
+        $.ajax({
+            url: "<c:url value="/api-bidder" />",
+            type: "get",
+            data:{
+                page_exist:page
+            },
+            success: function (response) {
+                document.getElementById("content-bidder").innerHTML = response;
+
+                // $('#content-user').innerHTML=response $(selector).html(content)
+            },
+            error: function (xhr) {
+                alert("Loading data not success. Please comeback later <3")
+            }
+        })
+    }
+    function clickProduct(page)
+    {
+        $('.page-link').removeClass("active");
+        $(this).addClass("active");
+        <%--"<c:url value="/api-user" />"--%>
+        event.preventDefault();
+        $.ajax({
+            url: "<c:url value="/api-product" />",
+            type: "get",
+            data:{
+                page_exist:page
+            },
+            success: function (response) {
+                document.getElementById("content-product").innerHTML = response;
+
+                // $('#content-user').innerHTML=response $(selector).html(content)
+            },
+            error: function (xhr) {
+                alert("Loading data not success. Please comeback later <3")
+            }
+        })
+    }
     $(document).ready(function () {
         $(".left-item").hover(function () {
                 $(this).css("background-color", "lightblue");

@@ -8,10 +8,10 @@
 <c:choose>
   <c:when test ="${lev2}"> <%--    neu la Admin--%>
     <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/SellerList" onclick="clickNav()" role="tab" data-toggle="list" >Sellers List</a>
-      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/BidderList" onclick="clickNav()" role="tab" data-toggle="list" >Bidder List</a>
-      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/ProductList"onclick="clickNav()" role="tab" data-toggle="list" >Product List</a>
-      <a class="list-group-item list-group-item-action left-item"  href="${pageContext.request.contextPath}/AdminServlet/UserList"   onclick="clickNav()" role="tab" data-toggle="list" >User List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;"  href="${pageContext.request.contextPath}/AdminServlet/SellerList" onclick="clickNav()" role="tab"  >Sellers List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;" href="${pageContext.request.contextPath}/AdminServlet/BidderList" onclick="clickNav()" role="tab"  >Bidder List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;" href="${pageContext.request.contextPath}/AdminServlet/ProductList"onclick="clickNav()" role="tab"  >Product List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;" href="${pageContext.request.contextPath}/AdminServlet/UserList"   onclick="clickNav()" role="tab"  >User List</a>
     </div>
   </c:when>
 
