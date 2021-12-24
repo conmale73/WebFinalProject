@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/partials/nav.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/partials" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/vwAccount/OTP.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/vwAccount" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/vwAdmin/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/vwAdmin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/vwGuest/ProductByCat.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/vwGuest" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/vwGuest/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/vwGuest" />
       </map>
     </option>
