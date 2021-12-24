@@ -113,4 +113,12 @@ public class ProductModel {
                     .executeAndFetch(ProductCategoryDTO.class);
         }
     }
+    public static List<ProductCategoryDTO> paginationProduct(int offset, int limit) {
+        final String query =
+                "SELECT * FROM product,category where product.IDDanhMuc = category.IDDanhMuc  LIMIT "+offset+" ," +limit;
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(ProductCategoryDTO.class);
+        }
+    }
 }

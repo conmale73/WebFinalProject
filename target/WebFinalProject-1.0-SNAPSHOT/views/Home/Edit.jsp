@@ -8,7 +8,15 @@
 <t:main>
 <jsp:attribute name="css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  </jsp:attribute>
+<style>
+    body {
+        height: 100vh;
+        background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-soft-purple-and-pink-watercolor-paint-background-image_402197.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+</style>
+</jsp:attribute>
     <jsp:body>
         <%--    Nếu là Admin--%>
         <c:if test="${lev2}">
