@@ -46,12 +46,12 @@
                 </div>
             </c:otherwise>
         </c:choose>
-<%--        <a href="http://localhost:8080/WebFinalProject/Home/DanhGia" class="list-group-item list-group-item-action">--%>
-<%--            Top 5 sản phẩm có nhiều lượt ra giá nhất--%>
-<%--        </a>--%>
-<%--        <a href="http://localhost:8080/WebFinalProject/Home/GiaCao" class="list-group-item list-group-item-action">--%>
-<%--            Top 5 sản phẩm có giá cao nhất--%>
-<%--        </a>--%>
+        <a href="${pageContext.request.contextPath}/Guest/Home/DanhGia" class="list-group-item list-group-item-action">
+            Top 5 sản phẩm có nhiều lượt ra giá nhất
+        </a>
+        <a href="${pageContext.request.contextPath}/GuestHome/GiaCao" class="list-group-item list-group-item-action">
+            Top 5 sản phẩm có giá cao nhất
+        </a>
 
     </jsp:body>
 </t:main>
