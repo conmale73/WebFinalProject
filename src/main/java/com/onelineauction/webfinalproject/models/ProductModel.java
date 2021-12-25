@@ -68,7 +68,21 @@ public class ProductModel {
         final String query =
                 "Select * from product\n" +
                         "where match(TenSanPham)\n" +
-                        "against(:Tensp)";
+                        "against(:Tensp)\n" +
+                        "order by ThoiGianKetThuc DESC";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("Tensp", TenSanPham)
+                    .executeAndFetch(Product.class);
+        }
+    }
+
+    public static List<Product> findNamePrice(String TenSanPham) {
+        final String query =
+                "Select * from product\n" +
+                        "where match(TenSanPham)\n" +
+                        "against(:Tensp)\n" +
+                        "order by GiaHienTai ASC";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("Tensp", TenSanPham)

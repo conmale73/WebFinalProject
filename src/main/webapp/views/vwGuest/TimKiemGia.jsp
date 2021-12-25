@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: ACER
-  Date: 24-Dec-21
-  Time: 5:18 AM
+  Date: 25-Dec-21
+  Time: 2:51 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,7 +15,7 @@
 <t:main>
     <jsp:body>
         <h4 class="card-header">
-            Thời gian kết thúc giảm dần
+            Giá sản phầm tăng dần
         </h4>
         <c:choose>
             <c:when test="${products.size()==0}">
