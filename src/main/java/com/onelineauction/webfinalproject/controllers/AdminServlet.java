@@ -16,9 +16,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet(name = "AdminServlet", value = "/AdminServlet/*")
 public class AdminServlet extends HttpServlet {
@@ -32,70 +36,36 @@ public class AdminServlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
-                List<User> userlistx = UserModel.paginationUser(0, 6);
-                double totalPages = Math.ceil((double) UserModel.findAll().size() / 6); // trả ra 6 sản phẩm mỗi trang
-                request.setAttribute("totalPageUser", totalPages);
-                request.setAttribute("users", userlistx);
-                request.setAttribute("user", true);
-                ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                loadUser(request,response);
                 break;
             case "/SellerList":
-                List<SellerListDTO> sellerlist = UserModel.paginationSeller(0, 6);
-                request.setAttribute("sellers", sellerlist);
-                request.setAttribute("sell", true);
-                double totalPagesSeller = Math.ceil((double) UserModel.findSellers().size() / 6); // trả ra 6 sản phẩm mỗi trang
-                request.setAttribute("totalPageSeller", totalPagesSeller);
-                ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                loadSeller(request,response);
                 break;
             case "/BidderList":
-                // List<BidderListDTO> bidderlist = UserModel.findBidders();
-                List<BidderListDTO> bidderlist = UserModel.paginationBidder(0, 6);
-                double totalPagesBidder = Math.ceil((double) UserModel.findSellers().size() / 6); // trả ra 6 sản phẩm mỗi trang
-                request.setAttribute("totalPagesBidder", totalPagesBidder);
-                request.setAttribute("bidders", bidderlist);
-                request.setAttribute("bid", true);
-                ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                loadBidder(request,response);
                 break;
             case "/ProductList":
-                List<ProductCategoryDTO> productList = ProductModel.paginationProduct(0,6);
-                double totalPageProduct = Math.ceil((double) ProductModel.findCategoryAndProduct().size() / 6); // trả ra 6 sản phẩm mỗi trang
-                request.setAttribute("totalPageProduct", totalPageProduct);
-                request.setAttribute("products", productList);
-                request.setAttribute("pro", true);
-                ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                loadProduct(request,response);
                 break;
             case "/EditUser":
                 int userId = Integer.parseInt(request.getParameter("id"));
                 constant.idUser=userId;
                 User id_find_user = UserModel.findById(userId);
-                String dob= "";
-                try {
-
-                    LocalDate lcd = id_find_user.getDob();
-
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
                 request.setAttribute("user", id_find_user); //Day la đối tượng user sau khi cần edit
-                request.setAttribute("dob", dob);
                 ServletUtils.forward("/views/Home/Edit.jsp", request, response);
                 break;
             case "/RemoveUser":
                 int userRemove = Integer.parseInt(request.getParameter("id"));
                 UserModel.deleteUser(userRemove);
-                List<User> userlistX = UserModel.showUsers();
-                request.setAttribute("users", userlistX);
-                request.setAttribute("user", true);
-                ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                loadUser(request,response);
+                break;
+            case "/RemoveProduct":
+                int productRemove = Integer.parseInt(request.getParameter("id"));
+                //UserModel.deleteUser(userRemove);
 
                 break;
             case "/UserList":
-                List<User> userlistxx = UserModel.paginationUser(0, 6);
-                request.setAttribute("users", userlistxx);
-                request.setAttribute("user", true);
-                double totalPages2 = Math.ceil((double) UserModel.findAll().size() / 6); // trả ra 6 sản phẩm mỗi trang
-                request.setAttribute("totalPageUser", totalPages2);
-                ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+                loadUser(request,response);
                 break;
             default:
                 ServletUtils.forward("/views/vwAdmin/404.jsp", request, response);
@@ -131,11 +101,43 @@ public class AdminServlet extends HttpServlet {
         User c = new User(constant.idUser,"","",name,dob,address,email,pointId,permission);
         UserModel.updateUser(c);
 
-        List<User> userlist = UserModel.showUsers();
-        request.setAttribute("users", userlist);
-        request.setAttribute("lev2",true);
-        ServletUtils.forward("/views/vwAdmin/index.jsp", request,response);
+        loadUser(request,response);
+    }
+    public void loadProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
 
-
+        List<ProductCategoryDTO> productList = ProductModel.paginationProduct(0,6);
+        double totalPageProduct = Math.ceil((double) ProductModel.findCategoryAndProduct().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalPageProduct", totalPageProduct);
+        request.setAttribute("products", productList);
+        request.setAttribute("pro", true);
+        ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+    }
+    public void loadUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        List<User> userlistx = UserModel.paginationUser(0, 6);
+        double totalPages = Math.ceil((double) UserModel.findAll().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalPageUser", totalPages);
+        request.setAttribute("users", userlistx);
+        request.setAttribute("user", true);
+        ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+    }
+    public void loadBidder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        List<BidderListDTO> bidderlist = UserModel.paginationBidder(0, 6);
+        double totalPagesBidder = Math.ceil((double) UserModel.findSellers().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalPagesBidder", totalPagesBidder);
+        request.setAttribute("bidders", bidderlist);
+        request.setAttribute("bid", true);
+        ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+    }
+    public void loadSeller(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        List<SellerListDTO> sellerlist = UserModel.paginationSeller(0, 6);
+        request.setAttribute("sellers", sellerlist);
+        request.setAttribute("sell", true);
+        double totalPagesSeller = Math.ceil((double) UserModel.findSellers().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalPageSeller", totalPagesSeller);
+        ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
     }
 }

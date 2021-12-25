@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ServletDefault", value = "/")//bắt toàn bộ đường dẫn
+@WebServlet(name = "ServletDefault", urlPatterns = {"/"})//bắt toàn bộ đường dẫn
 public class ServletDefault extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

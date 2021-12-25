@@ -29,8 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="txtDOB">Date Of Birth</label>
-<%--                    value="<c:out value='${user.dob}'/>"--%>
-                    <input type="text" value="${dob}" class="form-control" id="txtDOB" name="dob" required>
+                    <input type="text" value="<c:out value='${user.dob}'/>" class="form-control" id="txtDOB" name="dob" required>
                 </div>
                 <div class="form-group">
                     <label for="txtAddress">Address</label>
@@ -67,16 +66,27 @@
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    $('#txtDOB').datetimepicker(
+
+        $('#txtDOB').datetimepicker(
         {
             format: 'd/m/Y',
             timepicker: false,
-            mask: true
+            mask: true,
+
         }
     );
+
+
+
+
+
+
     $( "#btnSave" ).click(function() {
         Swal.fire('Update successfully')
     });
+
+
+
     $(document).ready(function () {
         $(".list-group-item").hover(function () {
                 $(this).css("background-color", "yellow");

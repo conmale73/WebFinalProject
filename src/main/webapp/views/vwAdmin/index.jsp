@@ -8,7 +8,7 @@
 <%--<jsp:useBean id="users" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />--%>
 <%--<jsp:useBean id="bidders" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.BidderListDTO>" />--%>
 <%--<jsp:useBean id="sellers" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.SellerListDTO>" />--%>
-<%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
+<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />
 
 <t:main>
     <jsp:attribute name="css">
@@ -237,20 +237,59 @@
                         <thead class="thead-dark">
                         <tr >
                             <th>Tên Sản Phẩm</th>
+                            <th>ID Sản Phẩm</th>
                             <th>Tên Danh Mục</th>
                             <th>Giá ban đầu</th>
                             <th>Giá Mua Ngay</th>
-
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody id="content-product">
                         <c:forEach items="${products}" var="p">
                             <tr class="table-success">
                                 <td>${p.tenSanPham}</td>
+                                <td>${p.IDSanPham}</td>
                                 <td>${p.tenDanhMuc}</td>
                                 <td><fmt:formatNumber value="${p.giaHienTai}" type="number" /></td>
                                 <td><fmt:formatNumber value="${p.giaMuaNgay}" type="number" /></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Details
+                                    </button>
+                                </td>
+                                <td>
+                                    <a onclick="appearRemove(${p.IDSanPham})" class="btn btn-danger"  role="button"  id="removeProduct" >
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        Remove
+                                    </a>
+                                </td>
                             </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Detailed Product</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="${pageContext.request.contextPath}/public/imgs/sp/${p.IDSanPham}/anhchinh.jpg" alt="${p.tenSanPham}" title="${p.tenSanPham}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <p class="card-text">${p.chiTiet}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
                         </tbody>
                     </table>
@@ -379,6 +418,10 @@
 
         );
     });
+    function removeProduct()
+    {
+
+    }
     function clickNav()
     {
         $('.left-item').removeClass("active");
@@ -410,6 +453,28 @@
             }
         })
     }
+    function appearRemoveProduct(idProduct)
+    {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
 
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                console.log("/AdminServlet/RemoveProduct?id=" + idProduct);
+                window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveProduct?id="+ idProduct ;
+            }
+        })
+    }
 
 </script>

@@ -1,7 +1,7 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@attribute name="css" fragment="true" required="false" %>
 <%@attribute name="js" fragment="true" required="false" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%--  danh cho footer--%>
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" src="<c:url value="../../css/abc.css"/>">
   <jsp:invoke fragment="css"/>
 </head>
 <body>

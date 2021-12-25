@@ -2,8 +2,10 @@ package com.onelineauction.webfinalproject.API;
 
 import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
 import com.onelineauction.webfinalproject.beans.SellerListDTO;
+import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.models.UserModel;
+import com.onelineauction.webfinalproject.utils.ServletUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,18 +20,19 @@ public class APIProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int page_current = Integer.parseInt(request.getParameter("page_exist"));
-        List<ProductCategoryDTO> productList = ProductModel.paginationProduct((page_current - 1) * 6, 6);//Tính tại lúc bắt đầu và các trang tiếp theo
+                int page_current = Integer.parseInt(request.getParameter("page_exist"));
+                List<ProductCategoryDTO> productList = ProductModel.paginationProduct((page_current - 1) * 6, 6);//Tính tại lúc bắt đầu và các trang tiếp theo
 
-        PrintWriter out = response.getWriter();
-        for (ProductCategoryDTO o : productList) {
-            out.println("<tr class=\"table-success\">\n" +
-                    "                                <td>"+o.getTenSanPham()+"</td>\n" +
-                    "                                <td>"+o.getTenSanPham()+"</td>\n" +
-                    "                                <td>"+ formatNumber(o.getGiaHienTai())+"</td>\n" +
-                    "                                <td>"+ formatNumber(o.getGiaMuaNgay())+"</td>\n" +
-                    "                            </tr>");
-        }
+                PrintWriter out = response.getWriter();
+                for (ProductCategoryDTO o : productList) {
+                    out.println("<tr class=\"table-success\">\n" +
+                            "                                <td>"+o.getTenSanPham()+"</td>\n" +
+                            "                                <td>"+o.getTenSanPham()+"</td>\n" +
+                            "                                <td>"+ formatNumber(o.getGiaHienTai())+"</td>\n" +
+                            "                                <td>"+ formatNumber(o.getGiaMuaNgay())+"</td>\n" +
+                            "                            </tr>");
+                }
+
     }
 
     @Override

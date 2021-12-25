@@ -8,6 +8,18 @@
 <!--        <url-pattern>/*</url-pattern>-->
 <!--    </filter-mapping>-->
 
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>Home1Servlet</welcome-file>-->
+<!--    </welcome-file-list>-->
+<!--    <servlet>-->
+<!--        <servlet-name>Home1Servlet</servlet-name>-->
+<!--        <servlet-class>com.onelineauction.webfinalproject.controllers.Home1Servlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Home1Servlet</servlet-name>-->
+<!--        <url-pattern>/Home1Servlet</url-pattern>-->
+<!--    </servlet-mapping>-->
+
     <filter-mapping>
         <filter-name>SessionInitFilter</filter-name>
         <url-pattern>/*</url-pattern>

@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/api-seller")
@@ -52,8 +55,12 @@ public class APISeller extends HttpServlet {
     }
 //    public String formatDate(DateTimeFormatter time)
 //    {
-//        DateTimeFormatter formatter = time.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        String formattedDate = time. format(DateTimeFormatter. ofPattern("dd-MMM-yy"));
-//        return formattedDate;
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//        CharSequence text;
+//        LocalDate localDate = LocalDate.parse(time.toString(), dateTimeFormatter);
+////        DateTimeFormatter formatter = time.ofPattern("dd-MM-yyyy HH:mm:ss");
+//       //dateTimeFormatter.format()
+//        //String formattedDate = time.format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
+//        return localDate.toString();
 //    }
 }
