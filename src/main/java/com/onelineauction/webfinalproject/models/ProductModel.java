@@ -128,4 +128,13 @@ public class ProductModel {
                     .executeAndFetch(ProductCategoryDTO.class);
         }
     }
+    public static void deleteProduct(String id)
+    {
+        String sql = "delete from product where IDSanPham = :ID ";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("ID", id)
+                    .executeUpdate();
+        }
+    }
 }

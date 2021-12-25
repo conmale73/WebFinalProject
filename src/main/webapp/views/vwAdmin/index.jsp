@@ -8,7 +8,8 @@
 <%--<jsp:useBean id="users" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />--%>
 <%--<jsp:useBean id="bidders" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.BidderListDTO>" />--%>
 <%--<jsp:useBean id="sellers" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.SellerListDTO>" />--%>
-<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />
+<%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
+<%--<jsp:useBean id="categories" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
 
 <t:main>
     <jsp:attribute name="css">
@@ -75,19 +76,19 @@
                                 </c:if>
                             </td>
                             <td>
-
-                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}">
+                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}" >
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Edit
                                 </a>
-
                             </td>
                             <td>
-                                <a onclick="appearRemove(${c.id})" class="btn btn-danger"  role="button"  id="remove" >
+                                <form action="${pageContext.request.contextPath}/AdminServlet/RemoveUser" method="post">
+                                    <input type="text" value="${c.id}" name="id"  hidden>
+                                <button type="submit" onclick="appearRemove(${c.id})" class="btn btn-danger"  role="button"  id="remove" >
                                     <i class="fa fa-times" aria-hidden="true"></i>
                                     Remove
-                                </a>
-
+                                </button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>
@@ -254,23 +255,23 @@
                                 <td><fmt:formatNumber value="${p.giaHienTai}" type="number" /></td>
                                 <td><fmt:formatNumber value="${p.giaMuaNgay}" type="number" /></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter${p.IDSanPham}" >
                                         Details
                                     </button>
                                 </td>
                                 <td>
-                                    <a onclick="appearRemove(${p.IDSanPham})" class="btn btn-danger"  role="button"  id="removeProduct" >
+                                    <a onclick="appearRemoveProduct('${p.IDSanPham}')" class="btn btn-danger"  role="button"  id="removeProduct" >
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                         Remove
                                     </a>
                                 </td>
                             </tr>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="exampleModalCenter${p.IDSanPham}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Detailed Product</h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle${p.IDSanPham}">Detailed Product</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -290,6 +291,70 @@
                                     </div>
                                 </div>
                             </div>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination ">
+                            <c:set var = "i" scope = "session" value = "${1}"/>
+                            <c:forEach var="tolProduct " begin ='1' end = '${totalPageProduct}'>
+                                <li class="page-item list-group" id="list-tab" role="tablist">
+                                    <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickProduct(${i})">
+                                        <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
+                                        <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+        <c:if test = "${category==true}">
+            <nav class="rounded-top navbar navbar-light " style="background-color: rgb(255, 127, 80);">
+                <span class="navbar-brand mb-0 h1">Category</span>
+                <a onclick="appearRemoveProduct('${c.IDSanPham}')" class="btn btn-primary"  role="button"  id="addCategory"  >
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Add Category
+                </a>
+            </nav>
+            <c:choose>
+                <c:when test="${categories.size() == 0}">
+                    <div class="card-body">
+                        <p class="card-text">Không có dữ liệu.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr >
+                            <th>Tên Danh Mục</th>
+                            <th>ID Danh Mục</th>
+                            <th>Số Lượng</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="content-category">
+                        <c:forEach items="${categories}" var="c">
+                            <tr class="table-success">
+                                <td>${c.tenDanhMuc}</td>
+                                <td>${c.IDDanhMuc}</td>
+                                <td>${c.soluong}</td>
+                                <td>
+                                    <a onclick="appearRemoveProduct('${c.IDSanPham}')" class="btn btn-warning"  role="button"  id="editCategory"  >
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        Edit
+                                    </a>
+                                </td>
+                                <td>
+                                    <a onclick="appearRemoveProduct('${c.IDSanPham}')" class="btn btn-danger"  role="button"  id="removeCategory"  >
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        Remove
+                                    </a>
+                                </td>
+                            </tr>
                         </c:forEach>
                         </tbody>
                     </table>
@@ -387,7 +452,6 @@
     {
         $('.page-link').removeClass("active");
         $(this).addClass("active");
-        <%--"<c:url value="/api-user" />"--%>
         event.preventDefault();
         $.ajax({
             url: "<c:url value="/api-product" />",
@@ -405,33 +469,18 @@
             }
         })
     }
-    $(document).ready(function () {
-        $(".left-item").hover(function () {
-                $(this).css("background-color", "lightblue");
-                $(this).css("color", "black");
-                $(this).css("background-color", "");
-
-            // $(this).css("font-weight", 800);
-
-            },
 
 
-        );
-    });
-    function removeProduct()
-    {
 
-    }
-    function clickNav()
-    {
-        $('.left-item').removeClass("active");
-        $('.left-item').css("background-color", "");
-        $(this).css("background-color", "lightblue");
-        $(this).addClass("active");
-
-    }
     function appearRemove(idUser)
     {
+        $('#remove').alert("Delete user successfully");
+
+        var delayInMilliseconds = 1000; //1 second
+
+        setTimeout(function() {
+            //your code to be executed after 1 second
+        }, delayInMilliseconds);
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -440,7 +489,14 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
+
         }).then((result) => {
+            event.preventDefault();
+            var delayInMilliseconds = 5000; //1 second
+
+            setTimeout(function() {
+                //your code to be executed after 1 second
+            }, delayInMilliseconds);
             if (result.isConfirmed) {
 
                 Swal.fire(
@@ -448,8 +504,8 @@
                     'Your file has been deleted.',
                     'success'
                 )
-                console.log("/AdminServlet/RemoveUser?id=" + idUser);
-                window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveUser?id="+ idUser ;
+               // console.log("/AdminServlet/RemoveUser?id=" + idUser);
+                //window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveUser?id="+ idUser ;
             }
         })
     }

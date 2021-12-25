@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="txtDOB">Date Of Birth</label>
-                    <input type="text" value="<c:out value='${user.dob}'/>" class="form-control" id="txtDOB" name="dob" required>
+                    <input type="text"  class="form-control" id="txtDOB" name="dob" required>
                 </div>
                 <div class="form-group">
                     <label for="txtAddress">Address</label>
@@ -66,20 +66,25 @@
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+        const dob = '${dob}';
+
+        dobFormatter = (dob) => {
+            const temp = new Date(dob);
+            let month = temp.getMonth() + 1;
+            let dateFormat = temp.getDate() + "/" + month + "/" + temp.getFullYear();
+            // console.log(dateFormat)
+            // console.log(typeof dateFormat)
+            return dateFormat;
+        }
 
         $('#txtDOB').datetimepicker(
         {
             format: 'd/m/Y',
             timepicker: false,
             mask: true,
-
+            value: dobFormatter(dob)
         }
     );
-
-
-
-
-
 
     $( "#btnSave" ).click(function() {
         Swal.fire('Update successfully')

@@ -179,6 +179,7 @@
         }
     }
 </style>
+    <div style="height: 250px"></div>
     <!-- Site footer -->
     <footer class="site-footer">
         <div class="container">

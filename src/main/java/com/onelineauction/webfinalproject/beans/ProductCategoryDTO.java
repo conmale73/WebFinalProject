@@ -16,6 +16,11 @@ public class ProductCategoryDTO {
     private String ChiTiet;
     private String AnhChinh;
     private String AnhPhu;
+    private int soluong;
+
+    public int getSoluong() {
+        return soluong;
+    }
 
     private String TenDanhMuc;
 

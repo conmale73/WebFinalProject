@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -33,6 +34,28 @@ public class CategoryModel {
         }
     }
 
+    public static List<ProductCategoryDTO> findCategoryByID() {
+        final String query =
+                "select category.TenDanhMuc,category.IDDanhMuc, count(*) as 'soluong'\n" +
+                        "    from category,product\n" +
+                        "    where product.IDDanhMuc=category.IDDanhMuc\n" +
+                        "    group by category.IDDanhMuc ";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(ProductCategoryDTO.class);
+        }
+    }
+    public static List<ProductCategoryDTO> paginationCategory(int offset,int limit) {
+        final String query = "select category.TenDanhMuc,category.IDDanhMuc, count(*) as 'soluong'\n" +
+                "    from category,product\n" +
+                "    where product.IDDanhMuc=category.IDDanhMuc\n" +
+                "    group by category.IDDanhMuc " +
+                " LIMIT "+offset+" ," +limit;
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(ProductCategoryDTO.class);
+        }
+    }
     public static void add(Category c) {
         String insertSql = "insert into category(TenDanhMuc) values (:TenDanhMuc)";
         try (Connection con = DbUtils.getConnection()) {

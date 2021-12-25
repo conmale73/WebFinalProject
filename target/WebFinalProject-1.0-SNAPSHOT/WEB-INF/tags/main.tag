@@ -14,6 +14,9 @@
 <%--  danh cho footer--%>
   <link rel="stylesheet" src="<c:url value="../../css/abc.css"/>">
   <jsp:invoke fragment="css"/>
+  <script>
+
+  </script>
 </head>
 <body>
   <jsp:include page="../../views/partials/nav.jsp"/>
@@ -27,6 +30,7 @@
       </div>
     </div>
   </div>
+
   <jsp:include page="../../views/partials/footer.jsp"/>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
