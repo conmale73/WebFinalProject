@@ -66,7 +66,10 @@
 <c:otherwise>
   <div class="card mt-3">
     <h4 class="card-header">
-      Danh Mục guest
+      <a href="${pageContext.request.contextPath}/Guest/Home/DanhSachSanPham" class="list-group-item list-group-item-action">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        Danh Mục
+      </a>
     </h4>
     <c:choose>
       <c:when test="${categoriesWithDetails.size()==0}">

@@ -3,6 +3,7 @@ import com.mysql.cj.xdevapi.Schema;
 import com.onelineauction.webfinalproject.beans.Category;
 import com.onelineauction.webfinalproject.beans.Product;
 import com.onelineauction.webfinalproject.beans.ProductForNew;
+import com.onelineauction.webfinalproject.beans.ProductForShow;
 import com.onelineauction.webfinalproject.models.CategoryModel;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
@@ -51,6 +52,11 @@ public class Home1Servlet extends HttpServlet {
                 List<ProductForNew> list2 = ProductModel.findNamePrice(TenSanPham);
                 request.setAttribute("products", list2);
                 ServletUtils.forward("/views/vwGuest/TimKiemGia.jsp", request, response);
+                break;
+            case "/DanhSachSanPham":
+                List<ProductForShow> list3 = ProductModel.ShowDanhSach();
+                request.setAttribute("products", list3);
+                ServletUtils.forward("/views/vwGuest/DanhSachSP.jsp", request, response);
                 break;
             default:
                 ServletUtils.forward("/views/Guest/404.jsp", request, response);

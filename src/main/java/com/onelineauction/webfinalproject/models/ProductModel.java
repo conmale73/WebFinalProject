@@ -3,6 +3,7 @@ package com.onelineauction.webfinalproject.models;
 import com.onelineauction.webfinalproject.beans.Product;
 import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
 import com.onelineauction.webfinalproject.beans.ProductForNew;
+import com.onelineauction.webfinalproject.beans.ProductForShow;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -45,10 +46,12 @@ public class ProductModel {
 
     public static List<Product> findTop5DanhGia() {
         final String query =
-                "Select * FROM product\n" +
-                        "Where IDSanPham = (Select IDSanPham from daugia\n" +
-                        "                    order by count(IDSanPham) DESC\n" +
-                        "                    LIMIT 5)";
+                "select product.* from product, (select IDSanPham, count(IDSanPham) as LanDauGia\n" +
+                        "                        from daugia\n" +
+                        "                        group by IDSanPham\n" +
+                        "                        order by LanDauGia desc) as d\n" +
+                        "where product.IDSanPham = d.IDSanPham\n" +
+                        "limit 5";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(Product.class);
@@ -102,6 +105,18 @@ public class ProductModel {
             return con.createQuery(query)
                     .addParameter("Tensp", TenSanPham)
                     .executeAndFetch(ProductForNew.class);
+        }
+    }
+
+    public static List<ProductForShow> ShowDanhSach() {
+        final String query = "select product.IDSanPham,product.TenSanPham, product.IDNguoiBan, product.GiaHienTai, product.GiaMuaNgay, product.BuocGia, product.IDDanhMuc, product.IDNguoiGiuGiaHienTai,convert(product.ThoiGianDangBan,date) as ThoiGianDangBan, product.ThoiGianKetThuc, product.ChiTiet, product.AnhChinh, product.AnhPhu, datediff(product.ThoiGianKetThuc,curtime()) as TGcon, count(daugia.IDSanPham) as LanDauGia\n" +
+                "from product\n" +
+                "left join daugia on daugia.IDSanPham = product.IDSanPham\n" +
+                "group by product.IDSanPham\n" +
+                "order by LanDauGia desc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(ProductForShow.class);
         }
     }
 
