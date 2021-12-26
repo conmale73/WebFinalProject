@@ -2,6 +2,7 @@ package com.onelineauction.webfinalproject.models;
 
 import com.onelineauction.webfinalproject.beans.Product;
 import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
+import com.onelineauction.webfinalproject.beans.ProductForNew;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -64,29 +65,43 @@ public class ProductModel {
         }
     }
 
-    public static List<Product> findName(String TenSanPham) {
+    public static List<ProductForNew> findName(String TenSanPham) {
         final String query =
-                "Select * from product\n" +
+                "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
                         "where match(TenSanPham)\n" +
                         "against(:Tensp)\n" +
                         "order by ThoiGianKetThuc DESC";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("Tensp", TenSanPham)
-                    .executeAndFetch(Product.class);
+                    .executeAndFetch(ProductForNew.class);
         }
     }
 
-    public static List<Product> findNamePrice(String TenSanPham) {
+    public static List<ProductForNew> findNamePrice(String TenSanPham) {
         final String query =
-                "Select * from product\n" +
+                "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
                         "where match(TenSanPham)\n" +
                         "against(:Tensp)\n" +
                         "order by GiaHienTai ASC";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("Tensp", TenSanPham)
-                    .executeAndFetch(Product.class);
+                    .executeAndFetch(ProductForNew.class);
+        }
+    }
+
+    public static List<ProductForNew> findNametimeup(String TenSanPham) {
+        final String query =
+                "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
+                        "where match(TenSanPham)\n" +
+                        "    against(:Tensp)\n" +
+                        "And timestampdiff(minute,ThoiGianDangBan,curtime())<30\n" +
+                        "order by neworold asc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("Tensp", TenSanPham)
+                    .executeAndFetch(ProductForNew.class);
         }
     }
 
