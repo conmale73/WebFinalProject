@@ -48,7 +48,7 @@
                         <th>Name</th>
                         <th>Date Of birth</th>
                         <th>Address</th>
-                        <th>Email</th>
+                        <th class="text-center">Email</th>
                         <th>Point</th>
                         <th>Permission</th>
                         <th></th>
@@ -76,18 +76,16 @@
                                 </c:if>
                             </td>
                             <td>
-                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}" >
+                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}" id="editUser" >
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Edit
                                 </a>
                             </td>
                             <td>
-                                <form action="${pageContext.request.contextPath}/AdminServlet/RemoveUser" method="post">
-                                    <input type="text" value="${c.id}" name="id"  hidden>
-                                <button type="submit" onclick="appearRemove(${c.id})" class="btn btn-danger"  role="button"  id="remove" >
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                    Remove
-                                </button>
+                                <form action="${pageContext.request.contextPath}/AdminServlet/RemoveUser" method="post" id="formRemoveUser${c.id}">
+
+                                    <input type="text" value="<c:out value='${c.id}'/>" name="iduser" hidden>
+                                    <input type="button" onclick="removeUserXD(${c.id},'${c.name}')"  class="btn btn-danger"  role="button"  id="removeUser" value="Remove">
                                 </form>
                             </td>
                         </tr>
@@ -313,11 +311,36 @@
         <c:if test = "${category==true}">
             <nav class="rounded-top navbar navbar-light " style="background-color: rgb(255, 127, 80);">
                 <span class="navbar-brand mb-0 h1">Category</span>
-                <a onclick="appearRemoveProduct('${c.IDSanPham}')" class="btn btn-primary"  role="button"  id="addCategory"  >
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     Add Category
-                </a>
+                </button>
             </nav>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="${pageContext.request.contextPath}/Admin/Category/Add" method="post">
+                                <label >Tên Danh Mục</label>
+                                <input type="text" class="form-control"  name="TenDanhMuc" placeholder="" required>
+                                <label >ID danh mục</label>
+                                <input type="text" class="form-control" name="IDCategory" placeholder="" required>
+                                <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Add" ></input>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <c:choose>
                 <c:when test="${categories.size() == 0}">
                     <div class="card-body">
@@ -330,8 +353,8 @@
                         <thead class="thead-dark">
                         <tr >
                             <th>Tên Danh Mục</th>
-                            <th>ID Danh Mục</th>
-                            <th>Số Lượng</th>
+                            <th class="text-center">ID Danh Mục</th>
+                            <th class="text-center">Số Lượng</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -340,21 +363,47 @@
                         <c:forEach items="${categories}" var="c">
                             <tr class="table-success">
                                 <td>${c.tenDanhMuc}</td>
-                                <td>${c.IDDanhMuc}</td>
-                                <td>${c.soluong}</td>
+                                <td class="text-center">${c.IDDanhMuc}</td>
+                                <td class="text-center">${c.soluong}</td>
                                 <td>
-                                    <a onclick="appearRemoveProduct('${c.IDSanPham}')" class="btn btn-warning"  role="button"  id="editCategory"  >
+
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter${c.IDDanhMuc}">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         Edit
-                                    </a>
+                                    </button>
                                 </td>
                                 <td>
-                                    <a onclick="appearRemoveProduct('${c.IDSanPham}')" class="btn btn-danger"  role="button"  id="removeCategory"  >
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                        Remove
-                                    </a>
+                                    <form action="${pageContext.request.contextPath}/Admin/Category/Delete" method="post" id="formRemoveCategory${c.IDDanhMuc}">
+                                        <input type="text" value="<c:out value='${c.IDDanhMuc}'/>" name="IDCategory" hidden>
+                                        <a class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i>
+                                            <input type="button" onclick="removeCategory(${c.soluong},${c.IDDanhMuc})"  class="btn btn-danger"  role="button"  id="removeDanhMuc" value="Remove">
+                                        </a>
+                                    </form>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="exampleModalCenter${c.IDDanhMuc}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle${c.IDDanhMuc}">Detailed Product</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="${pageContext.request.contextPath}/Admin/Category/Update" method="post">
+                                                <label >Tên Danh Mục</label>
+                                                <input type="text" class="form-control" value="<c:out value='${c.tenDanhMuc}'/>"  name="TenDanhMuc" placeholder="" required>
+                                                <label >ID danh mục</label>
+                                                <input type="text" class="form-control" value="<c:out value='${c.IDDanhMuc}'/>" name="IDCategory" placeholder="" required>
+                                                <div class="modal-footer">
+                                                    <input type="submit" class="btn btn-primary" value="Update" ></input>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
                         </tbody>
                     </table>
@@ -374,7 +423,6 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
-
 
     </jsp:body>
 </t:main>
@@ -470,45 +518,76 @@
         })
     }
 
-
-
-    function appearRemove(idUser)
+    function removeUserXD(iduser,name)
     {
-        $('#remove').alert("Delete user successfully");
-
-        var delayInMilliseconds = 1000; //1 second
-
-        setTimeout(function() {
-            //your code to be executed after 1 second
-        }, delayInMilliseconds);
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-
-        }).then((result) => {
-            event.preventDefault();
-            var delayInMilliseconds = 5000; //1 second
-
-            setTimeout(function() {
-                //your code to be executed after 1 second
-            }, delayInMilliseconds);
-            if (result.isConfirmed) {
-
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-               // console.log("/AdminServlet/RemoveUser?id=" + idUser);
-                //window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveUser?id="+ idUser ;
-            }
-        })
+        let id= '#formRemoveUser'+iduser;
+            Swal.fire({
+                title: 'Do you want to delete '+ name + " ?",
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(id).submit();
+                }
+            })
+        return;
     }
+    function removeCategory(soluong,idDanhmuc)
+    {
+        // event.preventDefault();
+        let id= '#formRemoveCategory'+idDanhmuc;
+
+        if(soluong!=0)
+        {
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Không Thế Xóa Danh Mục',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+            return;
+        }
+        else
+        {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $(id).submit();
+                }
+            })
+            return;
+        }
+    }
+    function deleteSuccess()
+    {
+        Swal.fire(
+            'Delete Successfully!',
+            'Your record has been deleted',
+            'success'
+        )
+    }
+    function updateSuccess()
+    {
+        Swal.fire(
+            'Update Successfully!',
+            'Your record has been updated',
+            'success'
+        )
+    }
+
     function appearRemoveProduct(idProduct)
     {
         Swal.fire({
@@ -527,8 +606,8 @@
                     'Your file has been deleted.',
                     'success'
                 )
-                console.log("/AdminServlet/RemoveProduct?id=" + idProduct);
-                window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveProduct?id="+ idProduct ;
+                <%--console.log("/AdminServlet/RemoveProduct?id=" + idProduct);--%>
+                <%--window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveProduct?id="+ idProduct ;--%>
             }
         })
     }

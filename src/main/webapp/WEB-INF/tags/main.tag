@@ -18,7 +18,15 @@
 
   </script>
 </head>
+<c:if test = "${message_delete == 'Xoa Thanh Cong'}">
+  <body onload="deleteSuccess()">
+</c:if>
+<c:if test = "${message_update == 'Update Thanh Cong'}">
+<body onload="updateSuccess()">
+</c:if>
+<c:if test = "${message_category == null}">
 <body>
+</c:if>
   <jsp:include page="../../views/partials/nav.jsp"/>
   <div class="container-fluid mt-4">
     <div class="row">

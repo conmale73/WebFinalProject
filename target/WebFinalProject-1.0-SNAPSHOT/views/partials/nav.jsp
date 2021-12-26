@@ -113,7 +113,12 @@
     <div class="">
       <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiem">
         <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo ngày kết thúc giảm dần</button>
+          <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+      </form>
+      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiemGia">
+        <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo giá tăng dần</button>
           <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
       </form>
     </div>
@@ -132,7 +137,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" style="right: 0">
 
-                    Hi <b>${authUser.name}</b>
+                  <i class="fa fa-user-o" aria-hidden="true"></i> Hi <b>${authUser.name}</b>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -184,7 +189,12 @@
         <div class="">
           <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiem">
             <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo ngày kết thúc giảm dần</button>
+              <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+          </form>
+          <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiemGia">
+            <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo giá tăng dần</button>
               <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
           </form>
         </div>

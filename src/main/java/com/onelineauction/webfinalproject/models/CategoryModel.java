@@ -36,20 +36,20 @@ public class CategoryModel {
 
     public static List<ProductCategoryDTO> findCategoryByID() {
         final String query =
-                "select category.TenDanhMuc,category.IDDanhMuc, count(*) as 'soluong'\n" +
-                        "    from category,product\n" +
-                        "    where product.IDDanhMuc=category.IDDanhMuc\n" +
-                        "    group by category.IDDanhMuc ";
+                "select category.TenDanhMuc,category.IDDanhMuc, count(product.IDSanPham) as 'soluong'\n" +
+                        "     from category\n" +
+                        "              LEFT OUTER JOIN    product on product.IDDanhMuc = category.IDDanhMuc\n" +
+                        "     group by category.IDDanhMuc ";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(ProductCategoryDTO.class);
         }
     }
     public static List<ProductCategoryDTO> paginationCategory(int offset,int limit) {
-        final String query = "select category.TenDanhMuc,category.IDDanhMuc, count(*) as 'soluong'\n" +
-                "    from category,product\n" +
-                "    where product.IDDanhMuc=category.IDDanhMuc\n" +
-                "    group by category.IDDanhMuc " +
+        final String query = "select category.TenDanhMuc,category.IDDanhMuc, count(product.IDSanPham) as 'soluong'\n" +
+                "     from category\n" +
+                "              LEFT OUTER JOIN    product on product.IDDanhMuc = category.IDDanhMuc\n" +
+                "     group by category.IDDanhMuc" +
                 " LIMIT "+offset+" ," +limit;
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
@@ -57,10 +57,11 @@ public class CategoryModel {
         }
     }
     public static void add(Category c) {
-        String insertSql = "insert into category(TenDanhMuc) values (:TenDanhMuc)";
+        String insertSql = "INSERT INTO category (IDDanhMuc, TenDanhMuc) VALUES (:iddanhmuc,:tendanhmuc)";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(insertSql)
-                    .addParameter("TenDanhMuc", c.getTenDanhMuc())
+                    .addParameter("tendanhmuc", c.getTenDanhMuc())
+                    .addParameter("iddanhmuc", c.getIDDanhMuc())
                     .executeUpdate();
         }
     }

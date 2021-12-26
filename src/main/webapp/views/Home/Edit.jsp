@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave" onclick="clickSave()">Save</button>
                 </div>
             </form>
 
@@ -89,7 +89,23 @@
     $( "#btnSave" ).click(function() {
         Swal.fire('Update successfully')
     });
-
+    function clickSave()
+    {
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Swal.fire('Saved!', '', 'success')
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
+    }
 
 
     $(document).ready(function () {

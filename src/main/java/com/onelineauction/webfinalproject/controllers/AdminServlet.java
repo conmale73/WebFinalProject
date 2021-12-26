@@ -38,8 +38,7 @@ public class AdminServlet extends HttpServlet {
         String[] color = {"white","white","white","white","white"};
         switch (path) {
             case "/Index":
-                //color[0] = "lightblue";
-                //request.setAttribute("colorLeftNav",color);
+
                 loadUser(request,response);
                 break;
             case "/SellerList":
@@ -72,11 +71,13 @@ public class AdminServlet extends HttpServlet {
                 System.out.println(localDate);
                 ServletUtils.forward("/views/Home/Edit.jsp", request, response);
                 break;
-//            case "/RemoveUser":
-//                int userRemove = Integer.parseInt(request.getParameter("id"));
-//                UserModel.deleteUser(userRemove);
-//                loadUser(request,response);
-//                break;
+            case "/RemoveUser":
+                int userRemove = Integer.parseInt(request.getParameter("iduser"));
+                UserModel.deleteUser(userRemove);
+                request.setAttribute("message_delete","Xoa Thanh Cong");
+                loadUser(request,response);
+                request.setAttribute("message_delete",null);
+                break;
             case "/RemoveProduct":
                 String productRemove = request.getParameter("id");
                 ProductModel.deleteProduct(productRemove);
@@ -104,8 +105,9 @@ public class AdminServlet extends HttpServlet {
             case "/RemoveUser":
                 int userRemove = Integer.parseInt(request.getParameter("id"));
                 UserModel.deleteUser(userRemove);
-
+                request.setAttribute("message_delete","Xoa Thanh Cong");
                 loadUser(request,response);
+                request.setAttribute("message_delete",null);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -127,7 +129,10 @@ public class AdminServlet extends HttpServlet {
         int permission = Integer.parseInt(request.getParameter("permission"));
         User c = new User(constant.idUser,"","",name,dob,address,email,pointId,permission);
         UserModel.updateUser(c);
+        request.setAttribute("success", true);
+        request.setAttribute("message_update","Update Thanh Cong");
         loadUser(request,response);
+        request.setAttribute("message_update",null);
     }
     public void loadProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
