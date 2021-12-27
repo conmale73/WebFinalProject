@@ -1,9 +1,6 @@
 package com.onelineauction.webfinalproject.models;
 
-import com.onelineauction.webfinalproject.beans.Product;
-import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
-import com.onelineauction.webfinalproject.beans.ProductForNew;
-import com.onelineauction.webfinalproject.beans.ProductForShow;
+import com.onelineauction.webfinalproject.beans.*;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -109,7 +106,7 @@ public class ProductModel {
     }
 
     public static List<ProductForShow> ShowDanhSach() {
-        final String query = "select product.IDSanPham,product.TenSanPham, product.IDNguoiBan, product.GiaHienTai, product.GiaMuaNgay, product.BuocGia, product.IDDanhMuc, product.IDNguoiGiuGiaHienTai,convert(product.ThoiGianDangBan,date) as ThoiGianDangBan, product.ThoiGianKetThuc, product.ChiTiet, product.AnhChinh, product.AnhPhu, datediff(product.ThoiGianKetThuc,curtime()) as TGcon, count(daugia.IDSanPham) as LanDauGia\n" +
+        final String query = "select product.IDSanPham,product.TenSanPham, product.IDNguoiBan, product.GiaHienTai, product.GiaMuaNgay, product.BuocGia, product.IDDanhMuc, product.IDNguoiGiuGiaHienTai,convert(product.ThoiGianDangBan,date) as ThoiGianDangBan, convert(product.ThoiGianKetThuc,date) as ThoiGianKetThuc, product.ChiTiet, product.AnhChinh, product.AnhPhu, datediff(product.ThoiGianKetThuc,curtime()) as TGcon, count(daugia.IDSanPham) as LanDauGia\n" +
                 "from product\n" +
                 "left join daugia on daugia.IDSanPham = product.IDSanPham\n" +
                 "group by product.IDSanPham\n" +
@@ -117,6 +114,18 @@ public class ProductModel {
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(ProductForShow.class);
+        }
+    }
+
+    public static List<ProductForFindID> findID(String proId) {
+        final String query =
+                "select IDSanPham,TenSanPham, IDNguoiBan, GiaHienTai, GiaMuaNgay, BuocGia, IDDanhMuc, IDNguoiGiuGiaHienTai,convert(ThoiGianDangBan,date) as ThoiGianDangBan, convert(ThoiGianKetThuc,date) as ThoiGianKetThuc, ChiTiet, AnhChinh, AnhPhu, datediff(ThoiGianKetThuc,curtime()) as TGcon, timestampdiff(hour ,curtime(),ThoiGianKetThuc) as TGconH, timestampdiff(minute,curtime(),ThoiGianKetThuc) as TGconS\n" +
+                        "from product\n" +
+                        "Where IDSanPham = :IDSanPham";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("IDSanPham", proId)
+                    .executeAndFetch(ProductForFindID.class);
         }
     }
 
@@ -128,6 +137,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
     public static Product findById(String id) {
         final String query = "select * from product where IDSanPham = :IDSanPham";
         try (Connection con = DbUtils.getConnection()) {
@@ -142,6 +152,7 @@ public class ProductModel {
             return list.get(0);
         }
     }
+
     public static List<ProductCategoryDTO> findCategoryAndProduct() {
         final String query =
                 "SELECT * FROM product,category where product.IDDanhMuc = category.IDDanhMuc";

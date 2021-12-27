@@ -3,7 +3,7 @@ package com.onelineauction.webfinalproject.beans;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class ProductForShow {
+public class ProductForFindID {
     private String IDSanPham;
     private String TenSanPham;
     private int IDNguoiBan;
@@ -17,14 +17,15 @@ public class ProductForShow {
     private String ChiTiet;
     private String AnhChinh;
     private String AnhPhu;
-    private int TGCon;
-    private int LanDauGia;
+    private int TGcon;
+    private int TGconH;
+    private int TGconS;
 
-    public ProductForShow(){
+    public ProductForFindID(){
 
     }
 
-    public ProductForShow(String IDSanPham, String tenSanPham, int IDNguoiBan, double giaHienTai, double giaMuaNgay, double buocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, Date thoiGianDangBan, Date thoiGianKetThuc, String chiTiet, String anhChinh, String anhPhu, int tGCon, int lanDauGia) {
+    public ProductForFindID(String IDSanPham, String tenSanPham, int IDNguoiBan, double giaHienTai, double giaMuaNgay, double buocGia, int IDDanhMuc, int IDNguoiGiuGiaHienTai, Date thoiGianDangBan, Date thoiGianKetThuc, String chiTiet, String anhChinh, String anhPhu, int TGcon, int TGconH, int TGconS) {
         this.IDSanPham = IDSanPham;
         TenSanPham = tenSanPham;
         this.IDNguoiBan = IDNguoiBan;
@@ -38,8 +39,9 @@ public class ProductForShow {
         ChiTiet = chiTiet;
         AnhChinh = anhChinh;
         AnhPhu = anhPhu;
-        this.TGCon = tGCon;
-        LanDauGia = lanDauGia;
+        this.TGcon = TGcon;
+        this.TGconH = TGconH;
+        this.TGconS = TGconS;
     }
 
 
@@ -97,7 +99,16 @@ public class ProductForShow {
         return AnhPhu;
     }
 
-    public int getTGCon() { return TGCon; }
+    public int getTGcon() {
+        return TGcon;
+    }
 
-    public int getLanDauGia() { return LanDauGia; }
+    public int getTGconH() {
+        return TGconH;
+    }
+
+    public int getTGconS() {
+        return TGconS;
+    }
+
 }
