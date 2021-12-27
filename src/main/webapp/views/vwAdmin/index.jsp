@@ -385,7 +385,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle${c.IDDanhMuc}">Detailed Product</h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle${c.IDDanhMuc}">Detailed Category</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -394,8 +394,8 @@
                                             <form action="${pageContext.request.contextPath}/Admin/Category/Update" method="post">
                                                 <label >Tên Danh Mục</label>
                                                 <input type="text" class="form-control" value="<c:out value='${c.tenDanhMuc}'/>"  name="TenDanhMuc" placeholder="" required>
-                                                <label >ID danh mục</label>
-                                                <input type="text" class="form-control" value="<c:out value='${c.IDDanhMuc}'/>" name="IDCategory" placeholder="" required>
+                                                <label >ID Danh Mục</label>
+                                                <input type="number" class="form-control" value="<c:out value='${c.IDDanhMuc}'/>" name="IDCategory" readonly>
                                                 <div class="modal-footer">
                                                     <input type="submit" class="btn btn-primary" value="Update" ></input>
                                                 </div>

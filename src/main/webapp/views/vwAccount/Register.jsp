@@ -100,9 +100,7 @@
 
                 </form>
             </form>
-            <div id="loaded">
 
-            </div>
         </div>
     </div>
 </div>

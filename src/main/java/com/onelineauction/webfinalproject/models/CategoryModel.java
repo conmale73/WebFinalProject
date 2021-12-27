@@ -66,6 +66,7 @@ public class CategoryModel {
         }
     }
     public static void update(Category c) {
+
         String sql = "update category set TenDanhMuc = :TenDanhMuc where IDDanhMuc = :IDDanhMuc";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)

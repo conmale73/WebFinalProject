@@ -23,6 +23,7 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -55,7 +56,8 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
-            <scope>provided</scope>
+            <scope> provided</scope>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.sql2o/sql2o -->
         <dependency>
