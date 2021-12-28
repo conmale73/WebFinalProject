@@ -21,10 +21,11 @@ public class APIProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
                 int page_current = Integer.parseInt(request.getParameter("page_exist"));
-                List<ProductCategoryDTO> productList = ProductModel.paginationProduct((page_current - 1) * 6, 6);//Tính tại lúc bắt đầu và các trang tiếp theo
+                List<ProductCategoryDTO> productList = ProductModel.paginationProduct((page_current - 1) * 1, 1);//Tính tại lúc bắt đầu và các trang tiếp theo
 
                 PrintWriter out = response.getWriter();
                 for (ProductCategoryDTO o : productList) {
+                    //nó có lên ko? thử đi chắc sai nhanh i =)
                     out.println("<tr class=\"table-success\">\n" +
                             "                                <td>"+o.getTenSanPham()+"</td>\n" +
                             "                                <td>"+o.getIDSanPham()+"</td>\n" +
@@ -53,9 +54,9 @@ public class APIProduct extends HttpServlet {
                             "                                                <span aria-hidden=\"true\">&times;</span>\n" +
                             "                                            </button>\n" +
                             "                                        </div>\n" +
-                            "                                        <div class=\"modal-body\">\n" +
+                            "                                        <div class=\"modal-body \" style=\"margin: 0 auto\" >\n" +
                             "                                            <div class=\"card\" style=\"width: 18rem;\">\n" +
-                            "                                                <img src=\"/public/imgs/sp/"+o.getIDSanPham()+"/anhchinh.jpg\" alt=\""+o.getTenSanPham()+"\" title=\""+o.getTenSanPham()+"\" class=\"card-img-top\">\n" +
+                            "                                                <img width=\"285px\" height=\"190px\" src=\"/public/imgs/sp/"+o.getIDSanPham()+"/anhchinh.jpg\" alt=\""+o.getTenSanPham()+"\" title=\""+o.getTenSanPham()+"\" class=\"card-img-top\">\n" +
                             "                                                <div class=\"card-body\">\n" +
                             "                                                    <p class=\"card-text\">"+o.getChiTiet()+"</p>\n" +
                             "                                                </div>\n" +

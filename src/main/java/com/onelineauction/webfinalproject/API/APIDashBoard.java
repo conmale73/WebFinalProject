@@ -25,33 +25,17 @@ public class APIDashBoard extends HttpServlet {
             out.println("<tr class=\"table-success\">\n" +
                     "                        <td>"+o.getId()+"</td>\n" +
                     "                        <td>"+o.getHoTen()+"</td>\n" +
-                    "                        <td>\n" +
-                    "                            <c:if test=\""+o.getXacnhan()+"\">\n" +
-                    "                                <strong> Bidder</strong>\n" +
-                    "                            </c:if>\n" +
-                    "                            <c:if test=\""+o.getXacnhan()+"\">\n" +
-                    "                                <strong> Seller</strong>\n" +
-                    "                            </c:if>\n" +
-                    "                        </td>\n" +
+                    "                        <td>\n" +checkpermission(o.getRequest())+ "</td>\n" +
                     "                        <td>"+o.getThoiGian()+"</td>\n" +
-                    "                        <td>\n" +
-                    "                            <c:if test=\""+o.getXacnhan()+"\">\n" +
-                    "                            <strong> Chưa Duyệt</strong>\n" +
-                    "                        </c:if>\n" +
-                    "                            <c:if test=\"${d.xacnhan==1}\">\n" +
-                    "                                <strong> Đã Duyệt</strong>\n" +
-                    "                            </c:if>\n" +
-                    "                        </td>\n" +
+                    "                        <td>\n" +checkStatus(o.getXacnhan())+"</td>\n" +
                     "                        <td>\n" +
                     "                            <form action=\"${pageContext.request.contextPath}/AdminServlet/AcceptRequest\" method=\"post\">\n" +
                     "\n" +
-                    "                                <input type=\"text\" class=\"form-control\"  value=\"<c:out value='${d.id}'/>\" name=\"id\" placeholder=\"\" hidden >\n" +
+                    "                                <input type=\"text\" class=\"form-control\"  value=\""+o.getId()+"\" name=\"id\" placeholder=\"\" hidden >\n" +
                     "\n" +
-                    "                                <input type=\"text\" class=\"form-control\"value=\"<c:out value='${d.request}'/>\" name=\"request\" placeholder=\"\"hidden >\n" +
+                    "                                <input type=\"text\" class=\"form-control\"value=\""+o.getRequest()+"\" name=\"request\" placeholder=\"\"hidden >\n" +
                     "\n" +
-                    "                                    <c:if test=\"${d.xacnhan==0}\">\n" +
-                    "                                        <input type=\"submit\" class=\"btn btn-danger\" value=\"Accept\" >\n" +
-                    "                                    </c:if>\n" +
+                                                    checkAccept(o.getXacnhan())+
                     "                            </form>\n" +
                     "                        </td>\n" +
                     "                    </tr>");
@@ -61,5 +45,30 @@ public class APIDashBoard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+    public String checkpermission(int request)
+    {
+        String html="";
+        if(request==0)
+            html="<strong> Bidder</strong>";
+        else
+            html="<strong> Seller</strong>";
+        return html;
+    }
+    public String checkStatus(int request)
+    {
+        String html="";
+        if(request==0)
+            html="<strong> Chưa Duyệt</strong>";
+        else
+            html="<strong> Đã Duyệt</strong>";
+        return html;
+    }
+    public String checkAccept(int request)
+    {
+        String html="";
+        if(request==0)
+            html="<input type=\"submit\" class=\"btn btn-danger\" value=\"Accept\" >";
+        return html;
     }
 }

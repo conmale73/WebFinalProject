@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 02:58 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 28, 2021 lúc 08:05 AM
+-- Phiên bản máy phục vụ: 10.4.20-MariaDB
+-- Phiên bản PHP: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `onlineauction`
+-- Cơ sở dữ liệu: `onlineauction`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Cấu trúc bảng cho bảng `category`
 --
 
 CREATE TABLE `category` (
@@ -33,39 +33,41 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `category`
+-- Đang đổ dữ liệu cho bảng `category`
 --
 
 INSERT INTO `category` (`IDDanhMuc`, `TenDanhMuc`) VALUES
+(32, 'Trang Sức'),
 (2, 'Đồ cổ'),
-(1, 'Đồ công nghệ');
+(1, 'Đồ Công Nghệ');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `daugia`
+-- Cấu trúc bảng cho bảng `daugia`
 --
 
 CREATE TABLE `daugia` (
   `IDSanPham` varchar(50) CHARACTER SET utf8 NOT NULL,
   `LuotDauGia` int(11) NOT NULL,
   `GiaDat` double NOT NULL,
-  `IDNguoiDatGia` int(11) NOT NULL
+  `IDNguoiDatGia` int(11) NOT NULL,
+  `ThoiGian` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `daugia`
+-- Đang đổ dữ liệu cho bảng `daugia`
 --
 
-INSERT INTO `daugia` (`IDSanPham`, `LuotDauGia`, `GiaDat`, `IDNguoiDatGia`) VALUES
-('CN001', 1, 71000000, 2),
-('CN001', 2, 73000000, 1),
-('CN001', 2, 73000000, 1);
+INSERT INTO `daugia` (`IDSanPham`, `LuotDauGia`, `GiaDat`, `IDNguoiDatGia`, `ThoiGian`) VALUES
+('CN001', 1, 71000000, 9, NULL),
+('CN001', 2, 73000000, 11, NULL),
+('CN001', 2, 73000000, 11, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hoadon`
+-- Cấu trúc bảng cho bảng `hoadon`
 --
 
 CREATE TABLE `hoadon` (
@@ -80,7 +82,27 @@ CREATE TABLE `hoadon` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Cấu trúc bảng cho bảng `listrequest`
+--
+
+CREATE TABLE `listrequest` (
+  `id` int(11) NOT NULL,
+  `request` int(11) DEFAULT NULL,
+  `ThoiGian` datetime DEFAULT NULL,
+  `xacnhan` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `listrequest`
+--
+
+INSERT INTO `listrequest` (`id`, `request`, `ThoiGian`, `xacnhan`) VALUES
+(15, 0, '2022-12-28 02:05:35', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product`
 --
 
 CREATE TABLE `product` (
@@ -100,17 +122,17 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `product`
+-- Đang đổ dữ liệu cho bảng `product`
 --
 
 INSERT INTO `product` (`IDSanPham`, `TenSanPham`, `IDNguoiBan`, `GiaHienTai`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
-('CN001', 'Máy tính Apple Mac Pro', 1, 73000000, 150000000, 1000000, 1, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', 'Phiên bản Mac Pro 2019 tiêu chuẩn với chip Intel Xeon W 8 nhân 3.5GHz, RAM 48GB, SSD 256GB và VGA Radeon Pro 580X có giá bán 5.999 USD, nhưng được bán trong cửa hàng tân trang của Apple với giá 5.349 USD. ', 'anhchinh.jpg', 'anhphu1.jpg'),
-('DC001', 'Thánh chỉ vua Càn Long', 1, 300000000, 500000000, 10000000, 2, 2, '2021-12-14 10:01:49', '2021-12-21 16:01:50', 'Thánh Chỉ niên hiệu vua Càn Long', 'anhchinh.jpg', 'anhphu1.jpg');
+('CN001', 'Máy tính Apple Mac Pro', 16, 7000, 15000, 100, 1, 2, '2021-12-03 20:03:25', '2021-12-07 20:03:25', 'Phiên bản Mac Pro 2019 tiêu chuẩn với chip Intel Xeon W 8 nhân 3.5GHz, RAM 48GB, SSD 256GB và VGA Radeon Pro 580X có giá bán 5.999 USD, nhưng được bán trong cửa hàng tân trang của Apple với giá 5.349 USD. ', '', ''),
+('DC001', 'Thánh chỉ vua Càn Long', 18, 300000000, 500000000, 10000000, 2, 2, '2021-12-14 10:01:49', '2021-12-21 16:01:50', 'Thánh Chỉ niên hiệu vua Càn Long', 'anhchinh.jpg', 'anhphu1.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -126,22 +148,19 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`ID`, `username`, `password`, `HoTen`, `NgaySinh`, `DiaChi`, `Email`, `DiemUyTin`, `Quyen`) VALUES
-(1, 'helloworld1', '$2a$12$i2hAfx0keY737E7d9NHfQeZyJJ0Hxc0cB8f6553QYoUy0zc80fiqa', 'Dương Quá', '2001-12-11', 'TP Hồ Chí Minh', 'quanhi@gmail.com', 90, 1),
-(2, 'femaletieulong', '$2a$12$i2hAfx0keY737E7d9NHfQeZyJJ0Hxc0cB8f6553QYoUy0zc80fiqa', 'Tiểu Long Nữ Cute', '1995-12-14', 'TP Hồ Chí Minh', 'coco@gmail.com', 90, 0),
-(3, 'anything', '$2a$12$/GeXCmk0Ui.PcU/N/x0ej.1.hC/asP5dY3faHU.3X2vTkhZ/3awl.', 'Any', '2009-12-13', 'Quáº£ng NgÃ£i', 'abcxyz@gmail.com', 90, 0),
-(4, 'damn', '$2a$12$IdkOYvigeQO2.vNDyTyNHOsvGEpicUdBjiYO8Pxov.WgATAKNvhS2', 'Damn Bro', '2021-12-25', 'áº¥c351313', 'a1sd531@gmail.com', 90, 0),
-(5, 'admin2', '$2a$12$ljL/vuh6tqr6mElrjeLpaO24foa6rx3zm8TzS44ISogVO97ph1k/q', 'Admin No.2', '2001-03-07', 'QN', 'conmalenumber2@gmail.com', 90, 2);
+(14, 'admin', '$2a$12$mTYLRxhpnQaYalj5/mXGzeAEgHDLkHn8eHrLMv6uBAmUiwOrs3/DG', 'Nguyễn Ngọc Ngạn', '2021-12-25', 'Đà Lạt', 'swan4567890@gmail.com', 90, 2),
+(15, 'admin123456', '$2a$12$HW5wK0AVuAkF7ONhTJLew.t8C2Wx3mjBWSKGi1mvjCnvAyxqS1Ul6', 'Hề Chúa', '2022-03-30', 'TP.hcm', 'swan4567890@gmail.com', 90, 1);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `category`
+-- Chỉ mục cho bảng `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`IDDanhMuc`),
@@ -149,33 +168,33 @@ ALTER TABLE `category`
   ADD UNIQUE KEY `TenDanhMuc` (`TenDanhMuc`);
 
 --
--- Indexes for table `hoadon`
+-- Chỉ mục cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`IDHoaDon`);
 
 --
--- Indexes for table `product`
+-- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`IDSanPham`),
   ADD UNIQUE KEY `IDSanPham` (`IDSanPham`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
