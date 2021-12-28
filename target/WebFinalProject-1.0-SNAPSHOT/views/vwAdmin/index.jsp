@@ -275,9 +275,9 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body " style="margin: 0 auto">
                                             <div class="card" style="width: 18rem;">
-                                                <img src="${pageContext.request.contextPath}/public/imgs/sp/${p.IDSanPham}/anhchinh.jpg" alt="${p.tenSanPham}" title="${p.tenSanPham}" class="card-img-top">
+                                                <img width="285px" height="190px" src="${pageContext.request.contextPath}/public/imgs/sp/${p.IDSanPham}/anhchinh.jpg" alt="${p.tenSanPham}" title="${p.tenSanPham}" class="card-img-top">
                                                 <div class="card-body">
                                                     <p class="card-text">${p.chiTiet}</p>
                                                 </div>
@@ -411,9 +411,9 @@
                     <div class="d-flex justify-content-center">
                         <ul class="pagination ">
                             <c:set var = "i" scope = "session" value = "${1}"/>
-                            <c:forEach var="tolProduct " begin ='1' end = '${totalPageProduct}'>
+                            <c:forEach var="tolCategory " begin ='1' end = '${totalPageCategory}'>
                                 <li class="page-item list-group" id="list-tab" role="tablist">
-                                    <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickProduct(${i})">
+                                    <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickCategory(${i})">
                                         <div class="text-dark" style="font-weight: bold;"><c:out value="${i}"/></div>
                                         <c:set var="i" scope="session" value="${i+1}"/>
                                     </a>
@@ -482,12 +482,15 @@
                             </form>
                         </td>
                     </tr>
+                    </c:forEach>
+                    </tbody>
+                    </table>
                         <div class="d-flex justify-content-center">
                             <ul class="pagination ">
                                 <c:set var = "i" scope = "session" value = "${1}"/>
-                                <c:forEach var="tolUser " begin ='1' end = '${totalPageUser}'>
+                                <c:forEach var="tolDashboard " begin ='1' end = '${totalDashBoard}'>
                                     <li class="page-item list-group" id="list-tab" role="tablist">
-                                        <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickUser(${i})">
+                                        <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickDashboard(${i})">
                                             <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
                                             <c:set var = "i" scope = "session" value = "${i+1}"/>
                                         </a>
@@ -495,8 +498,8 @@
                                 </c:forEach>
                             </ul>
                         </div>
-                    </c:forEach>
-                    </tbody>
+
+
                 </c:otherwise>
             </c:choose>
         </c:if>
@@ -593,7 +596,50 @@
             }
         })
     }
+    function clickDashboard(page)
+    {
+        $('.page-link').removeClass("active");
+        $(this).addClass("active");
 
+        event.preventDefault();
+        $.ajax({
+            url: "<c:url value="/api-dashboard" />",
+            type: "get",
+            data:{
+                page_exist:page
+            },
+            success: function (response) {
+                document.getElementById("content-dashboard").innerHTML = response;
+
+                // $('#content-user').innerHTML=response
+            },
+            error: function (xhr) {
+                alert("Loading data not success. Please comeback later <3")
+            }
+        })
+    }
+    function clickCategory(page)
+    {
+        $('.page-link').removeClass("active");
+        $(this).addClass("active");
+
+        event.preventDefault();
+        $.ajax({
+            url: "<c:url value="/api-category" />",
+            type: "get",
+            data:{
+                page_exist:page
+            },
+            success: function (response) {
+                document.getElementById("content-category").innerHTML = response;
+
+                // $('#content-user').innerHTML=response
+            },
+            error: function (xhr) {
+                alert("Loading data not success. Please comeback later <3")
+            }
+        })
+    }
     function removeUserXD(iduser,name)
     {
         let id= '#formRemoveUser'+iduser;
@@ -612,6 +658,7 @@
             })
         return;
     }
+
     function removeCategory(soluong,idDanhmuc)
     {
         // event.preventDefault();
@@ -647,6 +694,7 @@
             return;
         }
     }
+
     function deleteSuccess()
     {
         Swal.fire(

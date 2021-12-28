@@ -38,7 +38,7 @@
                         <input type="text" class="form-control w-100" id="txtOTP" name="OTP" placeholder="">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary "  onclick="onVerify()">VeriFy</button>
+                        <button type="submit" class="btn btn-primary ">VeriFy</button>
                     </div>
             </form>
 

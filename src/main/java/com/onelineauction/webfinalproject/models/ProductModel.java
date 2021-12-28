@@ -64,7 +64,13 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
-
+    public static List<Product> paginationProductFE(int offset, int limit)  {
+        final String query = "select * from product  LIMIT "+offset+" ," +limit;
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(Product.class);
+        }
+    }
     public static List<ProductForNew> findName(String TenSanPham) {
         final String query =
                 "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +

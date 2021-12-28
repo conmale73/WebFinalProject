@@ -137,7 +137,9 @@ public class AdminServlet extends HttpServlet {
         UserModel.updateUser(c);
         //request.setAttribute("success", true);
         request.setAttribute("message_update","Update Thanh Cong");
-        loadUser(request,response);
+        //loadUser(request,response);
+
+        response.sendRedirect("/AdminServlet/EditUser?id=" + constant.idUser);
         request.setAttribute("message_update",null);
     }
     public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -162,6 +164,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("dob", localDate);
         System.out.println(localDate);
         ServletUtils.forward("/views/Home/Edit.jsp", request, response);
+
     }
     public void loadProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -175,9 +178,10 @@ public class AdminServlet extends HttpServlet {
     }
     public void loadCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
         List<ProductCategoryDTO> categoryList = CategoryModel.paginationCategory(0,6);
-        double totalPageProduct = Math.ceil((double) CategoryModel.findCategoryByID().size() / 6); // trả ra 6 sản phẩm mỗi trang
-        request.setAttribute("totalPageProduct", totalPageProduct);
+        double totalPageCategory = Math.ceil((double) CategoryModel.findCategoryByID().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalPageCategory", totalPageCategory);
         request.setAttribute("categories", categoryList);
         request.setAttribute("category", true);
         ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
@@ -194,8 +198,8 @@ public class AdminServlet extends HttpServlet {
     public void loadDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         List<ListRequestUserDTO> listdashboard = UserModel.paginationDashBoard(0, 6);
-        double totalPages = Math.ceil((double) ListRequestModel.findAllRequest().size() / 6); // trả ra 6 sản phẩm mỗi trang
-        request.setAttribute("totalPageUser", totalPages);
+        double totalDashBoard = Math.ceil((double) ListRequestModel.findAllRequest().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalDashBoard", totalDashBoard);
         request.setAttribute("dashboard", listdashboard);
         request.setAttribute("dash", true);
         ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);

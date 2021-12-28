@@ -25,6 +25,7 @@ public class APIProduct extends HttpServlet {
 
                 PrintWriter out = response.getWriter();
                 for (ProductCategoryDTO o : productList) {
+
                     out.println("<tr class=\"table-success\">\n" +
                             "                                <td>"+o.getTenSanPham()+"</td>\n" +
                             "                                <td>"+o.getIDSanPham()+"</td>\n" +
@@ -37,7 +38,7 @@ public class APIProduct extends HttpServlet {
                             "                                    </button>\n" +
                             "                                </td>\n" +
                             "                                <td>\n" +
-                            "                                    <a onclick=\"appearRemoveProduct("+o.getIDSanPham()+")\" class=\"btn btn-danger\"  role=\"button\"  id=\"removeProduct\" >\n" +
+                            "                                    <a onclick=\"appearRemoveProduct('"+o.getIDSanPham()+"')\" class=\"btn btn-danger\"  role=\"button\"  id=\"removeProduct\" >\n" +
                             "                                        <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n" +
                             "                                        Remove\n" +
                             "                                    </a>\n" +
@@ -53,9 +54,9 @@ public class APIProduct extends HttpServlet {
                             "                                                <span aria-hidden=\"true\">&times;</span>\n" +
                             "                                            </button>\n" +
                             "                                        </div>\n" +
-                            "                                        <div class=\"modal-body\">\n" +
+                            "                                        <div class=\"modal-body \" style=\"margin: 0 auto\" >\n" +
                             "                                            <div class=\"card\" style=\"width: 18rem;\">\n" +
-                            "                                                <img src=\"/public/imgs/sp/"+o.getIDSanPham()+"/anhchinh.jpg\" alt=\""+o.getTenSanPham()+"\" title=\""+o.getTenSanPham()+"\" class=\"card-img-top\">\n" +
+                            "                                                <img width=\"285px\" height=\"190px\" src=\"/public/imgs/sp/"+o.getIDSanPham()+"/anhchinh.jpg\" alt=\""+o.getTenSanPham()+"\" title=\""+o.getTenSanPham()+"\" class=\"card-img-top\">\n" +
                             "                                                <div class=\"card-body\">\n" +
                             "                                                    <p class=\"card-text\">"+o.getChiTiet()+"</p>\n" +
                             "                                                </div>\n" +

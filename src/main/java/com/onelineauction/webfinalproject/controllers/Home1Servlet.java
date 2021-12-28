@@ -1,9 +1,6 @@
 package com.onelineauction.webfinalproject.controllers;
 import com.mysql.cj.xdevapi.Schema;
-import com.onelineauction.webfinalproject.beans.Category;
-import com.onelineauction.webfinalproject.beans.Product;
-import com.onelineauction.webfinalproject.beans.ProductForNew;
-import com.onelineauction.webfinalproject.beans.ProductForShow;
+import com.onelineauction.webfinalproject.beans.*;
 import com.onelineauction.webfinalproject.models.CategoryModel;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
@@ -27,8 +24,11 @@ public class Home1Servlet extends HttpServlet {
 
         switch (path) {
             case "/Index":
-                List<Product> list = ProductModel.findAll();
-                request.setAttribute("products", list);
+                //List<Product> list = ProductModel.findAll();
+                List<Product> productList = ProductModel.paginationProductFE(0,6);
+                double tolProductFE = Math.ceil((double) ProductModel.findAll().size() / 6); // trả ra 6 sản phẩm mỗi trang
+                request.setAttribute("tolProductFE", tolProductFE);
+                request.setAttribute("products", productList);
                 ServletUtils.forward("/views/vwGuest/index.jsp", request,response);
                 break;
             case "/GiaCao":

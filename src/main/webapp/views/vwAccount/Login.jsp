@@ -18,7 +18,12 @@
 
   </style>
 </head>
-<body>
+<c:if test = "${message_register == 'Dang Ky'}">
+<body onload="registerSuccess()">
+</c:if>
+<c:if test = "${message_register == null}">
+<body onload="registerSuccess()">
+</c:if>
 <div class="container-fluid h-100">
   <div class="row justify-content-center align-items-center h-100">
     <div class="col-sm-4">
@@ -81,7 +86,14 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <script>
-
+  function registerSuccess() {
+    Swal.fire({
+      'title': 'Good job!',
+      'text': 'Register succesfully',
+      'icon': 'success',
+      timer: 5000
+    })
+  }
 
 </script>
 </body>
