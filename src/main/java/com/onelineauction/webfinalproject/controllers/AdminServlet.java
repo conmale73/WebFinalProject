@@ -194,8 +194,8 @@ public class AdminServlet extends HttpServlet {
     public void loadDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         List<ListRequestUserDTO> listdashboard = UserModel.paginationDashBoard(0, 6);
-        double totalPages = Math.ceil((double) ListRequestModel.findAllRequest().size() / 6); // trả ra 6 sản phẩm mỗi trang
-        request.setAttribute("totalPageUser", totalPages);
+        double totalDashBoard = Math.ceil((double) ListRequestModel.findAllRequest().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalDashBoard", totalDashBoard);
         request.setAttribute("dashboard", listdashboard);
         request.setAttribute("dash", true);
         ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);

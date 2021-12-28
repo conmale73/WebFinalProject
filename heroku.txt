@@ -1,0 +1,1 @@
+heroku war:deploy C:\Users\ASUS.LAPTOP-LD7KLDC7\Desktop\JavaWeb\WebFinalProject\target\WebFinalProject-1.0-SNAPSHOT.war --app daugiaonlinenhom11
