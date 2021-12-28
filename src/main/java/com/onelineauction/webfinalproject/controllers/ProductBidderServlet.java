@@ -35,6 +35,16 @@ public class ProductBidderServlet extends HttpServlet {
                     ServletUtils.forward("/views/vwBidder/ProductDetail.jsp", request, response);
                 }
                 break;
+            case "/Auction":
+                String auctionID = request.getParameter("id");
+                Product productAuction = ProductModel.findById(auctionID);
+                if (productAuction == null) {
+                    ServletUtils.redirect("/Home", request, response);
+                } else {
+                    request.setAttribute("productAuction", productAuction);
+                    ServletUtils.forward("/views/vwBidder/ProductAuction.jsp", request, response);
+                }
+                break;
 
             default:
                 ServletUtils.forward("/views/vwBidder/404.jsp", request, response);
@@ -44,6 +54,7 @@ public class ProductBidderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getPathInfo();
 
     }
 }
