@@ -45,7 +45,10 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "/IsAvailable":
                 String username = request.getParameter("user");//username
+                String mail = request.getParameter("mail");
+                System.out.println(">>check mail: " + mail);
                 User user = UserModel.findByUsername(username);
+//nói thử
                 boolean isAvailable = (user == null);
 
                 PrintWriter out = response.getWriter();
