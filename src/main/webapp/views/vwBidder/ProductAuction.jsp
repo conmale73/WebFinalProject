@@ -5,8 +5,6 @@
 
 <jsp:useBean id="productAuction" scope="request" type="com.onelineauction.webfinalproject.beans.Product" />
 
-<%--<jsp:useBean id="auction" class="com.onelineauction.webfinalproject.beans.DauGia" scope="request"/>--%>
-
 <t:main>
     <jsp:body>
         <div class="card">
@@ -102,10 +100,5 @@
     </jsp:body>
 </t:main>
 <script>
-    $('#frmAuction').on('submit', function (e){
-        e.preventDefault();
 
-        const sotien = $('#soTien').val();
-
-    })
 </script>

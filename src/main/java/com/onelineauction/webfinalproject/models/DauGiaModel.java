@@ -6,16 +6,16 @@ import org.sql2o.Connection;
 import com.onelineauction.webfinalproject.beans.DauGia;
 
 public class DauGiaModel {
-    public static void deleteSanPhamDauGia(String id)
-    {
+    public static void deleteSanPhamDauGia(String id) {
         String sql = "delete from daugia where IDSanPham = :ID";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ID", id)
                     .executeUpdate();
+        }
+    }
 
-
-    public static DauGia findByID(String id){
+    public static DauGia findByID (String id){
         final String query = "select * from daugia where IDSanPham = :IDSanPham";
         try (Connection con = DbUtils.getConnection()) {
             List<DauGia> list = con.createQuery(query)
@@ -28,6 +28,7 @@ public class DauGiaModel {
             return list.get(0);
         }
     }
+
 
 //    public static void add(DauGia d) {
 //
