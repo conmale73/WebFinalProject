@@ -99,7 +99,6 @@
 
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary" id="register">Register</button>
-
                     </div>
 
                 </form>

@@ -482,6 +482,19 @@
                             </form>
                         </td>
                     </tr>
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination ">
+                                <c:set var = "i" scope = "session" value = "${1}"/>
+                                <c:forEach var="tolUser " begin ='1' end = '${totalPageUser}'>
+                                    <li class="page-item list-group" id="list-tab" role="tablist">
+                                        <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickUser(${i})">
+                                            <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
+                                            <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
                     </c:forEach>
                     </tbody>
                 </c:otherwise>
