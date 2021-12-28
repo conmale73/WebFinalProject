@@ -10,6 +10,7 @@
 <%--<jsp:useBean id="sellers" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.SellerListDTO>" />--%>
 <%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
 <%--<jsp:useBean id="categories" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
+<%--<jsp:useBean id="dash" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ListRequestUserDTO>"/>--%>
 
 <t:main>
     <jsp:attribute name="css">
@@ -413,8 +414,8 @@
                             <c:forEach var="tolProduct " begin ='1' end = '${totalPageProduct}'>
                                 <li class="page-item list-group" id="list-tab" role="tablist">
                                     <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickProduct(${i})">
-                                        <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
-                                        <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                        <div class="text-dark" style="font-weight: bold;"><c:out value="${i}"/></div>
+                                        <c:set var="i" scope="session" value="${i+1}"/>
                                     </a>
                                 </li>
                             </c:forEach>
@@ -423,7 +424,69 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
+        <c:if test="${dash==true}">
+            <nav class="rounded-top navbar navbar-light " style="background-color: rgb(255, 127, 80);">
+                <span class="navbar-brand mb-0 h1">DashBoard</span>
+            </nav>
+            <c:choose>
+                <c:when test="${dashboard.size() == 0}">
+                    <div class="card-body">
+                        <p class="card-text">Không có dữ liệu.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
 
+                    <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>ID user</th>
+                        <th>Tên</th>
+                        <th>Permission</th>
+                        <th>Thời Gian</th>
+                        <th>Trạng Thái</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="content-dashboard">
+                    <c:forEach items="${dashboard}" var="d">
+                    <tr class="table-success">
+                        <td>${d.id}</td>
+                        <td>${d.hoTen}</td>
+                        <td>
+                            <c:if test="${d.request==0}">
+                                <strong> Bidder</strong>
+                            </c:if>
+                            <c:if test="${d.request==1}">
+                                <strong> Seller</strong>
+                            </c:if>
+                        </td>
+                        <td>${d.thoiGian}</td>
+                        <td>
+                            <c:if test="${d.xacnhan==0}">
+                            <strong> Chưa Duyệt</strong>
+                        </c:if>
+                            <c:if test="${d.xacnhan==1}">
+                                <strong> Đã Duyệt</strong>
+                            </c:if>
+                        </td>
+                        <td>
+                            <form action="${pageContext.request.contextPath}/AdminServlet/AcceptRequest" method="post">
+
+                                <input type="text" class="form-control"  value="<c:out value='${d.id}'/>" name="id" placeholder="" hidden >
+
+                                <input type="text" class="form-control"value="<c:out value='${d.request}'/>" name="request" placeholder=""hidden >
+
+                                    <c:if test="${d.xacnhan==0}">
+                                        <input type="submit" class="btn btn-danger" value="Accept" >
+                                    </c:if>
+                            </form>
+                        </td>
+                    </tr>
+                    </c:forEach>
+                    </tbody>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
     </jsp:body>
 </t:main>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

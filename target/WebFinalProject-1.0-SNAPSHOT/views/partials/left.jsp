@@ -9,12 +9,12 @@
   <c:when test ="${lev2 }"> <%--    neu la Admin--%>
 
     <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[0]}" href=""  role="tab"  >DashBoard</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[0]}" href="${pageContext.request.contextPath}/AdminServlet/SellerList"  role="tab"  >Sellers List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[1]}" href="${pageContext.request.contextPath}/AdminServlet/BidderList"  role="tab"  >Bidder List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[2]}" href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab"  >Product List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[3]}" href="${pageContext.request.contextPath}/AdminServlet/Category"    role="tab"  >Category</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[4]}" href="${pageContext.request.contextPath}/AdminServlet/UserList"    role="tab"  >User List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[0]}" href="${pageContext.request.contextPath}/AdminServlet/DashBoard"  role="tab"  >DashBoard</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[1]}" href="${pageContext.request.contextPath}/AdminServlet/SellerList"  role="tab"  >Sellers List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[2]}" href="${pageContext.request.contextPath}/AdminServlet/BidderList"  role="tab"  >Bidder List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[3]}" href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab"  >Product List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[4]}" href="${pageContext.request.contextPath}/AdminServlet/Category"    role="tab"  >Category</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[5]}" href="${pageContext.request.contextPath}/AdminServlet/UserList"    role="tab"  >User List</a>
     </div>
   </c:when>
 

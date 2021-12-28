@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <style>
         body {
             height: 100vh;
             background-color: #92a8d1;
         }
+
     </style>
+
     <script type="text/css">
         .valid {
             border: 1px solid green
@@ -34,6 +37,7 @@
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 50 50'%3E%3Cpath d='M28.43 6.378C18.27 4.586 8.58 11.37 6.788 21.533c-1.791 10.161 4.994 19.851 15.155 21.643l.707-4.006C14.7 37.768 9.392 30.189 10.794 22.24c1.401-7.95 8.981-13.258 16.93-11.856l.707-4.006z'%3E%3CanimateTransform attributeType='xml' attributeName='transform' type='rotate' from='0 25 25' to='360 25 25' dur='0.6s' repeatCount='indefinite'/%3E%3C/path%3E%3C/svg%3E") center / 50px no-repeat;
         }
     </script>
+
 </head>
 <body>
 
@@ -100,21 +104,22 @@
 
                 </form>
             </form>
-            <div id="loaded">
 
-            </div>
         </div>
     </div>
+
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <%--<jsp:invoke fragment="js"/>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -128,29 +133,29 @@
     );
     $('#txtUsername').select(); //auto focus
 
-    $('#frmRegister').on('submit', function (e) {
-        e.preventDefault();
+    <%--$('#frmRegister').on('submit', function (e) {--%>
+    <%--    e.preventDefault();--%>
 
-        const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không
-        $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {
-            if (data === true) {
-                $('#frmRegister').off('submit').submit();
-            }
-            else {
-                $('#register').click(function ()
-                {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Invalid User!',
-                    })
-                })
-            }
-        });
+    <%--    const username = $('#txtUsername').val();   // Kiem tra username có rỗng hay không--%>
+    <%--    $.getJSON('${pageContext.request.contextPath}/Account/IsAvailable?user=' + username, function (data) {--%>
+    <%--        if (data === true) {--%>
+    <%--            $('#frmRegister').off('submit').submit();--%>
+    <%--        }--%>
+    <%--        else {--%>
+    <%--            $('#register').click(function ()--%>
+    <%--            {--%>
+    <%--                Swal.fire({--%>
+    <%--                    icon: 'error',--%>
+    <%--                    title: 'Oops...',--%>
+    <%--                    text: 'Invalid User!',--%>
+    <%--                })--%>
+    <%--            })--%>
+    <%--        }--%>
+    <%--    });--%>
 
-        // $('#frmRegister').off('submit').submit();
+    <%--    // $('#frmRegister').off('submit').submit();--%>
 
-    })
+    <%--})--%>
 
     
     $(document).ready(function () {
@@ -187,10 +192,10 @@
                     }
             }
 
-        })
+        });
 
 
-    })
+    });
     // $(document).ready(function(){
     //     const pass = $('#txtPassword').val();
     //     const confirm = $('#txtConfirm').val();

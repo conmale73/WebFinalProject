@@ -53,11 +53,41 @@
                         <option value="1">Seller</option>
                     </select>
                 </div>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fa fa-spinner" aria-hidden="true"></i>
+                    Reset Password
+                </button>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary" id="btnSave" onclick="clickSave()">Save</button>
+
+                    <button type="submit" class="btn btn-primary" id="btnSave" onclick="clickSave()">
+                        <i class="fa fa-hand-o-up" aria-hidden="true"></i>
+                        Save</button>
                 </div>
             </form>
-
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Reset</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="${pageContext.request.contextPath}/AdminServlet/Reset" method="post">
+                                <label >Reset Password</label>
+                                <input type="text" class="form-control" name="rawpwd" placeholder="" required>
+                                <label >Send to Email :</label>
+                                <input type="text" class="form-control" name="email" value="<c:out value='${user.email}'/>" placeholder="" readonly>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-primary" value="Reset" ></input>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </c:if>
 
     </jsp:body>
@@ -86,9 +116,9 @@
         }
     );
 
-    $( "#btnSave" ).click(function() {
-        Swal.fire('Update successfully')
-    });
+    // $( "#btnSave" ).click(function() {
+    //     Swal.fire('Update successfully')
+    // });
     function clickSave()
     {
         Swal.fire({
@@ -106,19 +136,13 @@
             }
         })
     }
+        function updateSuccess()
+        {
+            Swal.fire(
+                'Update Successfully!',
+                'Your record has been updated',
+                'success'
+            )
+        }
 
-
-    $(document).ready(function () {
-        $(".list-group-item").hover(function () {
-                $(this).css("background-color", "yellow");
-                $(this).css("color", "black");
-                $(this).css("font-weight", 800);
-
-            }, function () {
-                $(this).css("background-color", "white");
-                $(this).css("color", "black");
-                $(this).css("font-weight", 200);
-            }
-        );
-    });
 </script>
