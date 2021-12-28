@@ -8,7 +8,9 @@
 <%--<jsp:useBean id="users" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.User>" />--%>
 <%--<jsp:useBean id="bidders" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.BidderListDTO>" />--%>
 <%--<jsp:useBean id="sellers" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.SellerListDTO>" />--%>
-<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />
+<%--<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
+<%--<jsp:useBean id="categories" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductCategoryDTO>" />--%>
+<%--<jsp:useBean id="dash" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ListRequestUserDTO>"/>--%>
 
 <t:main>
     <jsp:attribute name="css">
@@ -47,7 +49,7 @@
                         <th>Name</th>
                         <th>Date Of birth</th>
                         <th>Address</th>
-                        <th>Email</th>
+                        <th class="text-center">Email</th>
                         <th>Point</th>
                         <th>Permission</th>
                         <th></th>
@@ -75,19 +77,17 @@
                                 </c:if>
                             </td>
                             <td>
-
-                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}">
+                                <a class="btn btn-warning"  role="button" href="${pageContext.request.contextPath}/AdminServlet/EditUser?id=${c.id}" id="editUser" >
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Edit
                                 </a>
-
                             </td>
                             <td>
-                                <a onclick="appearRemove(${c.id})" class="btn btn-danger"  role="button"  id="remove" >
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                    Remove
-                                </a>
+                                <form action="${pageContext.request.contextPath}/AdminServlet/RemoveUser" method="post" id="formRemoveUser${c.id}">
 
+                                    <input type="text" value="<c:out value='${c.id}'/>" name="iduser" hidden>
+                                    <input type="button" onclick="removeUserXD(${c.id},'${c.name}')"  class="btn btn-danger"  role="button"  id="removeUser" value="Remove">
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>
@@ -254,23 +254,23 @@
                                 <td><fmt:formatNumber value="${p.giaHienTai}" type="number" /></td>
                                 <td><fmt:formatNumber value="${p.giaMuaNgay}" type="number" /></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter${p.IDSanPham}" >
                                         Details
                                     </button>
                                 </td>
                                 <td>
-                                    <a onclick="appearRemove(${p.IDSanPham})" class="btn btn-danger"  role="button"  id="removeProduct" >
+                                    <a onclick="appearRemoveProduct('${p.IDSanPham}')" class="btn btn-danger"  role="button"  id="removeProduct" >
                                         <i class="fa fa-times" aria-hidden="true"></i>
                                         Remove
                                     </a>
                                 </td>
                             </tr>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="exampleModalCenter${p.IDSanPham}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Detailed Product</h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle${p.IDSanPham}">Detailed Product</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -309,8 +309,197 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
+        <c:if test = "${category==true}">
+            <nav class="rounded-top navbar navbar-light " style="background-color: rgb(255, 127, 80);">
+                <span class="navbar-brand mb-0 h1">Category</span>
 
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Add Category
+                </button>
+            </nav>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="${pageContext.request.contextPath}/Admin/Category/Add" method="post">
+                                <label >Tên Danh Mục</label>
+                                <input type="text" class="form-control"  name="TenDanhMuc" placeholder="" required>
+                                <label >ID danh mục</label>
+                                <input type="text" class="form-control" name="IDCategory" placeholder="" required>
+                                <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Add" ></input>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <c:choose>
+                <c:when test="${categories.size() == 0}">
+                    <div class="card-body">
+                        <p class="card-text">Không có dữ liệu.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
 
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr >
+                            <th>Tên Danh Mục</th>
+                            <th class="text-center">ID Danh Mục</th>
+                            <th class="text-center">Số Lượng</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="content-category">
+                        <c:forEach items="${categories}" var="c">
+                            <tr class="table-success">
+                                <td>${c.tenDanhMuc}</td>
+                                <td class="text-center">${c.IDDanhMuc}</td>
+                                <td class="text-center">${c.soluong}</td>
+                                <td>
+
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter${c.IDDanhMuc}">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        Edit
+                                    </button>
+                                </td>
+                                <td>
+                                    <form action="${pageContext.request.contextPath}/Admin/Category/Delete" method="post" id="formRemoveCategory${c.IDDanhMuc}">
+                                        <input type="text" value="<c:out value='${c.IDDanhMuc}'/>" name="IDCategory" hidden>
+                                        <a class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i>
+                                            <input type="button" onclick="removeCategory(${c.soluong},${c.IDDanhMuc})"  class="btn btn-danger"  role="button"  id="removeDanhMuc" value="Remove">
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="exampleModalCenter${c.IDDanhMuc}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle${c.IDDanhMuc}">Detailed Category</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="${pageContext.request.contextPath}/Admin/Category/Update" method="post">
+                                                <label >Tên Danh Mục</label>
+                                                <input type="text" class="form-control" value="<c:out value='${c.tenDanhMuc}'/>"  name="TenDanhMuc" placeholder="" required>
+                                                <label >ID Danh Mục</label>
+                                                <input type="number" class="form-control" value="<c:out value='${c.IDDanhMuc}'/>" name="IDCategory" readonly>
+                                                <div class="modal-footer">
+                                                    <input type="submit" class="btn btn-primary" value="Update" ></input>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination ">
+                            <c:set var = "i" scope = "session" value = "${1}"/>
+                            <c:forEach var="tolProduct " begin ='1' end = '${totalPageProduct}'>
+                                <li class="page-item list-group" id="list-tab" role="tablist">
+                                    <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickProduct(${i})">
+                                        <div class="text-dark" style="font-weight: bold;"><c:out value="${i}"/></div>
+                                        <c:set var="i" scope="session" value="${i+1}"/>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+        <c:if test="${dash==true}">
+            <nav class="rounded-top navbar navbar-light " style="background-color: rgb(255, 127, 80);">
+                <span class="navbar-brand mb-0 h1">DashBoard</span>
+            </nav>
+            <c:choose>
+                <c:when test="${dashboard.size() == 0}">
+                    <div class="card-body">
+                        <p class="card-text">Không có dữ liệu.</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+
+                    <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>ID user</th>
+                        <th>Tên</th>
+                        <th>Permission</th>
+                        <th>Thời Gian</th>
+                        <th>Trạng Thái</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="content-dashboard">
+                    <c:forEach items="${dashboard}" var="d">
+                    <tr class="table-success">
+                        <td>${d.id}</td>
+                        <td>${d.hoTen}</td>
+                        <td>
+                            <c:if test="${d.request==0}">
+                                <strong> Bidder</strong>
+                            </c:if>
+                            <c:if test="${d.request==1}">
+                                <strong> Seller</strong>
+                            </c:if>
+                        </td>
+                        <td>${d.thoiGian}</td>
+                        <td>
+                            <c:if test="${d.xacnhan==0}">
+                            <strong> Chưa Duyệt</strong>
+                        </c:if>
+                            <c:if test="${d.xacnhan==1}">
+                                <strong> Đã Duyệt</strong>
+                            </c:if>
+                        </td>
+                        <td>
+                            <form action="${pageContext.request.contextPath}/AdminServlet/AcceptRequest" method="post">
+
+                                <input type="text" class="form-control"  value="<c:out value='${d.id}'/>" name="id" placeholder="" hidden >
+
+                                <input type="text" class="form-control"value="<c:out value='${d.request}'/>" name="request" placeholder=""hidden >
+
+                                    <c:if test="${d.xacnhan==0}">
+                                        <input type="submit" class="btn btn-danger" value="Accept" >
+                                    </c:if>
+                            </form>
+                        </td>
+                    </tr>
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination ">
+                                <c:set var = "i" scope = "session" value = "${1}"/>
+                                <c:forEach var="tolUser " begin ='1' end = '${totalPageUser}'>
+                                    <li class="page-item list-group" id="list-tab" role="tablist">
+                                        <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickUser(${i})">
+                                            <div  class="text-dark" style="font-weight: bold;"><c:out value = "${i}"/></div>
+                                            <c:set var = "i" scope = "session" value = "${i+1}"/>
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </c:forEach>
+                    </tbody>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
     </jsp:body>
 </t:main>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -387,7 +576,6 @@
     {
         $('.page-link').removeClass("active");
         $(this).addClass("active");
-        <%--"<c:url value="/api-user" />"--%>
         event.preventDefault();
         $.ajax({
             url: "<c:url value="/api-product" />",
@@ -405,54 +593,77 @@
             }
         })
     }
-    $(document).ready(function () {
-        $(".left-item").hover(function () {
-                $(this).css("background-color", "lightblue");
-                $(this).css("color", "black");
-                $(this).css("background-color", "");
 
-            // $(this).css("font-weight", 800);
-
-            },
-
-
-        );
-    });
-    function removeProduct()
+    function removeUserXD(iduser,name)
     {
-
+        let id= '#formRemoveUser'+iduser;
+            Swal.fire({
+                title: 'Do you want to delete '+ name + " ?",
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(id).submit();
+                }
+            })
+        return;
     }
-    function clickNav()
+    function removeCategory(soluong,idDanhmuc)
     {
-        $('.left-item').removeClass("active");
-        $('.left-item').css("background-color", "");
-        $(this).css("background-color", "lightblue");
-        $(this).addClass("active");
+        // event.preventDefault();
+        let id= '#formRemoveCategory'+idDanhmuc;
 
+        if(soluong!=0)
+        {
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Không Thế Xóa Danh Mục',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+            return;
+        }
+        else
+        {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $(id).submit();
+                }
+            })
+            return;
+        }
     }
-    function appearRemove(idUser)
+    function deleteSuccess()
     {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-                console.log("/AdminServlet/RemoveUser?id=" + idUser);
-                window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveUser?id="+ idUser ;
-            }
-        })
+        Swal.fire(
+            'Delete Successfully!',
+            'Your record has been deleted',
+            'success'
+        )
     }
+    function updateSuccess()
+    {
+        Swal.fire(
+            'Update Successfully!',
+            'Your record has been updated',
+            'success'
+        )
+    }
+
     function appearRemoveProduct(idProduct)
     {
         Swal.fire({
@@ -471,8 +682,8 @@
                     'Your file has been deleted.',
                     'success'
                 )
-                console.log("/AdminServlet/RemoveProduct?id=" + idProduct);
-                window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveProduct?id="+ idProduct ;
+                <%--console.log("/AdminServlet/RemoveProduct?id=" + idProduct);--%>
+                <%--window.location.href = "${pageContext.request.contextPath}/AdminServlet/RemoveProduct?id="+ idProduct ;--%>
             }
         })
     }

@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>"/>
+<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductForNew>"/>
 
 <t:main>
     <jsp:body>
@@ -30,10 +30,11 @@
 
                         <c:forEach items="${products}" var="c">
                             <div class="col-sm-4 mb-3">
+                                <c:if test="${c.neworold<30}">
                                 <div class="card h-100">
                                     <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.IDSanPham}/anhchinh.jpg" alt="${c.tenSanPham}" title="${c.tenSanPham}" class="card-img-top h-50">
-                                    <div class="card-body">
-                                        <h6 class="card-title">${c.tenSanPham}</h6>
+                                    <div class="card-body" style="background-color: burlywood">
+                                        <h6 class="card-title">${c.tenSanPham} (NEW PRODUCT)</h6>
                                         <h5 class="card-title text-danger">
                                             Giá hiện tại:
                                             <fmt:formatNumber value="${c.giaHienTai}" type="number" />
@@ -47,6 +48,26 @@
                                         </a>
                                     </div>
                                 </div>
+                                </c:if>
+                                <c:if test="${c.neworold>30}">
+                                <div class="card h-100">
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.IDSanPham}/anhchinh.jpg" alt="${c.tenSanPham}" title="${c.tenSanPham}" class="card-img-top h-50">
+                                    <div class="card-body">
+                                            <h6 class="card-title">${c.tenSanPham}</h6>
+                                        <h5 class="card-title text-danger">
+                                            Giá hiện tại:
+                                            <fmt:formatNumber value="${c.giaHienTai}" type="number" />
+                                        </h5>
+                                        <p class="card-text">${c.chiTiet}</p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Guest/Product/Detail?id=${c.IDSanPham}" role="button">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            Chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                                </c:if>
                             </div>
                         </c:forEach>
                     </div>

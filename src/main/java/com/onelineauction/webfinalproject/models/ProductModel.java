@@ -1,7 +1,6 @@
 package com.onelineauction.webfinalproject.models;
 
-import com.onelineauction.webfinalproject.beans.Product;
-import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
+import com.onelineauction.webfinalproject.beans.*;
 import com.onelineauction.webfinalproject.utils.DbUtils;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -44,10 +43,12 @@ public class ProductModel {
 
     public static List<Product> findTop5DanhGia() {
         final String query =
-                "Select * FROM product\n" +
-                        "Where IDSanPham = (Select IDSanPham from daugia\n" +
-                        "                    order by count(IDSanPham) DESC\n" +
-                        "                    LIMIT 5)";
+                "select product.* from product, (select IDSanPham, count(IDSanPham) as LanDauGia\n" +
+                        "                        from daugia\n" +
+                        "                        group by IDSanPham\n" +
+                        "                        order by LanDauGia desc) as d\n" +
+                        "where product.IDSanPham = d.IDSanPham\n" +
+                        "limit 5";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(Product.class);
@@ -64,29 +65,67 @@ public class ProductModel {
         }
     }
 
-    public static List<Product> findName(String TenSanPham) {
+    public static List<ProductForNew> findName(String TenSanPham) {
         final String query =
-                "Select * from product\n" +
+                "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
                         "where match(TenSanPham)\n" +
                         "against(:Tensp)\n" +
                         "order by ThoiGianKetThuc DESC";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("Tensp", TenSanPham)
-                    .executeAndFetch(Product.class);
+                    .executeAndFetch(ProductForNew.class);
         }
     }
 
-    public static List<Product> findNamePrice(String TenSanPham) {
+    public static List<ProductForNew> findNamePrice(String TenSanPham) {
         final String query =
-                "Select * from product\n" +
+                "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
                         "where match(TenSanPham)\n" +
                         "against(:Tensp)\n" +
                         "order by GiaHienTai ASC";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("Tensp", TenSanPham)
-                    .executeAndFetch(Product.class);
+                    .executeAndFetch(ProductForNew.class);
+        }
+    }
+
+    public static List<ProductForNew> findNametimeup(String TenSanPham) {
+        final String query =
+                "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
+                        "where match(TenSanPham)\n" +
+                        "    against(:Tensp)\n" +
+                        "And timestampdiff(minute,ThoiGianDangBan,curtime())<30\n" +
+                        "order by neworold asc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("Tensp", TenSanPham)
+                    .executeAndFetch(ProductForNew.class);
+        }
+    }
+
+    public static List<ProductForShow> ShowDanhSach() {
+        final String query = "select product.IDSanPham,product.TenSanPham, product.IDNguoiBan, product.GiaHienTai, product.GiaMuaNgay, product.BuocGia, product.IDDanhMuc, product.IDNguoiGiuGiaHienTai,convert(product.ThoiGianDangBan,date) as ThoiGianDangBan, convert(product.ThoiGianKetThuc,date) as ThoiGianKetThuc, product.ChiTiet, product.AnhChinh, product.AnhPhu, datediff(product.ThoiGianKetThuc,curtime()) as TGcon, count(daugia.IDSanPham) as LanDauGia\n" +
+                "from product\n" +
+                "left join daugia on daugia.IDSanPham = product.IDSanPham\n" +
+                "group by product.IDSanPham\n" +
+                "order by LanDauGia desc";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(ProductForShow.class);
+        }
+    }
+
+    public static List<ProductForFindID> findID(String proId) {
+        final String query =
+                "select IDSanPham,TenSanPham, IDNguoiBan, GiaHienTai, GiaMuaNgay, BuocGia, IDDanhMuc, IDNguoiGiuGiaHienTai,convert(ThoiGianDangBan,date) as ThoiGianDangBan, convert(ThoiGianKetThuc,date) as ThoiGianKetThuc, ChiTiet, AnhChinh, AnhPhu, datediff(ThoiGianKetThuc,curtime()) as TGcon, timestampdiff(hour ,curtime(),ThoiGianKetThuc) as TGconH, timestampdiff(minute,curtime(),ThoiGianKetThuc) as TGconS\n" +
+                        "from product\n" +
+                        "Where IDSanPham = :IDSanPham";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("IDSanPham", proId)
+                    .executeAndFetch(ProductForFindID.class);
         }
     }
 
@@ -98,6 +137,7 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
+
     public static Product findById(String id) {
         final String query = "select * from product where IDSanPham = :IDSanPham";
         try (Connection con = DbUtils.getConnection()) {
@@ -112,6 +152,7 @@ public class ProductModel {
             return list.get(0);
         }
     }
+
     public static List<ProductCategoryDTO> findCategoryAndProduct() {
         final String query =
                 "SELECT * FROM product,category where product.IDDanhMuc = category.IDDanhMuc";
@@ -126,6 +167,15 @@ public class ProductModel {
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .executeAndFetch(ProductCategoryDTO.class);
+        }
+    }
+    public static void deleteProduct(String id)
+    {
+        String sql = "delete from product where IDSanPham = :ID ";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("ID", id)
+                    .executeUpdate();
         }
     }
 }

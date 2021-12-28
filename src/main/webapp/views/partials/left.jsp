@@ -6,12 +6,15 @@
 <jsp:useBean id="categoriesWithDetails" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Category>"/>
 
 <c:choose>
-  <c:when test ="${lev2}"> <%--    neu la Admin--%>
+  <c:when test ="${lev2 }"> <%--    neu la Admin--%>
+
     <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;"  href="${pageContext.request.contextPath}/AdminServlet/SellerList" onclick="clickNav()" role="tab"  >Sellers List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;" href="${pageContext.request.contextPath}/AdminServlet/BidderList" onclick="clickNav()" role="tab"  >Bidder List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;" href="${pageContext.request.contextPath}/AdminServlet/ProductList"onclick="clickNav()" role="tab"  >Product List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif;" href="${pageContext.request.contextPath}/AdminServlet/UserList"   onclick="clickNav()" role="tab"  >User List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[0]}" href="${pageContext.request.contextPath}/AdminServlet/DashBoard"  role="tab"  >DashBoard</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[1]}" href="${pageContext.request.contextPath}/AdminServlet/SellerList"  role="tab"  >Sellers List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[2]}" href="${pageContext.request.contextPath}/AdminServlet/BidderList"  role="tab"  >Bidder List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[3]}" href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab"  >Product List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[4]}" href="${pageContext.request.contextPath}/AdminServlet/Category"    role="tab"  >Category</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[5]}" href="${pageContext.request.contextPath}/AdminServlet/UserList"    role="tab"  >User List</a>
     </div>
   </c:when>
 
@@ -64,7 +67,11 @@
 <c:otherwise>
   <div class="card mt-3">
     <h4 class="card-header">
-      Danh Mục
+      <a href="${pageContext.request.contextPath}/Guest/Home/DanhSachSanPham" class="list-group-item list-group-item-action">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        Danh Mục
+      </a>
+     
     </h4>
     <c:choose>
       <c:when test="${categoriesWithDetails.size()==0}">

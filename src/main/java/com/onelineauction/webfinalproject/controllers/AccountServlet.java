@@ -77,7 +77,6 @@ public class AccountServlet extends HttpServlet {
             case "/Logout":
                 logout(request, response);
                 break;
-
             case  "/OTP":
                 //Lay cac thong tin va gui Email
                 sendEmail(request,response);

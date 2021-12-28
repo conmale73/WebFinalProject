@@ -27,12 +27,48 @@ public class APIProduct extends HttpServlet {
                 for (ProductCategoryDTO o : productList) {
                     out.println("<tr class=\"table-success\">\n" +
                             "                                <td>"+o.getTenSanPham()+"</td>\n" +
-                            "                                <td>"+o.getTenSanPham()+"</td>\n" +
+                            "                                <td>"+o.getIDSanPham()+"</td>\n" +
+                            "                                <td>"+o.getTenDanhMuc()+"</td>\n"+
                             "                                <td>"+ formatNumber(o.getGiaHienTai())+"</td>\n" +
                             "                                <td>"+ formatNumber(o.getGiaMuaNgay())+"</td>\n" +
-                            "                            </tr>");
+                            "<td>\n" +
+                            "                                    <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModalCenter"+o.getIDSanPham()+"\" >\n" +
+                            "                                        Details\n" +
+                            "                                    </button>\n" +
+                            "                                </td>\n" +
+                            "                                <td>\n" +
+                            "                                    <a onclick=\"appearRemoveProduct("+o.getIDSanPham()+")\" class=\"btn btn-danger\"  role=\"button\"  id=\"removeProduct\" >\n" +
+                            "                                        <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n" +
+                            "                                        Remove\n" +
+                            "                                    </a>\n" +
+                            "                                </td>"+
+                            "                            </tr>"+
+                            "<!-- Modal -->\n" +
+                            "                            <div class=\"modal fade\" id=\"exampleModalCenter"+o.getIDSanPham()+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\n" +
+                            "                                <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
+                            "                                    <div class=\"modal-content\">\n" +
+                            "                                        <div class=\"modal-header\">\n" +
+                            "                                            <h5 class=\"modal-title\" id=\"exampleModalLongTitle"+o.getIDSanPham()+"\">Detailed Product</h5>\n" +
+                            "                                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+                            "                                                <span aria-hidden=\"true\">&times;</span>\n" +
+                            "                                            </button>\n" +
+                            "                                        </div>\n" +
+                            "                                        <div class=\"modal-body\">\n" +
+                            "                                            <div class=\"card\" style=\"width: 18rem;\">\n" +
+                            "                                                <img src=\"/public/imgs/sp/"+o.getIDSanPham()+"/anhchinh.jpg\" alt=\""+o.getTenSanPham()+"\" title=\""+o.getTenSanPham()+"\" class=\"card-img-top\">\n" +
+                            "                                                <div class=\"card-body\">\n" +
+                            "                                                    <p class=\"card-text\">"+o.getChiTiet()+"</p>\n" +
+                            "                                                </div>\n" +
+                            "                                            </div>\n" +
+                            "                                        </div>\n" +
+                            "                                        <div class=\"modal-footer\">\n" +
+                            "                                            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n" +
+                            "\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                            </div>");
                 }
-
     }
 
     @Override

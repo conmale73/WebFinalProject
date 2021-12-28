@@ -1,6 +1,7 @@
 package com.onelineauction.webfinalproject.controllers;
 
 import com.onelineauction.webfinalproject.beans.Category;
+import com.onelineauction.webfinalproject.beans.ProductCategoryDTO;
 import com.onelineauction.webfinalproject.models.CategoryModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
@@ -28,7 +29,7 @@ public class AdminCategoryServlet extends HttpServlet {
                 break;
 
             case "/Add":
-                ServletUtils.forward("/views/vwAdmin/AddCategory.jsp", request, response);
+//                ServletUtils.forward("/views/vwAdmin/AddCategory.jsp", request, response);
                 break;
 
             case "/Edit":
@@ -56,6 +57,7 @@ public class AdminCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String path = request.getPathInfo();
         switch (path) {
             case "/Add":
@@ -78,22 +80,41 @@ public class AdminCategoryServlet extends HttpServlet {
 
     private void addCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("TenDanhMuc");
-        Category c = new Category(name);
+        int id_danhmuc = Integer.parseInt(request.getParameter("IDCategory"));
+        Category c = new Category(id_danhmuc,name);
         CategoryModel.add(c);
-        ServletUtils.forward("/views/vwCategory/Add.jsp", request, response);
+        loadCategory(request,response);
+        request.setAttribute("message_delete",null);
     }
 
     private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("IDDanhMuc"));
         String name = request.getParameter("TenDanhMuc");
-        Category c = new Category(id, name);
+        int id_danhmuc = Integer.parseInt(request.getParameter("IDCategory"));
+        System.out.println(name);
+        System.out.println(id_danhmuc);
+        Category c = new Category(id_danhmuc, name);
         CategoryModel.update(c);
-        ServletUtils.redirect("/Admin/Category", request, response);
+        request.setAttribute("message_update","Update Thanh Cong");
+        loadCategory(request,response);
+        request.setAttribute("message_update",null);
+
     }
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("IDDanhMuc"));
-        CategoryModel.delete(id);
-        ServletUtils.redirect("/Admin/Category", request, response);
+        int id_danhmuc = Integer.parseInt(request.getParameter("IDCategory"));
+        CategoryModel.delete(id_danhmuc);
+        request.setAttribute("message_delete","Xoa Thanh Cong");
+        loadCategory(request,response);
+        request.setAttribute("message_delete",null);
+    }
+    public void loadCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        List<ProductCategoryDTO> categoryList = CategoryModel.paginationCategory(0,6);
+        double totalPageProduct = Math.ceil((double) CategoryModel.findCategoryByID().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        request.setAttribute("totalPageProduct", totalPageProduct);
+        request.setAttribute("categories", categoryList);
+        request.setAttribute("category", true);
+        ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
+
     }
 }

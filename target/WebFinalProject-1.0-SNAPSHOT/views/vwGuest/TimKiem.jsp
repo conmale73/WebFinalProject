@@ -10,12 +10,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.Product>"/>
+<jsp:useBean id="products" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.ProductForNew>"/>
 
 <t:main>
     <jsp:body>
         <h4 class="card-header">
-            Sản Phẩm
+            Thời gian kết thúc giảm dần
         </h4>
         <c:choose>
             <c:when test="${products.size()==0}">
@@ -32,8 +32,13 @@
                             <div class="col-sm-4 mb-3">
                                 <div class="card h-100">
                                     <img src="${pageContext.request.contextPath}/public/imgs/sp/${c.IDSanPham}/anhchinh.jpg" alt="${c.tenSanPham}" title="${c.tenSanPham}" class="card-img-top h-50">
-                                    <div class="card-body">
-                                        <h6 class="card-title">${c.tenSanPham}</h6>
+                                    <div class="card-body" style="background-color: burlywood">
+                                        <c:if test="${c.neworold<30}">
+                                            <h6 class="card-title">${c.tenSanPham} (NEW PRODUCT)</h6>
+                                        </c:if>
+                                        <c:if test="${c.neworold>30}">
+                                            <h6 class="card-title">${c.tenSanPham}</h6>
+                                        </c:if>
                                         <h5 class="card-title text-danger">
                                             Giá hiện tại:
                                             <fmt:formatNumber value="${c.giaHienTai}" type="number" />
@@ -53,14 +58,5 @@
                 </div>
             </c:otherwise>
         </c:choose>
-        <a href="${pageContext.request.contextPath}/Guest/Home" class="list-group-item list-group-item-action">
-            Top 5 sản phẩm sắp hết hạn đấu giá
-        </a>
-        <a href="${pageContext.request.contextPath}/Guest/Home/DanhGia" class="list-group-item list-group-item-action">
-            Top 5 sản phẩm có nhiều lượt ra giá nhất
-        </a>
-        <a href="${pageContext.request.contextPath}/Guest/Home/GiaCao" class="list-group-item list-group-item-action">
-            Top 5 sản phẩm có giá cao nhất
-        </a>
     </jsp:body>
 </t:main>

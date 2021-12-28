@@ -1,6 +1,7 @@
 package com.onelineauction.webfinalproject.controllers;
 
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.beans.ProductForFindID;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
@@ -43,13 +44,9 @@ public class ProductFEServlet extends HttpServlet {
 
             case "/Detail":
                 String proId = request.getParameter("id");
-                Product product = ProductModel.findById(proId);
-                if (product == null) {
-                    ServletUtils.redirect("/Index", request, response);
-                } else {
-                    request.setAttribute("product", product);
-                    ServletUtils.forward("/views/vwGuest/ProductDetail.jsp", request, response);
-                }
+                List<ProductForFindID> product = ProductModel.findID(proId);
+                request.setAttribute("products", product);
+                ServletUtils.forward("/views/vwGuest/ProductDetail.jsp", request, response);
                 break;
             default:
                 ServletUtils.forward("/views/vwGuest/404.jsp", request, response);
