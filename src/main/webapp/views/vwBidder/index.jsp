@@ -20,7 +20,6 @@
                 <div class="card-body">
                     <div></div>
                     <div class="row">
-
                         <c:forEach items="${products}" var="c">
                             <div class="col-sm-4 mb-3">
                                 <div class="card h-100">

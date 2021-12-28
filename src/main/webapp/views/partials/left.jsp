@@ -18,7 +18,7 @@
   <c:when test="${lev1}"> <%--Neu la seller--%>
     <div class="card mt-3">
       <h4 class="card-header">
-        Danh Mục seller
+        Danh Mục
       </h4>
       <c:choose>
         <c:when test="${categoriesWithDetails.size()==0}">
@@ -41,7 +41,7 @@
   <c:when test="${lev0}"> <%--Neu la bidder--%>
     <div class="card mt-3">
       <h4 class="card-header">
-        Danh Mục bidder
+        Danh Mục
       </h4>
       <c:choose>
         <c:when test="${categoriesWithDetails.size()==0}">
@@ -64,7 +64,7 @@
 <c:otherwise>
   <div class="card mt-3">
     <h4 class="card-header">
-      Danh Mục guest
+      Danh Mục
     </h4>
     <c:choose>
       <c:when test="${categoriesWithDetails.size()==0}">
