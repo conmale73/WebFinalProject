@@ -1,6 +1,8 @@
 package com.onelineauction.webfinalproject.controllers;
 
+import com.onelineauction.webfinalproject.beans.DauGia;
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.models.DauGiaModel;
 import com.onelineauction.webfinalproject.models.ProductModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
@@ -38,10 +40,13 @@ public class ProductBidderServlet extends HttpServlet {
             case "/Auction":
                 String auctionID = request.getParameter("id");
                 Product productAuction = ProductModel.findById(auctionID);
-                if (productAuction == null) {
+                List<DauGia> list1 = DauGiaModel.findAllByID(auctionID);
+
+                if (productAuction == null || list1 == null) {
                     ServletUtils.redirect("/Home", request, response);
                 } else {
                     request.setAttribute("productAuction", productAuction);
+                    request.setAttribute("auction", list1);
                     ServletUtils.forward("/views/vwBidder/ProductAuction.jsp", request, response);
                 }
                 break;

@@ -5,14 +5,16 @@
 
 <jsp:useBean id="productAuction" scope="request" type="com.onelineauction.webfinalproject.beans.Product" />
 
+
 <t:main>
     <jsp:body>
         <div class="card">
             <h4 class="card-header">
-                   Đấu Giá ${productAuction.tenSanPham}
+                Đấu Giá ${productAuction.tenSanPham}
             </h4>
             <div class="row">
                 <div class="col-sm-4 mb-3">
+
                     <div class="card h-100">
                         <img src="${pageContext.request.contextPath}/public/imgs/sp/${productAuction.IDSanPham}/anhchinh.jpg" alt="${productAuction.tenSanPham}" title="${productAuction.tenSanPham}">
                         <div class="card-body">
@@ -65,35 +67,38 @@
                     </div>
                 </div>
                 <div class="card">
+                    <jsp:useBean id="auction" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.DauGia>" />
                     <h5 class="card-title">Lịch Sử Đặt Giá</h5>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Giá Đặt</th>
-                            <th>Người Đặt Giá</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Giá Đặt</th>
+                                <th>Người Đặt Giá</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-<%--                            <c:forEach items="${auction}" var="a">--%>
-<%--                                <c:choose>--%>
-<%--                                    <c:when test="${a.IDSanPham == productAuction.IDSanPham}">--%>
-<%--                                        <tr>--%>
-<%--                                            <td>${a.luotDauGia}</td>--%>
-<%--                                            <td>${a.giaDat}</td>--%>
-<%--                                            <td>${a.IDNguoiDatGia}</td>--%>
-<%--                                        </tr>--%>
-<%--                                    </c:when>--%>
-<%--                                    <c:otherwise>--%>
-<%--                                        <div class="card-body">--%>
-<%--                                            <p>Không có dữ liệu.</p>--%>
-<%--                                        </div>--%>
-<%--                                    </c:otherwise>--%>
-<%--                                </c:choose>--%>
-<%--                            </c:forEach>--%>
-                        </tbody>
-                    </table>
+                            <c:choose>
+                                <c:when test="${auction.size() == 0}">
+                                    <div class="card-body">
+                                        <p class="card-text">Không có lịch sử đấu giá</p>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach items="${auction}">
+                                        <tr>
+                                            <td>${auction.luotDauGia}</td>
+                                            <td>${auction.giaDat}</td>
+                                            <td>${auction.IDNguoiDatGia}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
