@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <jsp:useBean id="auction" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.DauGia>" />
+<%--                    <jsp:useBean id="auction" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.DauGia>" />--%>
                     <h5 class="card-title">Lịch Sử Đặt Giá</h5>
                     <div class="card-body">
                         <table class="table table-hover">
@@ -80,22 +80,22 @@
                             </thead>
                             <tbody>
 
-                            <c:choose>
-                                <c:when test="${auction.size() == 0}">
-                                    <div class="card-body">
-                                        <p class="card-text">Không có lịch sử đấu giá</p>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:forEach items="${auction}">
-                                        <tr>
-                                            <td>${auction.luotDauGia}</td>
-                                            <td>${auction.giaDat}</td>
-                                            <td>${auction.IDNguoiDatGia}</td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
+<%--                            <c:choose>--%>
+<%--                                <c:when test="${auction.size() == 0}">--%>
+<%--                                    <div class="card-body">--%>
+<%--                                        <p class="card-text">Không có lịch sử đấu giá</p>--%>
+<%--                                    </div>--%>
+<%--                                </c:when>--%>
+<%--                                <c:otherwise>--%>
+<%--                                    <c:forEach items="${auction}">--%>
+<%--                                        <tr>--%>
+<%--                                            <td>${auction.luotDauGia}</td>--%>
+<%--                                            <td>${auction.giaDat}</td>--%>
+<%--                                            <td>${auction.IDNguoiDatGia}</td>--%>
+<%--                                        </tr>--%>
+<%--                                    </c:forEach>--%>
+<%--                                </c:otherwise>--%>
+<%--                            </c:choose>--%>
                             </tbody>
                         </table>
                     </div>
