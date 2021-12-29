@@ -21,23 +21,24 @@ public class ProductFEServlet extends HttpServlet {
         switch (path) {
             case "/ByCat":
                 int catId = Integer.parseInt(request.getParameter("id"));
-                List<Product> list = ProductModel.findPhanTrang(1, 0);
-                if (catId==21) {
-                    list = ProductModel.findPhanTrang(2, 0);
-                    request.setAttribute("productsByCat", list);
-                    ServletUtils.forward("/views/vwGuest/ProductByCat2.jsp", request, response);
-                }
-                else
-                if (catId==12) {
-                    list = ProductModel.findPhanTrang(1, 3);
-                }
-                else
-                if (catId==22)
-                {
-                    list = ProductModel.findPhanTrang(2, 3);
-                    request.setAttribute("productsByCat", list);
-                    ServletUtils.forward("/views/vwGuest/ProductByCat2.jsp", request, response);
-                }
+                List<Product> list = ProductModel.findByCatId(catId);
+//                List<Product> list = ProductModel.findPhanTrang(1, 0);
+//                if (catId==21) {
+//                    list = ProductModel.findPhanTrang(2, 0);
+//                    request.setAttribute("productsByCat", list);
+//                    ServletUtils.forward("/views/vwGuest/ProductByCat2.jsp", request, response);
+//                }
+//                else
+//                if (catId==12) {
+//                    list = ProductModel.findPhanTrang(1, 3);
+//                }
+//                else
+//                if (catId==22)
+//                {
+//                    list = ProductModel.findPhanTrang(2, 3);
+//                    request.setAttribute("productsByCat", list);
+//                    ServletUtils.forward("/views/vwGuest/ProductByCat2.jsp", request, response);
+//                }
                 request.setAttribute("productsByCat", list);
                 ServletUtils.forward("/views/vwGuest/ProductByCat.jsp", request, response);
                 break;

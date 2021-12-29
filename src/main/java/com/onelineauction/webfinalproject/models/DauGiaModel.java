@@ -9,7 +9,7 @@ import com.onelineauction.webfinalproject.beans.DauGia;
 
 public class DauGiaModel {
     public static void deleteSanPhamDauGia(String id) {
-        String sql = "delete from daugia where IDSanPham = :ID";
+        String sql = "delete from daugia where IDSanPham =: ID";
         try (Connection con = DbUtils.getConnection()) {
             con.createQuery(sql)
                     .addParameter("ID", id)
@@ -17,19 +17,19 @@ public class DauGiaModel {
         }
     }
 
-//    public static DauGia findByID (String id){
-//        final String query = "select * from daugia where IDSanPham = :IDSanPham";
-//        try (Connection con = DbUtils.getConnection()) {
-//            List<DauGia> list = con.createQuery(query)
-//                    .addParameter("IDSanPham", id)
-//                    .executeAndFetch(DauGia.class);
-//
-//            if (list.size() == 0) {
-//                return null;
-//            }
-//            return list.get(0);
-//        }
-//    }
+    public static DauGia findByID (String id){
+        final String query = "select * from daugia where IDSanPham = :IDSanPham";
+        try (Connection con = DbUtils.getConnection()) {
+            List<DauGia> list = con.createQuery(query)
+                    .addParameter("IDSanPham", id)
+                    .executeAndFetch(DauGia.class);
+
+            if (list.size() == 0) {
+                return null;
+            }
+            return list.get(0);
+        }
+    }
 
     public static List<DauGia> findAllByID(String id) {
         final String query =
