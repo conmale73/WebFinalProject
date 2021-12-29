@@ -54,6 +54,8 @@
                                                                         <div> </div>
                                                                     <p>Chi tiết: ${product.chiTiet}</p>
                                         </div>
+                    </div>
+                </div>
                                     </div>
                             </div>
                         </c:forEach>

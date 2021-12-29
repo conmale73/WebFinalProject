@@ -97,7 +97,7 @@ public class AdminCategoryServlet extends HttpServlet {
         request.setAttribute("message_update","Update Thanh Cong");
         loadCategory(request,response);
         request.setAttribute("message_update",null);
-        //ServletUtils.redirect("/Admin/Category", request, response);
+
     }
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -9,18 +9,19 @@
   <c:when test ="${lev2 }"> <%--    neu la Admin--%>
 
     <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[0]}" href="${pageContext.request.contextPath}/AdminServlet/SellerList"  role="tab"  >Sellers List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[1]}" href="${pageContext.request.contextPath}/AdminServlet/BidderList"  role="tab"  >Bidder List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[2]}" href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab"  >Product List</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[3]}" href="${pageContext.request.contextPath}/AdminServlet/Category"    role="tab"  >Category</a>
-      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[4]}" href="${pageContext.request.contextPath}/AdminServlet/UserList"    role="tab"  >User List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[0]}" href="${pageContext.request.contextPath}/AdminServlet/DashBoard"  role="tab"  >DashBoard</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[1]}" href="${pageContext.request.contextPath}/AdminServlet/SellerList"  role="tab"  >Sellers List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[2]}" href="${pageContext.request.contextPath}/AdminServlet/BidderList"  role="tab"  >Bidder List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[3]}" href="${pageContext.request.contextPath}/AdminServlet/ProductList" role="tab"  >Product List</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[4]}" href="${pageContext.request.contextPath}/AdminServlet/Category"    role="tab"  >Category</a>
+      <a class="list-group-item list-group-item-action left-item" style="font-family: 'Oswald', sans-serif;font-family: 'Quicksand', sans-serif; background-color: ${colorLeftNav[5]}" href="${pageContext.request.contextPath}/AdminServlet/UserList"    role="tab"  >User List</a>
     </div>
   </c:when>
 
   <c:when test="${lev1}"> <%--Neu la seller--%>
     <div class="card mt-3">
       <h4 class="card-header">
-        Danh Mục seller
+        Danh Mục
       </h4>
       <c:choose>
         <c:when test="${categoriesWithDetails.size()==0}">
@@ -43,7 +44,7 @@
   <c:when test="${lev0}"> <%--Neu la bidder--%>
     <div class="card mt-3">
       <h4 class="card-header">
-        Danh Mục bidder
+        Danh Mục
       </h4>
       <c:choose>
         <c:when test="${categoriesWithDetails.size()==0}">
@@ -66,7 +67,11 @@
 <c:otherwise>
   <div class="card mt-3">
     <h4 class="card-header">
-      Danh Mục guest
+      <a href="${pageContext.request.contextPath}/Guest/Home/DanhSachSanPham" class="list-group-item list-group-item-action">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        Danh Mục
+      </a>
+     
     </h4>
     <c:choose>
       <c:when test="${categoriesWithDetails.size()==0}">

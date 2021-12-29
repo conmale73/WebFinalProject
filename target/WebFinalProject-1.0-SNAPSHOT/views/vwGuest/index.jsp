@@ -42,7 +42,21 @@
                                 </div>
                             </div>
                         </c:forEach>
+
                     </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <ul class="pagination ">
+                        <c:set var = "i" scope = "session" value = "${1}"/>
+                        <c:forEach var="tolProductFE " begin ='1' end = '${tolProductFE}'>
+                            <li class="page-item list-group" id="list-tab" role="tablist">
+                                <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickCategory(${i})">
+                                    <div class="text-dark" style="font-weight: bold;"><c:out value="${i}"/></div>
+                                    <c:set var="i" scope="session" value="${i+1}"/>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
             </c:otherwise>
         </c:choose>
@@ -55,3 +69,26 @@
 
     </jsp:body>
 </t:main>
+<script>
+    function clickProduct(page)
+    {
+        $('.page-link').removeClass("active");
+        $(this).addClass("active");
+        event.preventDefault();
+        $.ajax({
+            url: "<c:url value="/api-productFE" />",
+            type: "get",
+            data:{
+                page_exist:page
+            },
+            success: function (response) {
+                document.getElementById("card-body").innerHTML = response;
+
+                // $('#content-user').innerHTML=response $(selector).html(content)
+            },
+            error: function (xhr) {
+                alert("Loading data not success. Please comeback later <3")
+            }
+        })
+    }
+</script>

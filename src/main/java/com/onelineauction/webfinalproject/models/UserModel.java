@@ -1,6 +1,7 @@
 package com.onelineauction.webfinalproject.models;
 
 import com.onelineauction.webfinalproject.beans.BidderListDTO;
+import com.onelineauction.webfinalproject.beans.ListRequestUserDTO;
 import com.onelineauction.webfinalproject.beans.SellerListDTO;
 import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.utils.DbUtils;
@@ -14,6 +15,20 @@ public class UserModel {
         try (Connection con = DbUtils.getConnection()) {
             List<User> list = con.createQuery(query)
                     .addParameter("username", username)
+                    .executeAndFetch(User.class);
+
+            if (list.size() == 0) {
+                return null;
+            }
+
+            return list.get(0);
+        }
+    }
+    public static User findByEmail(String email) {
+        final String query = "select * from users where email=:email";
+        try (Connection con = DbUtils.getConnection()) {
+            List<User> list = con.createQuery(query)
+                    .addParameter("email",email)
                     .executeAndFetch(User.class);
 
             if (list.size() == 0) {
@@ -169,6 +184,14 @@ public class UserModel {
             return con.createQuery(query).executeAndFetch(BidderListDTO.class);
         }
     }
+    public static List<ListRequestUserDTO> paginationDashBoard(int offset, int limit)  {
+        final String query = "select users.ID,users.HoTen,listrequest.request,listrequest.ThoiGian,listrequest.xacnhan\n" +
+                "from listrequest,users\n" +
+                "where listrequest.id=users.ID  LIMIT " +offset+ "," +limit;
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query).executeAndFetch(ListRequestUserDTO.class);
+        }
+    }
     public static void deleteUser(int id)
     {
         String sql = "delete from users where ID =:ID";
@@ -177,7 +200,15 @@ public class UserModel {
                     .addParameter("ID", id)
                     .executeUpdate();
         }
-
-
+    }
+    public static void resetPassword(int id,String password)
+    {
+        String sql = "update users set password=:pass where ID =:id";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("id",id )
+                    .addParameter("pass",password)
+                    .executeUpdate();
+        }
     }
 }

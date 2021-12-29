@@ -9,7 +9,7 @@
     <jsp:body>
         <div class="card">
             <h4 class="card-header">
-                Products
+                    Sản Phẩm
             </h4>
             <c:choose>
                 <c:when test="${productsByCat.size() == 0}">

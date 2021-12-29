@@ -17,7 +17,7 @@ public class APIController extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     int page_current= Integer.parseInt( request.getParameter("page_exist"));
 
-    List<User> userlistx = UserModel.paginationUser((page_current-1)*6,6);//Tính tại lúc bắt đầu và các trang tiếp theo
+    List<User> userlistx = UserModel.paginationUser((page_current-1)*5,5);//Tính tại lúc bắt đầu và các trang tiếp theo
 
     PrintWriter out = response.getWriter();
     for(User o: userlistx)
