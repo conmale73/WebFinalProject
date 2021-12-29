@@ -33,9 +33,10 @@ public class DauGiaModel {
 
     public static List<DauGia> findAllByID(String id) {
         final String query =
-                "SELECT * FROM daugia where IDSanPham =: IDSanPham";
+                "SELECT * FROM daugia where IDSanPham = :IDSanPham";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
+                    .addParameter("IDSanPham", id)
                     .executeAndFetch(DauGia.class);
         }
     }
