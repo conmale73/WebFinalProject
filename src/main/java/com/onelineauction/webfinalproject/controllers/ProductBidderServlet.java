@@ -42,7 +42,7 @@ public class ProductBidderServlet extends HttpServlet {
                 Product productAuction = ProductModel.findById(auctionID);
                 List<DauGia> list1 = DauGiaModel.findAllByID(auctionID);
 
-                if (productAuction == null || list1 == null) {
+                if (productAuction == null) {
                     ServletUtils.redirect("/Home", request, response);
                 } else {
                     request.setAttribute("productAuction", productAuction);

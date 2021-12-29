@@ -81,7 +81,7 @@
       </c:when>
       <c:otherwise>
         <c:forEach items="${categoriesWithDetails}" var="c">
-          <a href="${pageContext.request.contextPath}/Guest/Product/ByCat?id=${c.IDDanhMuc}1" class="list-group-item list-group-item-action">
+          <a href="${pageContext.request.contextPath}/Guest/Product/ByCat?id=${c.IDDanhMuc}" class="list-group-item list-group-item-action">
             <i class="fa fa-caret-right" aria-hidden="true"></i>
               ${c.tenDanhMuc}
           </a>
