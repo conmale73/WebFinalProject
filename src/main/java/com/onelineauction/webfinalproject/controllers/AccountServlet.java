@@ -45,8 +45,18 @@ public class AccountServlet extends HttpServlet {
                 break;
             case "/IsAvailable":
                 String username = request.getParameter("user");//username
+                String mail = request.getParameter("mail");
+
                 User user = UserModel.findByUsername(username);
-                boolean isAvailable = (user == null);
+                User email = UserModel.findByEmail(mail);
+                boolean isAvailable = true;
+                System.out.println(user);
+                System.out.println(email);
+                if(user!=null && email!=null)
+                {
+                    isAvailable=false;
+                }
+//                boolean isAvailable = (user == null);
 
                 PrintWriter out = response.getWriter();
                 response.setContentType("application/json");
@@ -77,7 +87,6 @@ public class AccountServlet extends HttpServlet {
             case "/Logout":
                 logout(request, response);
                 break;
-
             case  "/OTP":
                 //Lay cac thong tin va gui Email
                 sendEmail(request,response);
@@ -198,8 +207,10 @@ public class AccountServlet extends HttpServlet {
         if(otp.equals(constant.codeOtp))    //so sánh chuỗi, 2 đối tượng
         {
             UserModel.add(constant.userConstant);
-            request.setAttribute("yesOTP",constant.codeOtp);
+            //request.setAttribute("yesOTP",constant.codeOtp);
+            request.setAttribute("message_register","Dang Ky");
             ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+            request.setAttribute("message_register",null);
         }else{
             ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
 

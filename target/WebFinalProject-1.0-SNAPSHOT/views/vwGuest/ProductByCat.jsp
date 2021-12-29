@@ -7,7 +7,6 @@
 
 <t:main>
     <jsp:body>
-        <c class="card">
             <h4 class="card-header">
                 Sản Phẩm
             </h4>
