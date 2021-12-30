@@ -252,7 +252,7 @@ public class AccountServlet extends HttpServlet {
         if(test)
         {
             ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
-            System.out.println("Ra roi");
+            //System.out.println("Ra roi");
         }else
             System.out.println("Khong ra");
 

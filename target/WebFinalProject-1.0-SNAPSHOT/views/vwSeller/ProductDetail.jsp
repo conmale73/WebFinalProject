@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <jsp:useBean id="productAuction" scope="request" type="com.onelineauction.webfinalproject.beans.Product" />
+<%--<jsp:useBean id="currentUser" scope="request" type="com.onelineauction.webfinalproject.beans.User" />--%>
 
 <%--<jsp:useBean id="auctionList" scope="request" type="java.util.List<com.onelineauction.webfinalproject.beans.DauGia>"/>--%>
 <t:main>
@@ -56,18 +57,15 @@
                             <form action="${pageContext.request.contextPath}/Seller/Product/SubmitAuction" method="post" id="frmAuction${productAuction.IDSanPham}">
                                 <div class="form-group">
                                     <label for="soTien">Số tiền muốn đặt</label>
-                                    <input type="number" class="form-control" id="soTien" placeholder="Nhập số tiền muốn đặt" name="giaDatMoi">
+                                    <input type="number" class="form-control" id="soTien" placeholder="Nhập số tiền muốn đặt" name="soTien" required>
 
                                     <small id="emailHelp" class="form-text text-muted">
                                         Số tiền hợp lệ nhỏ nhất là
                                         <fmt:formatNumber value="${productAuction.buocGia + productAuction.giaHienTai}" type="number" />
                                     </small>
                                 </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="xacnhan">
-                                    <label class="form-check-label" for="xacnhan">Xác nhận đặt giá</label>
-                                </div>
-                                <input type="button" onclick="dauGia(${productAuction.IDSanPham},'${currentUser.id}')" class="btn btn-outline-primary" value="Submit" id="submitAuct">
+                                <input type="text" name="id" value="${productAuction.IDSanPham}" hidden>
+                                <input type="submit" class="btn btn-outline-primary" value="Submit" id="submitAuct">
                             </form>
                         </div>
                     </div>
@@ -110,6 +108,24 @@
         </div>
     </jsp:body>
 </t:main>
-<script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+
+    function daugia(idSanPham, soTien){
+        let idSP = 'frmAuction' + idSanPham;
+        Swal.fire({
+            title: 'Bạn có chắc muốn đấu giá số tiền '+ soTien + " ?",
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(idSP).submit();
+            }
+        })
+        return;
+    }
 
 </script>

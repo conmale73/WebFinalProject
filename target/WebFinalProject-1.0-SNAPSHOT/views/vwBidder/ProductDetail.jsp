@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5 mb-4">
+                <div class="col-sm-4 mb-3">
                     <div class="card h-100">
                         <div class="card-body">
                             <h3 class="card-title">${productAuction.tenSanPham}</h3>

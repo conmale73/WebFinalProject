@@ -22,19 +22,29 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/Seller/Auction">Đấu Giá</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSeller" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+
     </ul>
+
+    <div>
+<%--      <form id="formTimKiemSell" action="/Guest/Home/TimKiem" method="get">--%>
+<%--        <ul class="navbar-nav mr-auto">--%>
+<%--          <li class="nav-item">--%>
+<%--            <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">--%>
+<%--          </li>--%>
+<%--          <li class="nav-item dropdown">--%>
+<%--            <a class="nav-link dropdown-toggle" id="navbarDropdownBidderSearchSell" role="button" data-toggle="dropdown"--%>
+<%--               aria-haspopup="true" aria-expanded="false">--%>
+<%--              Tìm Kiếm--%>
+<%--            </a>--%>
+<%--            <div class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
+<%--              <input type="hidden" name="actionTimKiem" id="actionTimKiemSell" value="">--%>
+<%--              <input class="dropdown-item" id="btnTimKiemGiamDanSell" type="submit" role="button" value="Xếp theo ngày kết thúc giảm dần">--%>
+<%--              <input class="dropdown-item" id="btnTimKiemTangdanSell" type="submit" role="button" value="Xếp theo giá tăng dần" >--%>
+<%--            </div>--%>
+<%--          </li>--%>
+<%--        </ul>--%>
+<%--      --%>
+<%--    </ul>--%>
       <div>
         <form id="formTimKiemSell" action="/Guest/Home/TimKiem" method="get">
           <ul class="navbar-nav mr-auto">
@@ -76,6 +86,7 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Auction/Index">Đấu Giá</a>
       </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBidder" role="button" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
