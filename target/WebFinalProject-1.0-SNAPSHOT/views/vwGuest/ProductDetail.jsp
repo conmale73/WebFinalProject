@@ -20,46 +20,52 @@
                 <div class="card-body">
                     <div class="row">
                         <c:forEach items="${products}" var="product">
+                        <div>
                             <div>
-                                <div>
-                                    <div class="card h-100">
-                                        <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhchinh.jpg" alt="${product.tenSanPham}" title="${product.tenSanPham}" class="card-img-top h-50">
-                                        <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhphu1.jpg" alt="${product.tenSanPham}" title="${product.tenSanPham}">
-                                        <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhphu2.jpg" alt="${product.tenSanPham}" title="${product.tenSanPham}">
-                                        <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhphu3.jpg" alt="${product.tenSanPham}" title="${product.tenSanPham}">
-                                        <div class="card-body">
-                                            <h3 class="card-title">${product.tenSanPham}</h3>
-                                            <h5 class="card-text mt-3">
-                                                                        Giá hiện tại:
-                                                                        <span class="text-danger font-weight-bold">
-                                                                <fmt:formatNumber value="${product.giaHienTai}" type="number" />
-                                                              </span>
-                                                                    </h5>
-                                                                    <h5 class="card-text mt-3">
-                                                                        Giá mua ngay:
-                                                                        <span class="text-danger font-weight-bold">
-                                                                <fmt:formatNumber value="${product.giaMuaNgay}" type="number" />
-                                                              </span>
-                                                                    </h5>
-                                                                    <h5 class="card-text">Mã số người bán: ${product.IDNguoiBan}</h5>
-                                                                    <h5 class="card-text">Mã số người đặt giá cao nhất hiện tại: ${product.IDNguoiGiuGiaHienTai}</h5>
-                                                                    <h5>
-                                                                        Ngày đăng:
-                                                                        <fmt:formatDate value="${product.thoiGianDangBan}" type="date" />
-                                                                    </h5>
-                                                                    <h5>
-                                                                        Ngày kết thúc:
-                                                                        <fmt:formatDate value="${product.thoiGianKetThuc}" type="date" />
-                                                                    </h5>
-                                                                        <div> </div>
-                                                                    <p>Chi tiết: ${product.chiTiet}</p>
-                                        </div>
-                    </div>
-                </div>
+                                <div class="card h-100">
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhchinh.jpg"
+                                         alt="${product.tenSanPham}" title="${product.tenSanPham}"
+                                         class="card-img-top h-50">
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhphu1.jpg"
+                                         alt="${product.tenSanPham}" title="${product.tenSanPham}">
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhphu2.jpg"
+                                         alt="${product.tenSanPham}" title="${product.tenSanPham}">
+                                    <img src="${pageContext.request.contextPath}/public/imgs/sp/${product.IDSanPham}/anhphu3.jpg"
+                                         alt="${product.tenSanPham}" title="${product.tenSanPham}">
+                                    <div class="card-body">
+                                        <h3 class="card-title">${product.tenSanPham}</h3>
+                                        <h5 class="card-text mt-3">
+                                            Giá hiện tại:
+                                            <span class="text-danger font-weight-bold">
+                                                <fmt:formatNumber value="${product.giaHienTai}" type="number"/>
+                                            </span>
+                                        </h5>
+                                        <h5 class="card-text mt-3">
+                                            Giá mua ngay:
+                                            <span class="text-danger font-weight-bold">
+                                                <fmt:formatNumber value="${product.giaMuaNgay}" type="number"/>
+                                            </span>
+                                        </h5>
+                                        <h5 class="card-text">Mã số người bán: ${product.IDNguoiBan}</h5>
+                                        <h5 class="card-text">Mã số người đặt giá cao nhất hiện
+                                            tại: ${product.IDNguoiGiuGiaHienTai}</h5>
+                                        <h5>
+                                            Ngày đăng:
+                                            <fmt:formatDate value="${product.thoiGianDangBan}" type="date"/>
+                                        </h5>
+                                        <h5>
+                                            Ngày kết thúc:
+                                            <fmt:formatDate value="${product.thoiGianKetThuc}" type="date"/>
+                                        </h5>
+                                        <div></div>
+                                        <p>Chi tiết: ${product.chiTiet}</p>
                                     </div>
+                                </div>
                             </div>
-                        </c:forEach>
+                        </div>
                     </div>
+                    </c:forEach>
+                </div>
                 </div>
             </c:otherwise>
         </c:choose>

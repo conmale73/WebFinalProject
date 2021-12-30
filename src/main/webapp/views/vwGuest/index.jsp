@@ -17,9 +17,9 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <div class="card-body">
+                <div class="card-body" >
                     <div></div>
-                    <div class="row">
+                    <div class="row" id="content-product">
 
                         <c:forEach items="${products}" var="c">
                             <div class="col-sm-4 mb-3">
@@ -31,7 +31,9 @@
                                             Giá hiện tại:
                                             <fmt:formatNumber value="${c.giaHienTai}" type="number" />
                                         </h5>
-                                        <p class="card-text">${c.chiTiet}</p>
+                                        <div>
+                                            <p class="card-text">${c.chiTiet}</p>
+                                        </div>
                                     </div>
                                     <div class="card-footer text-muted">
                                         <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Guest/Product/Detail?id=${c.IDSanPham}" role="button">
@@ -50,7 +52,7 @@
                         <c:set var = "i" scope = "session" value = "${1}"/>
                         <c:forEach var="tolProductFE " begin ='1' end = '${tolProductFE}'>
                             <li class="page-item list-group" id="list-tab" role="tablist">
-                                <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickCategory(${i})">
+                                <a class="page-link list-group-item list-group-item-action" role="tab" data-toggle="list" href="#" onclick="clickProductFE(${i})">
                                     <div class="text-dark" style="font-weight: bold;"><c:out value="${i}"/></div>
                                     <c:set var="i" scope="session" value="${i+1}"/>
                                 </a>
@@ -70,7 +72,7 @@
     </jsp:body>
 </t:main>
 <script>
-    function clickProduct(page)
+    function clickProductFE(page)
     {
         $('.page-link').removeClass("active");
         $(this).addClass("active");
@@ -82,7 +84,7 @@
                 page_exist:page
             },
             success: function (response) {
-                document.getElementById("card-body").innerHTML = response;
+                document.getElementById("content-product").innerHTML = response;
 
                 // $('#content-user').innerHTML=response $(selector).html(content)
             },

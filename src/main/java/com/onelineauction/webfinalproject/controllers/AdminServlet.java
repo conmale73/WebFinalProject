@@ -137,9 +137,8 @@ public class AdminServlet extends HttpServlet {
         UserModel.updateUser(c);
         //request.setAttribute("success", true);
         request.setAttribute("message_update","Update Thanh Cong");
-        //loadUser(request,response);
-
-        response.sendRedirect("/AdminServlet/EditUser?id=" + constant.idUser);
+        loadUser(request,response);
+        //response.sendRedirect("/AdminServlet/EditUser?id=" + constant.idUser);
         request.setAttribute("message_update",null);
     }
     public void resetPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -189,7 +188,7 @@ public class AdminServlet extends HttpServlet {
     public void loadUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         List<User> userlistx = UserModel.paginationUser(0, 5);
-        double totalPages = Math.ceil((double) UserModel.findAll().size() / 5); // trả ra 6 sản phẩm mỗi trang
+        double totalPages = Math.ceil((double) UserModel.findAll().size() / 5); // trả ra 5 sản phẩm mỗi trang
         request.setAttribute("totalPageUser", totalPages);
         request.setAttribute("users", userlistx);
         request.setAttribute("user", true);

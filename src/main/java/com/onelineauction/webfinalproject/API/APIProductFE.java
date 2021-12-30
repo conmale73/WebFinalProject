@@ -30,7 +30,9 @@ public class APIProductFE extends HttpServlet {
                     "                                        <h5 class=\"card-title text-danger\">\n" +
                     "                                            Giá hiện tại:\n" + formatNumber(o.getGiaHienTai()) +
                     "                                        </h5>\n" +
-                    "                                        <p class=\"card-text\">"+o.getChiTiet()+"</p>\n" +
+                    "<div>\n" +
+                    "                                            <p class=\"card-text\">"+o.getChiTiet()+"</p>\n" +
+                    "                                        </div>"                                        +
                     "                                    </div>\n" +
                     "                                    <div class=\"card-footer text-muted\">\n" +
                     "                                        <a class=\"btn btn-sm btn-outline-primary\" href=\"/Guest/Product/Detail?id="+o.getIDSanPham()+"\" role=\"button\">\n" +

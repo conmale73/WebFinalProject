@@ -1,9 +1,11 @@
 package com.onelineauction.webfinalproject.controllers;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.onelineauction.webfinalproject.beans.ListRequest;
 import com.onelineauction.webfinalproject.beans.SendEmail;
 import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.constant.constant;
+import com.onelineauction.webfinalproject.models.ListRequestModel;
 import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 import javafx.print.Printer;
@@ -43,6 +45,23 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
                 break;
             case "/Profile":
+                String messagep = request.getParameter("message_update");
+                //System.out.println(instanceof message);
+                if (messagep != null && messagep.equals("thanhcong")) {
+                    request.setAttribute("message_update", "Update Thanh Cong");
+                }
+                else if(messagep != null && messagep.equals("thatbai"))
+                {
+                    request.setAttribute("message_update", "Update That Bai");
+                }
+
+                User userpro = UserModel.findByUsername(constant.username);
+                //User id_find_user = UserModel.findById(userId);
+
+                LocalDate localDate = userpro.getDob();
+                request.setAttribute("user", userpro); //Day la đối tượng user sau khi cần edit
+                request.setAttribute("dob", localDate);
+                System.out.println(localDate);
                 ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
                 break;
             case "/OTP":
@@ -66,9 +85,30 @@ public class AccountServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
-
                 out.print(isAvailable);
                 out.flush();
+                break;
+            case "/NangCap":
+                ListRequest list = new ListRequest(constant.idUser,LocalDate.now(),1,0);
+                ListRequestModel.xuLyYeuCau(list);
+                //
+                User userpronang = UserModel.findByUsername(constant.username);
+                //User id_find_user = UserModel.findById(userId);
+                LocalDate localDate1 = userpronang.getDob();
+                request.setAttribute("user", userpronang); //Day la đối tượng user sau khi cần edit
+                request.setAttribute("dob", localDate1);
+                ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
+                break;
+            case "/HaCap":
+                ListRequest listb = new ListRequest(constant.idUser,LocalDate.now(),0,0);
+                ListRequestModel.xuLyYeuCau(listb);
+                //
+                User userproha = UserModel.findByUsername(constant.username);
+                //User id_find_user = UserModel.findById(userId);
+                LocalDate localDate2 = userproha.getDob();
+                request.setAttribute("user", userproha); //Day la đối tượng user sau khi cần edit
+                request.setAttribute("dob", localDate2);
+                ServletUtils.forward("/views/vwAccount/Profile.jsp", request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);
@@ -95,10 +135,16 @@ public class AccountServlet extends HttpServlet {
             case  "/OTP":
                 //Lay cac thong tin va gui Email
                 sendEmail(request,response);
-                //verify(request, response);
+
                 break;
             case "/Verify":
                 verify(request,response);
+                break;
+            case "/ChangePass":
+                changePass(request,response);
+                break;
+            case "/Update":
+                updateUser(request,response);
                 break;
       default:
         ServletUtils.forward("/views/404.jsp", request, response);
@@ -130,13 +176,16 @@ public class AccountServlet extends HttpServlet {
         String username = request.getParameter("username");//lấy
         String password = request.getParameter("password");
         User user = UserModel.findByUsername(username);
-
+        constant.idUser= user.getId();
+        constant.username=username;//gán vào để sd
+        constant.level = user.getLevel();
         if(user !=null)
         {
             BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
             if(result.verified)
             {
                 HttpSession session = request.getSession();// lay request cua 1 phien lam viec cua ng dung
+
                 session.setAttribute("auth",true);
                 session.setAttribute("authUser",user);
 
@@ -182,6 +231,7 @@ public class AccountServlet extends HttpServlet {
         session.setAttribute("auth",false);
         session.setAttribute("authUser",new User());
 
+
         session.setAttribute("lev0",false);
         session.setAttribute("lev1",false);
         session.setAttribute("lev2",false);
@@ -224,5 +274,51 @@ public class AccountServlet extends HttpServlet {
         }
 
     }
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //cap nhat
+        String name = request.getParameter("name");
+        String strDob = request.getParameter("dob");
 
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dob = LocalDate.parse(strDob, df);
+
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        int pointId = Integer.parseInt(request.getParameter("point"));
+        //System.out.println(pointId);
+        //int permission = Integer.parseInt(request.getParameter("permission"));
+        User c = new User(constant.idUser,"","",name,dob,address,email,pointId,constant.level);
+        UserModel.updateUser(c);
+        //set lai du liệu khi edit
+        setUser(request);
+        //request.setAttribute("message_update","Update Thanh Cong");
+        //loadUser(request,response);
+        response.sendRedirect(request.getContextPath()+"/Account/Profile?message_update=thanhcong");
+
+    }
+    public void setUser(HttpServletRequest request)
+    {
+        User userpro = UserModel.findByUsername(constant.username);
+        //User id_find_user = UserModel.findById(userId);
+        LocalDate localDate = userpro.getDob();
+        request.setAttribute("user", userpro); //Day la đối tượng user sau khi cần edit
+        request.setAttribute("dob", localDate);
+    }
+    private void changePass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String oldpassword = request.getParameter("oldpassword");//lấy
+        String newpassword = request.getParameter("newpassword");//lấy
+        User user = UserModel.findByUsername(constant.username);
+        BCrypt.Result result = BCrypt.verifyer().verify(oldpassword.toCharArray(), user.getPassword());
+        if(result.verified) //nếu là đúng password cũ
+        {
+            String password = BCrypt.withDefaults().hashToString(12, newpassword.toCharArray());
+            UserModel.resetPassword(constant.idUser,password);// cập nhật mật khẩu
+            response.sendRedirect(request.getContextPath()+"/Account/Profile?message_update=thanhcong");
+        }
+        else {
+            response.sendRedirect(request.getContextPath()+"/Account/Profile?message_update=thatbai");
+
+        }
+
+    }
 }

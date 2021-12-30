@@ -9,6 +9,7 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class ListRequestModel {
+
     public static List<ListRequestUserDTO> findAllRequest()  {
         final String query = "select users.ID,users.HoTen,listrequest.request,listrequest.ThoiGian,listrequest.xacnhan\n" +
                 "from listrequest,users\n" +
@@ -35,6 +36,18 @@ public class ListRequestModel {
                     .addParameter("id_user", iduser)
                     .executeUpdate();
         }
+    }
+    public static void xuLyYeuCau(ListRequest list) {
+        String sql = "INSERT INTO listrequest (id, request, ThoiGian, xacnhan) VALUES (:id,:request,:thoigian,:xacnhan)";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("id", list.getId())
+                    .addParameter("request",list.getRequest())
+                    .addParameter("thoigian",list.getThoiGian())
+                    .addParameter("xacnhan",list.getXacnhan())
+                    .executeUpdate();
+        }
+
     }
 
 }
