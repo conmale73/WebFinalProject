@@ -169,8 +169,8 @@ public class AdminServlet extends HttpServlet {
     public void loadProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
-        List<ProductCategoryDTO> productList = ProductModel.paginationProduct(0,6);
-        double totalPageProduct = Math.ceil((double) ProductModel.findCategoryAndProduct().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        List<ProductCategoryDTO> productList = ProductModel.paginationProduct(0,5);
+        double totalPageProduct = Math.ceil((double) ProductModel.findCategoryAndProduct().size() / 5); // trả ra 6 sản phẩm mỗi trang
         request.setAttribute("totalPageProduct", totalPageProduct);
         request.setAttribute("products", productList);
         request.setAttribute("pro", true);
@@ -179,8 +179,8 @@ public class AdminServlet extends HttpServlet {
     public void loadCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
-        List<ProductCategoryDTO> categoryList = CategoryModel.paginationCategory(0,6);
-        double totalPageCategory = Math.ceil((double) CategoryModel.findCategoryByID().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        List<ProductCategoryDTO> categoryList = CategoryModel.paginationCategory(0,5);
+        double totalPageCategory = Math.ceil((double) CategoryModel.findCategoryByID().size() / 5); // trả ra 6 sản phẩm mỗi trang
         request.setAttribute("totalPageCategory", totalPageCategory);
         request.setAttribute("categories", categoryList);
         request.setAttribute("category", true);
@@ -188,8 +188,8 @@ public class AdminServlet extends HttpServlet {
     }
     public void loadUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        List<User> userlistx = UserModel.paginationUser(0, 6);
-        double totalPages = Math.ceil((double) UserModel.findAll().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        List<User> userlistx = UserModel.paginationUser(0, 5);
+        double totalPages = Math.ceil((double) UserModel.findAll().size() / 5); // trả ra 6 sản phẩm mỗi trang
         request.setAttribute("totalPageUser", totalPages);
         request.setAttribute("users", userlistx);
         request.setAttribute("user", true);
@@ -197,8 +197,8 @@ public class AdminServlet extends HttpServlet {
     }
     public void loadDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        List<ListRequestUserDTO> listdashboard = UserModel.paginationDashBoard(0, 6);
-        double totalDashBoard = Math.ceil((double) ListRequestModel.findAllRequest().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        List<ListRequestUserDTO> listdashboard = UserModel.paginationDashBoard(0, 5);
+        double totalDashBoard = Math.ceil((double) ListRequestModel.findAllRequest().size() / 5); // trả ra 6 sản phẩm mỗi trang
         request.setAttribute("totalDashBoard", totalDashBoard);
         request.setAttribute("dashboard", listdashboard);
         request.setAttribute("dash", true);
@@ -206,8 +206,8 @@ public class AdminServlet extends HttpServlet {
     }
     public void loadBidder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        List<BidderListDTO> bidderlist = UserModel.paginationBidder(0, 6);
-        double totalPagesBidder = Math.ceil((double) UserModel.findSellers().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        List<BidderListDTO> bidderlist = UserModel.paginationBidder(0, 5);
+        double totalPagesBidder = Math.ceil((double) UserModel.findSellers().size() / 5); // trả ra 6 sản phẩm mỗi trang
         request.setAttribute("totalPagesBidder", totalPagesBidder);
         request.setAttribute("bidders", bidderlist);
         request.setAttribute("bid", true);
@@ -215,10 +215,10 @@ public class AdminServlet extends HttpServlet {
     }
     public void loadSeller(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        List<SellerListDTO> sellerlist = UserModel.paginationSeller(0, 6);
+        List<SellerListDTO> sellerlist = UserModel.paginationSeller(0, 5);
         request.setAttribute("sellers", sellerlist);
         request.setAttribute("sell", true);
-        double totalPagesSeller = Math.ceil((double) UserModel.findSellers().size() / 6); // trả ra 6 sản phẩm mỗi trang
+        double totalPagesSeller = Math.ceil((double) UserModel.findSellers().size() / 5); // trả ra 6 sản phẩm mỗi trang
         request.setAttribute("totalPageSeller", totalPagesSeller);
         ServletUtils.forward("/views/vwAdmin/index.jsp", request, response);
     }

@@ -19,7 +19,7 @@ public class APICategory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int page_current= Integer.parseInt( request.getParameter("page_exist"));
 
-        List<ProductCategoryDTO> listCategory  = CategoryModel.paginationCategory((page_current-1)*6,6);//Tính tại lúc bắt đầu và các trang tiếp theo
+        List<ProductCategoryDTO> listCategory  = CategoryModel.paginationCategory((page_current-1)*5,5);//Tính tại lúc bắt đầu và các trang tiếp theo
         PrintWriter out = response.getWriter();
         for(ProductCategoryDTO o: listCategory) {
             out.println("<tr class=\"table-success\">\n" +

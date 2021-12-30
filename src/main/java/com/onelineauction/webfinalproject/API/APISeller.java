@@ -24,7 +24,7 @@ public class APISeller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int page_current = Integer.parseInt(request.getParameter("page_exist"));
-        List<SellerListDTO> sellerList = UserModel.paginationSeller((page_current - 1) * 6, 6);//Tính tại lúc bắt đầu và các trang tiếp theo
+        List<SellerListDTO> sellerList = UserModel.paginationSeller((page_current - 1) *5, 5);//Tính tại lúc bắt đầu và các trang tiếp theo
 
         PrintWriter out = response.getWriter();
         for (SellerListDTO o : sellerList) {

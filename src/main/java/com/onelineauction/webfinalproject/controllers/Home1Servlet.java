@@ -43,15 +43,19 @@ public class Home1Servlet extends HttpServlet {
                 break;
             case "/TimKiem":
                 String TenSanPham = request.getParameter("txtTen");
-                List<ProductForNew> list1 = ProductModel.findName(TenSanPham);
-                request.setAttribute("products", list1);
-                ServletUtils.forward("/views/vwGuest/TimKiem.jsp", request, response);
-                break;
-            case "/TimKiemGia":
-                TenSanPham = request.getParameter("txtTen");
-                List<ProductForNew> list2 = ProductModel.findNamePrice(TenSanPham);
-                request.setAttribute("products", list2);
-                ServletUtils.forward("/views/vwGuest/TimKiemGia.jsp", request, response);
+                System.out.println(TenSanPham);
+                String actionTimKiem = request.getParameter("actionTimKiem");
+                System.out.println(actionTimKiem);
+                if (actionTimKiem.equals("Giảm Dần")) {
+                    List<ProductForNew> list1 = ProductModel.findName(TenSanPham);
+                    request.setAttribute("products", list1);
+                    ServletUtils.forward("/views/vwGuest/index.jsp", request, response);
+                }
+                 else if (actionTimKiem.equals("Tăng Dần")) {
+                    List<ProductForNew> list2 = ProductModel.findNamePrice(TenSanPham);
+                    request.setAttribute("products", list2);
+                    ServletUtils.forward("/views/vwGuest/index.jsp", request, response);
+                }
                 break;
             case "/DanhSachSanPham":
                 List<ProductForShow> list3 = ProductModel.ShowDanhSach();

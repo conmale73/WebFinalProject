@@ -64,13 +64,6 @@ public class ProductModel {
                     .executeAndFetch(Product.class);
         }
     }
-    public static List<Product> paginationProductFE(int offset, int limit)  {
-        final String query = "select * from product  LIMIT "+offset+" ," +limit;
-        try (Connection con = DbUtils.getConnection()) {
-            return con.createQuery(query)
-                    .executeAndFetch(Product.class);
-        }
-    }
     public static List<ProductForNew> findName(String TenSanPham) {
         final String query =
                 "select *, timestampdiff(minute,ThoiGianDangBan,curtime()) as neworold from product\n" +
@@ -136,7 +129,7 @@ public class ProductModel {
     }
 
     public static List<Product> findByCatId(int catId) {
-        final String query = "select * from product where IDDanhMuc = :IDDanhMuc";
+        final String query = "select * from product where IDDanhMuc =:IDDanhMuc";
         try (Connection con = DbUtils.getConnection()) {
             return con.createQuery(query)
                     .addParameter("IDDanhMuc", catId)
@@ -145,7 +138,7 @@ public class ProductModel {
     }
 
     public static Product findById(String id) {
-        final String query = "select * from product where IDSanPham = :IDSanPham";
+        final String query = "select * from product where IDSanPham =:IDSanPham";
         try (Connection con = DbUtils.getConnection()) {
             List<Product> list = con.createQuery(query)
                     .addParameter("IDSanPham", id)
@@ -182,6 +175,13 @@ public class ProductModel {
             con.createQuery(sql)
                     .addParameter("ID", id)
                     .executeUpdate();
+        }
+    }
+    public static List<Product> paginationProductFE(int offset, int limit)  {
+        final String query = "select * from product  LIMIT "+offset+" ," +limit;
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .executeAndFetch(Product.class);
         }
     }
 

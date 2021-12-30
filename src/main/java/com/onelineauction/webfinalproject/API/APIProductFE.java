@@ -19,7 +19,7 @@ public class APIProductFE extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int page_current= Integer.parseInt( request.getParameter("page_exist"));
 
-        List<Product> listproduct  = ProductModel.paginationProductFE((page_current-1)*6,6);//Tính tại lúc bắt đầu và các trang tiếp theo
+        List<Product> listproduct  = ProductModel.paginationProductFE((page_current-1)*5,5);//Tính tại lúc bắt đầu và các trang tiếp theo
         PrintWriter out = response.getWriter();
         for(Product o: listproduct) {
             out.println("<div class=\"col-sm-4 mb-3\">\n" +

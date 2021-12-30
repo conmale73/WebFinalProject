@@ -20,9 +20,7 @@
     <h4 class="card-header">
         Profile
     </h4>
-    <div class="card-body">
 
-    </div>
 
     </jsp:body>
 </t:main>

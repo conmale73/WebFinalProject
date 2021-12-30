@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Dau Gia</title>
+    <script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha512-f0tzWhCwVFS3WeYaofoLWkTP62ObhewQ1EZn65oSYDZUg1+CyywGKkWzm8BxaJj5HGKI72PnMH9jYyIFz+GH7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <style>
         body {
             height: 100vh;
@@ -39,10 +39,31 @@
             border: 1px solid red;
         }
     </style>
+    <script>
+        function clickRegister()
+        {
+            // $('.page-link').removeClass("active");
+            // $(this).addClass("active");
+            <%--"<c:url value="/api-user" />"--%>
+            event.preventDefault();
+            $.ajax({
+                url: "<c:url value="/doRegister" />",
+                type: "get",
+                data:{
 
-    <script type="text/css">
+                },
+                success: function (response) {
+                    //document.getElementById("content-user").innerHTML = response;
 
+                    // $('#content-user').innerHTML=response
+                },
+                error: function (xhr) {
+                    alert("Loading data not success. Please comeback later <3")
+                }
+            })
+        }
     </script>
+
 
 </head>
 <body>
@@ -101,15 +122,12 @@
                         <label for="txtEmail">Email</label>
                         <input onchange="addClassIsValid(this.id)" type="email" class="form-control" id="txtEmail" name="email" placeholder="" required>
                     </div>
-
-                    <div>
-                        <button class="g-recaptcha"
-                                data-sitekey="reCAPTCHA_site_key"
-                                data-callback='onSubmit'
-                                data-action='submit'>Submit</button>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary" id="register">Register</button>
+                <div class="d-flex justify-content-center">
+                <div class="g-recaptcha" data-sitekey="6LdMw9YdAAAAAHdaPm4SKc8wttv5Hil61wP8mNBo" > </div>
+                <p style="color:red;">${errorString}</p>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                        <button type="submit" class="btn btn-primary" id="register" >Register</button>
                     </div>
             </form>
 
@@ -133,7 +151,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
         integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<%--<script src="https://www.google.com/recaptcha/api.js"></script>--%>
 <script>
     function onSubmit(token) {
         document.getElementById("demo-form").submit();
@@ -159,10 +177,11 @@
             console.log(typeof data)
             //ô submit form thử
             if (data) {
+                // clickRegister();
                 $('#frmRegister').off('submit').submit();
             }
             else {
-
+                // clickRegister();
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -213,6 +232,7 @@
 
 
     });
+
 
 //id của element đó
     function addClassIsValid(id) {

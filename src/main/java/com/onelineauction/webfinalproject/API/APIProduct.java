@@ -21,7 +21,7 @@ public class APIProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
                 int page_current = Integer.parseInt(request.getParameter("page_exist"));
-                List<ProductCategoryDTO> productList = ProductModel.paginationProduct((page_current - 1) * 6, 6);//Tính tại lúc bắt đầu và các trang tiếp theo
+                List<ProductCategoryDTO> productList = ProductModel.paginationProduct((page_current - 1) * 5, 5);//Tính tại lúc bắt đầu và các trang tiếp theo
 
                 PrintWriter out = response.getWriter();
                 for (ProductCategoryDTO o : productList) {

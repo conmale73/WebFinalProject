@@ -109,18 +109,39 @@
         </div>
       </li>
     </ul>
+      <div>
+        <form id="formTimKiemBidd" action="/Guest/Home/TimKiem" method="get">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownBidderSearchBidd" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Tìm Kiếm
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <input type="hidden" name="actionTimKiem" id="actionTimKiemBidd" value="">
+                <input class="dropdown-item" id="btnTimKiemGiamDanBidd" type="submit" role="button" value="Xếp theo ngày kết thúc giảm dần">
+                <input class="dropdown-item" id="btnTimKiemTangdanBidd" type="submit" role="button" value="Xếp theo giá tăng dần" >
+              </div>
+            </li>
+          </ul>
+        </form>
+        </ul>
+      </div>
 
-    <div class="">
-      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiem">
-        <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo ngày kết thúc giảm dần</button>
-          <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-      </form>
-      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiemGia">
-        <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo giá tăng dần</button>
-          <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-      </form>
+<%--      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiem">--%>
+
+<%--        <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">--%>
+<%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo ngày kết thúc giảm dần</button>--%>
+<%--          &lt;%&ndash;        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;%&gt;--%>
+<%--      </form>--%>
+<%--      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiemGia">--%>
+<%--        <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">--%>
+<%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo giá tăng dần</button>--%>
+<%--          &lt;%&ndash;        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;%&gt;--%>
+<%--      </form>--%>
     </div>
 
   </c:when>
@@ -128,14 +149,14 @@
     <c:choose>
       <c:when test="${auth}">
         <div class="row">
-          <div class="col-10"></div>
+<%--          <div class="col-10"></div>--%>
           <div class="col-1">
             <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post"></form>
             <ul class="navbar-nav ">
               <li class="nav-item dropdown " >
 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" style="right: 0">
+                   aria-haspopup="true" aria-expanded="false" >
 
                   <i class="fa fa-user-o" aria-hidden="true"></i> Hi <b>${authUser.name}</b>
                 </a>
@@ -185,18 +206,26 @@
             </div>
           </li>
         </ul>
-
-        <div class="">
-          <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiem">
-            <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo ngày kết thúc giảm dần</button>
-              <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-          </form>
-          <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiemGia">
-            <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Xếp theo giá tăng dần</button>
-              <%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-          </form>
+        <div>
+            <form id="formTimKiem" action="/Guest/Home/TimKiem" method="get">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownBidderSearch" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                    Tìm Kiếm
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <input type="hidden" name="actionTimKiem" id="actionTimKiem" value="">
+                    <input class="dropdown-item" id="btnTimKiemGiamDan" type="submit" role="button" value="Xếp theo ngày kết thúc giảm dần">
+                    <input class="dropdown-item" id="btnTimKiemTangdan" type="submit" role="button" value="Xếp theo giá tăng dần" >
+                  </div>
+                </li>
+              </ul>
+            </form>
+          </ul>
         </div>
 
         <div class=" ml-auto">
@@ -208,6 +237,25 @@
 
   </div>
 </nav>
+<script>
+  $('#btnTimKiemGiamDan').click(function(){
+    document.getElementById("actionTimKiem").value = "Giảm Dần";
+    $('#formTimKiem').submit();
+  });
+  $('#btnTimKiemTangdan').click(function(){
+    document.getElementById("actionTimKiem").value = "Tăng Dần";
+    $('#formTimKiem').submit();
+  });
+  //Bidder
+  $('#btnTimKiemGiamDanBidd').click(function(){
+    document.getElementById("actionTimKiemBidd").value = "Giảm Dần";
+    $('#formTimKiemBidd').submit();
+  });
+  $('#btnTimKiemTangdanBidd').click(function(){
+    document.getElementById("actionTimKiemBidd").value = "Tăng Dần";
+    $('#formTimKiemBidd').submit();
+  });
+</script>
 
 
 

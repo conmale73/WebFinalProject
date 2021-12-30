@@ -14,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <%--  danh cho footer--%>
-  <link rel="stylesheet" src="<c:url value="../../css/abc.css"/>">
+<%--  <link rel="stylesheet" src="<c:url value="../../css/abc.css"/>">--%>
   <jsp:invoke fragment="css"/>
   <script>
 
@@ -31,7 +31,7 @@
 </c:if>
   <jsp:include page="../../views/partials/nav.jsp"/>
   <div class="container-fluid mt-4">
-    <div class="row">
+    <div class="row back-g">
       <div class="col-sm-2">
         <jsp:include page="../../views/partials/left.jsp"/>
       </div>

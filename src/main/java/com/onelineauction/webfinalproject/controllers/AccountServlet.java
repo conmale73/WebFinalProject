@@ -35,6 +35,11 @@ public class AccountServlet extends HttpServlet {
                 ServletUtils.forward("/views/vwAccount/Register.jsp", request, response);
                 break;
             case "/Login":
+                String message = request.getParameter("message_register");
+                //System.out.println(instanceof message);
+                if (message != null && message.equals("dang_ky")) {
+                    request.setAttribute("message_register", "Dang Ky");
+                }
                 ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
                 break;
             case "/Profile":
@@ -208,9 +213,11 @@ public class AccountServlet extends HttpServlet {
         {
             UserModel.add(constant.userConstant);
             //request.setAttribute("yesOTP",constant.codeOtp);
-            request.setAttribute("message_register","Dang Ky");
-            ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
-            request.setAttribute("message_register",null);
+            //request.setAttribute("message_register","Dang Ky");
+//            ServletUtils.forward("/views/vwAccount/Login.jsp", request, response);
+//            request.setAttribute("message_register",null);
+            response.sendRedirect(request.getContextPath()+"/Account/Login?message_register=dang_ky");
+            //response.sendRedirect(request.getContextPath()+"/Account/Login"); // qua bên get của login
         }else{
             ServletUtils.forward("/views/vwAccount/OTP.jsp", request, response);
 
