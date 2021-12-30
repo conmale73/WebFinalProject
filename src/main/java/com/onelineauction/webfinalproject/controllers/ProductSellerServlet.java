@@ -2,9 +2,11 @@ package com.onelineauction.webfinalproject.controllers;
 
 import com.onelineauction.webfinalproject.beans.DauGia;
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.beans.SendEmail;
 import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.models.DauGiaModel;
 import com.onelineauction.webfinalproject.models.ProductModel;
+import com.onelineauction.webfinalproject.models.UserModel;
 import com.onelineauction.webfinalproject.utils.ServletUtils;
 
 import javax.servlet.ServletException;
@@ -41,6 +43,38 @@ public class ProductSellerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getPathInfo();
+        switch (path){
+            case "/SubmitAuction":
+                submitAuction(request, response);
+                break;
+
+        }
+    }
+    private void submitAuction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idSP = request.getParameter("id");
+        HttpSession session = request.getSession();
+        User curUser = (User) session.getAttribute("authUser");
+
+        DauGia previousAuction = DauGiaModel.luotDauGiaCuoiCung(idSP);
+        double giaDat = Double.parseDouble(request.getParameter("soTien"));
+        DauGia dg = new DauGia(idSP, previousAuction.getLuotDauGia() + 1, giaDat, curUser.getId());
+        DauGiaModel.add(dg);
+
+        Product p = ProductModel.findById(idSP);
+
+        int idNB = p.getIDNguoiBan();
+        User seller = UserModel.findById(idNB);
+        //Gửi email cho ng đấu giá và ng đăng bán
+        SendEmail sm1 = new SendEmail();
+        SendEmail sm2 = new SendEmail();
+        //Gui cho Bidder
+        sm1.sendBidderorSeller(curUser.getEmail(),"You are bidding with price:",giaDat);
+        sm2.sendBidderorSeller(seller.getEmail(),"Your order is being auctioned with price: ",giaDat);
+
+        Product product = new Product(p.getIDSanPham(), p.getTenSanPham(), p.getIDNguoiBan(), giaDat, p.getGiaMuaNgay(), p.getBuocGia(), p.getIDDanhMuc(), curUser.getId(), p.getThoiGianDangBan(), p.getThoiGianKetThuc(), p.getChiTiet(), p.getAnhChinh(), p.getAnhPhu());
+        ProductModel.update(product);
+        loadData(request, response);
 
     }
 
