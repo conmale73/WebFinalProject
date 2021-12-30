@@ -24,7 +24,7 @@
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
-        .back-g
+        .admin-b
         {
             height: 100vh;
             background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-soft-purple-and-pink-watercolor-paint-background-image_402197.jpg);

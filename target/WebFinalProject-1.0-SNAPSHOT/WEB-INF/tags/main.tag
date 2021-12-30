@@ -26,12 +26,15 @@
 <c:if test = "${message_update == 'Update Thanh Cong'}">
 <body onload="updateSuccess()">
 </c:if>
+<c:if test = "${message_update == 'Update That Bai'}">
+<body onload="updateFail()">
+</c:if>
 <c:if test = "${message_category == null}">
 <body>
 </c:if>
   <jsp:include page="../../views/partials/nav.jsp"/>
   <div class="container-fluid mt-4">
-    <div class="row back-g">
+    <div class="row admin-b profile-b">
       <div class="col-sm-2">
         <jsp:include page="../../views/partials/left.jsp"/>
       </div>
@@ -49,3 +52,10 @@
   <jsp:invoke fragment="js"/>
 </body>
 </html>
+<script>
+
+  let lev2 = ${empty lev2}
+  if (!lev2) {
+    $('.row').removeClass('profile-b')
+  }
+</script>
