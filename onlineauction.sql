@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2021 at 03:12 PM
+-- Generation Time: Dec 30, 2021 at 05:24 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -68,7 +68,17 @@ INSERT INTO `daugia` (`IDSanPham`, `LuotDauGia`, `GiaDat`, `IDNguoiDatGia`) VALU
 ('CN004', 1, 50000000, 1),
 ('CN004', 2, 51000000, 2),
 ('CN004', 3, 52990000, 1),
-('CN001', 7, 81000000, 2);
+('CN001', 7, 81000000, 2),
+('CN001', 8, 83000000, 2),
+('CN001', 9, 84000000, 1),
+('CN001', 10, 85000000, 1),
+('CN001', 11, 86000000, 1),
+('CN001', 12, 87000000, 1),
+('CN001', 13, 88000000, 1),
+('CN004', 4, 53990000, 1),
+('CN004', 5, 54990000, 1),
+('CN004', 6, 55990000, 1),
+('CN002', 1, 116000000, 3);
 
 -- --------------------------------------------------------
 
@@ -132,10 +142,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`IDSanPham`, `TenSanPham`, `IDNguoiBan`, `GiaHienTai`, `GiaMuaNgay`, `BuocGia`, `IDDanhMuc`, `IDNguoiGiuGiaHienTai`, `ThoiGianDangBan`, `ThoiGianKetThuc`, `ChiTiet`, `AnhChinh`, `AnhPhu`) VALUES
-('CN001', 'Apple Mac Pro', 3, 81000000, 150000000, 1000000, 1, 2, '2021-12-26 07:31:25', '2022-01-07 20:03:25', 'Phiên bản Mac Pro 2019 tiêu chuẩn với chip Intel Xeon W 8 nhân 3.5GHz, RAM 48GB, SSD 256GB và VGA Radeon Pro 580X có giá bán 5.999 USD, nhưng được bán trong cửa hàng tân trang của Apple với giá 5.349 USD.', 'anhchinh.jpg', 'anhphu1.jpg'),
+('CN001', 'Apple Mac Pro', 3, 88000000, 150000000, 1000000, 1, 1, '2021-12-26 07:31:25', '2022-01-07 20:03:25', 'Phiên bản Mac Pro 2019 tiêu chuẩn với chip Intel Xeon W 8 nhân 3.5GHz, RAM 48GB, SSD 256GB và VGA Radeon Pro 580X có giá bán 5.999 USD, nhưng được bán trong cửa hàng tân trang của Apple với giá 5.349 USD.', 'anhchinh.jpg', 'anhphu1.jpg'),
 ('CN002', 'Laptop Razer Blade 17 (2021)', 3, 105990000, 116000000, 1000000, 1, 2, '2021-12-26 06:31:05', '2022-01-21 19:31:05', 'Razer Blade 17 (2021) là một trong những chiếc laptop gaming cao cấp đang được săn đón nhất ở thời điểm hiện tai. Khôn chỉ sở hữu thiết kế đẹp mắt với nhiều tính năng ưu việt hơn hẳn các đối thủ. ', 'anhchinh.jpg', 'anhphu1.jpg'),
 ('CN003', 'MJ\'S Swarovski & Diamond Studded Notebook', 1, 802725000, 913836000, 1000000, 1, 2, '2021-12-26 06:59:44', '2022-01-15 19:59:44', 'Bề mặt nắp laptop được nạm kim cương Swarovski cực kỳ quý giá, và toàn thân máy đều được mạ vàng, chuột dát vàng, thời gian bảo hành lên đến 10 năm. Ngoài ra còn được tặng thêm bọc bằng da cá sấu.', 'anhchinh.jpg', 'anhphu1.jpg'),
-('CN004', 'Dell Xps 15 9510 Gen 11th', 3, 52990000, 63000000, 1000000, 1, 2, '2021-12-18 19:54:31', '2022-01-17 19:54:31', 'Dell Xps 9510 đang là chiếc laptop doanh nhân 2 in 1 mỏng nhẹ và bền bỉ nhất hiện nay. Ngoài thiết kế sang trọng, hiện đại thì chiếc máy tính xách tay này còn được đánh giá cao nhờ hiệu năng mạnh mẽ.', 'anhchinh.jpg', 'anhphu1.jpg'),
+('CN004', 'Dell Xps 15 9510 Gen 11th', 3, 55990000, 63000000, 1000000, 1, 1, '2021-12-18 19:54:31', '2022-01-17 19:54:31', 'Dell Xps 9510 đang là chiếc laptop doanh nhân 2 in 1 mỏng nhẹ và bền bỉ nhất hiện nay. Ngoài thiết kế sang trọng, hiện đại thì chiếc máy tính xách tay này còn được đánh giá cao nhờ hiệu năng mạnh mẽ.', 'anhchinh.jpg', 'anhphu1.jpg'),
 ('CN005', 'CTO – MacBook Pro 16 inch 2020 New– (Space Gray/i9 2.4Ghz/64GB/1TB/5600M)', 1, 108000000, 119000000, 1000000, 1, 2, '2021-12-20 19:49:55', '2022-01-19 19:49:55', 'Theo như giới thiệu, CTO – MacBook Pro 16 inch 2019 New được cho sẽ trở thành chiếc máy tính xách tay tốt nhất trên thế giới.', 'anhchinh.jpg', 'anhphu1.jpg'),
 ('CN006', 'iPhone 6 Falcon Supernova Pink Diamond (48.4 triệu USD)', 1, 730320000, 841430000, 1000000, 1, 2, '2021-12-29 13:05:23', '2021-12-29 13:05:23', 'Chiếc điện thoại không nạm các hạt kim cương, mà dát vàng 18 k với viên kim cương hồng khổng lồ ở phía sau lưng.', 'anhchinh.jpg', 'anhphu1.jpg'),
 ('CN007', 'Stuart Hughes iPhone 4s Elite Gold', 1, 1780155000, 2891266000, 1000000, 1, 2, '2021-12-29 13:19:39', '2021-12-29 13:19:39', 'iPhone 4S Elite Gold được trang trí bởi 500 viên kim cương đắt tiền với mặt sau máy là 24 carat vàng và 53 viên kim cương cho logo Apple. Phím Home cũng được trang trí bởi kim cương 2,6 carat cùng các viên nhỏ hơn xung quanh. Bản iPhone 4S này là bản 64GB', 'anhchinh.jpg', 'anhphu1.jpg'),
@@ -178,7 +188,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`ID`, `username`, `password`, `HoTen`, `NgaySinh`, `DiaChi`, `Email`, `DiemUyTin`, `Quyen`) VALUES
 (1, 'duchau', '$2a$12$mTYLRxhpnQaYalj5/mXGzeAEgHDLkHn8eHrLMv6uBAmUiwOrs3/DG', 'Vũ Đức Hậu', '2001-03-07', 'Quảng Ngãi', 'conmalenumber2@gmail.com', 90, 0),
 (2, 'abc', '$2a$12$mTYLRxhpnQaYalj5/mXGzeAEgHDLkHn8eHrLMv6uBAmUiwOrs3/DG', 'Ây Bi Xi', '2001-12-11', 'aaaaaaaaaaaâ', 'abc@gmail.com', 90, 0),
-(3, 'damngoodseller', '$2a$12$MtJN15lLK2bvLpdnL6U.6.QSYc8hUFNLvoIlUQItY28rKvxQr.ubq', 'Dương Quá', '1995-12-14', 'TQ', 'quanhi@gmail.com', 90, 1),
+(3, 'damngoodseller', '$2a$12$MtJN15lLK2bvLpdnL6U.6.QSYc8hUFNLvoIlUQItY28rKvxQr.ubq', 'Dương Quá', '1995-12-14', 'TQ', 'cuccutkuteahehe@gmail.com', 90, 1),
 (14, 'admin', '$2a$12$mTYLRxhpnQaYalj5/mXGzeAEgHDLkHn8eHrLMv6uBAmUiwOrs3/DG', 'Nguyễn Ngọc Ngạn', '2021-12-25', 'Đà Lạt', 'swan4567890@gmail.com', 90, 2),
 (15, 'admin123456', '$2a$12$HW5wK0AVuAkF7ONhTJLew.t8C2Wx3mjBWSKGi1mvjCnvAyxqS1Ul6', 'Hề Chúa', '2022-03-30', 'TP.hcm', 'swan4567890@gmail.com', 90, 1);
 
