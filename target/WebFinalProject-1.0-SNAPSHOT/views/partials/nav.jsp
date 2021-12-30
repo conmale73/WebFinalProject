@@ -3,42 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:choose>
   <c:when test="${lev2}">
-<%--    <nav class="navbar navbar-expand-lg navbar-light bg-light ">--%>
-<%--    <a class="navbar-brand" href="#">Đấu Giá Trực Tuyến Admin</a>--%>
-<%--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"--%>
-<%--            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--      <span class="navbar-toggler-icon"></span>--%>
-<%--    </button>--%>
 
-<%--    <div class="collapse navbar-collapse " id="navbarSupportedContent">--%>
-<%--    <ul class="navbar-nav mr-auto">--%>
-<%--      <li class="nav-item active">--%>
-<%--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>--%>
-<%--      </li>--%>
-<%--      <li class="nav-item">--%>
-<%--        <a class="nav-link" href="#">Link</a>--%>
-<%--      </li>--%>
-<%--      <li class="nav-item dropdown">--%>
-<%--        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"--%>
-<%--           aria-haspopup="true" aria-expanded="false">--%>
-<%--          Dropdown--%>
-<%--        </a>--%>
-<%--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
-<%--          <a class="dropdown-item" href="#">Action</a>--%>
-<%--          <a class="dropdown-item" href="#">Another action</a>--%>
-<%--          <div class="dropdown-divider"></div>--%>
-<%--          <a class="dropdown-item" href="#">Something else here</a>--%>
-<%--        </div>--%>
-<%--      </li>--%>
-<%--    </ul>--%>
-
-<%--    <div class="">--%>
-<%--      <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Guest/Home/TimKiem">--%>
-<%--        <input class="form-control mr-sm-2" name="txtTen" type="text" placeholder="Search" aria-label="Search">--%>
-<%--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-<%--          &lt;%&ndash;        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;%&gt;--%>
-<%--      </form>--%>
-<%--    </div>--%>
 
   </c:when>
   <c:when test="${lev1}">
@@ -166,11 +131,26 @@
                     <i class="fa fa-user" aria-hidden="true"></i>
                     Profile
                   </a>
-                  <div class="dropdown-divider"></div>
+                  <c:if test = "${lev0}">
+                  <form action="<c:url value="/Account/NangCap"/>" method="get" id="formNangCap">
+                    <div style="padding: 0!important;" class="dropdown-item" >
+                      <input style="width: 100%" type="button" onclick="appearnav('Nâng Cấp')"  class="btn btn-danger"  role="button"  value="Nâng Cấp">
+                    </div>
+                  </form>
+                  </c:if>
+                  <c:if test = "${lev1}">
+
+                  <form action="${pageContext.request.contextPath}/Account/HaCap" method="get" id="formHaCap">
+                    <div style="padding: 0!important;" class="dropdown-item" >
+                    <input style="width: 100%" type="button" onclick="appearnav('Hạ Cấp')"  class="btn btn-danger"  role="button"  value="Hạ Cấp">
+                    </div>
+                  </form>
+                  </c:if>
                   <a class="dropdown-item" href="javascript: $('#frmLogout').submit()">
                     <i class=" fa fa-sign-out" aria-hidden="true"></i>
                     Sign out
                   </a>
+
                 </div>
               </li>
             </ul>
@@ -237,6 +217,8 @@
 
   </div>
 </nav>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
   $('#btnTimKiemGiamDan').click(function(){
     document.getElementById("actionTimKiem").value = "Giảm Dần";
@@ -255,6 +237,40 @@
     document.getElementById("actionTimKiemBidd").value = "Tăng Dần";
     $('#formTimKiemBidd').submit();
   });
+  function appearnav(re)
+  {
+    let id = '#formNangCap';
+    // if(re === "Nangcap")
+    // {
+    //   let id= '#formNangCap'
+    // }
+    if(re === "Hạ Cấp")
+    {
+      id = '#formHaCap'
+    }
+    Swal.fire({
+      title: 'Bạn có chắc muốn '+ re + ' ?',
+      text: "Vui Lòng Cân nhắc ",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        $(id).submit();
+      }
+    })
+  }
+  <c:if test = "${request_success.equals('Dang Ky')}">
+  Swal.fire({
+    'title': 'Good job!',
+    'text': 'Gửi Yêu Cầu Thành Công',
+    'icon': 'success',
+    timer: 3000
+  })
+  </c:if>
 </script>
 
 
