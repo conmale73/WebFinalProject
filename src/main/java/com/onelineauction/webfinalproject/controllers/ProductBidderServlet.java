@@ -2,6 +2,7 @@ package com.onelineauction.webfinalproject.controllers;
 
 import com.onelineauction.webfinalproject.beans.DauGia;
 import com.onelineauction.webfinalproject.beans.Product;
+import com.onelineauction.webfinalproject.beans.SendEmail;
 import com.onelineauction.webfinalproject.beans.User;
 import com.onelineauction.webfinalproject.constant.constant;
 import com.onelineauction.webfinalproject.models.DauGiaModel;
@@ -65,6 +66,16 @@ public class ProductBidderServlet extends HttpServlet {
         DauGiaModel.add(dg);
 
         Product p = ProductModel.findById(idSP);
+
+        int idNB = p.getIDNguoiBan();
+        User seller = UserModel.findById(idNB);
+        //Gửi email cho ng đấu giá và ng đăng bán
+        SendEmail sm1 = new SendEmail();
+        SendEmail sm2 = new SendEmail();
+        //Gui cho Bidder
+        sm1.sendBidderorSeller(curUser.getEmail(),"You are bidding with price:",giaDat);
+        sm2.sendBidderorSeller(seller.getEmail(),"Your order is being auctioned with price: ",giaDat);
+
         Product product = new Product(p.getIDSanPham(), p.getTenSanPham(), p.getIDNguoiBan(), giaDat, p.getGiaMuaNgay(), p.getBuocGia(), p.getIDDanhMuc(), curUser.getId(), p.getThoiGianDangBan(), p.getThoiGianKetThuc(), p.getChiTiet(), p.getAnhChinh(), p.getAnhPhu());
         ProductModel.update(product);
         loadData(request, response);

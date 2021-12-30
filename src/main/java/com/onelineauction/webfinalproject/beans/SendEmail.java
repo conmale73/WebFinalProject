@@ -66,9 +66,6 @@ public class SendEmail {
     }
     public boolean sendReset(String email,String code) {
         boolean test = false;
-
-
-
         try {
             String toEmail = email;
             String fromEmail = "tuantuan3455@gmail.com";
@@ -112,6 +109,50 @@ public class SendEmail {
 
         return test;
     }
+    public boolean sendBidderorSeller(String email,String content,double money) {
+        boolean test = false;
+        try {
+            String toEmail = email;
+            String fromEmail = "tuantuan3455@gmail.com";
+            String password = "751953tT";
+            // your host email smtp server details
+            Properties properties = new Properties();
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.host", "smtp.gmail.com");
+            properties.put("mail.smtp.port", "587");
 
+            //get session to authenticate the host email address and password
+            Session session = Session.getInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, password);
+                }
+            });
+
+            //set email message details
+            Message mess = new MimeMessage(session);
+
+            //set from email address
+            mess.setFrom(new InternetAddress(fromEmail));
+            //set to email address or destination email address
+            mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+
+            //set email subject
+            mess.setSubject("Your order has been proceed");
+
+            //set message text
+            mess.setText(content + money);
+            //send the message
+            Transport.send(mess);
+
+            test=true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return test;
+    }
 
 }
