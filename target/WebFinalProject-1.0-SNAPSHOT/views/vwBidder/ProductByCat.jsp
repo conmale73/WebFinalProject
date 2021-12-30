@@ -36,10 +36,6 @@
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                                 Chi Tiết
                                             </a>
-                                            <a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/Bidder/Product/Auction?id=${c.IDSanPham}" role="button">
-                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                                Đấu Giá
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
