@@ -38,10 +38,6 @@
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                             Chi tiết
                                         </a>
-                                        <a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/Seller/Product/Auction?id=${c.IDSanPham}" role="button">
-                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                            Đấu giá
-                                        </a>
                                     </div>
                                 </div>
                             </div>

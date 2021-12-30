@@ -37,10 +37,6 @@
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                             Chi Tiết
                                         </a>
-                                        <a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/Bidder/Product/Auction?id=${c.IDSanPham}" role="button">
-                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                            Đấu Giá
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -49,12 +45,5 @@
                 </div>
             </c:otherwise>
         </c:choose>
-        <a href="http://localhost:8080/WebFinalProject/Home/DanhGia" class="list-group-item list-group-item-action">
-            Top 5 sản phẩm có nhiều lượt ra giá nhất
-        </a>
-        <a href="http://localhost:8080/WebFinalProject/Home/GiaCao" class="list-group-item list-group-item-action">
-            Top 5 sản phẩm có giá cao nhất
-        </a>
-
     </jsp:body>
 </t:main>
