@@ -184,4 +184,35 @@ public class ProductModel {
                     .executeUpdate();
         }
     }
+
+    public static List<Product> findBySellerID(int id) {
+        final String query = "select * from product where IDNguoiBan = :IDNguoiBan";
+        try (Connection con = DbUtils.getConnection()) {
+            return con.createQuery(query)
+                    .addParameter("IDNguoiBan", id)
+                    .executeAndFetch(Product.class);
+        }
+    }
+
+    public static void update(Product p){
+        String sql = "update product set TenSanPham =:TenSanPham,GiaHienTai=:GiaHienTai,GiaMuaNgay=:GiaMuaNgay,BuocGia=:BuocGia,IDDanhMuc=:IDDanhMuc," +
+                "IDNguoiGiuGiaHienTai=:IDNguoiGiuGiaHienTai,ThoiGianDangBan=:ThoiGianDangBan,ThoiGianKetThuc=:ThoiGianKetThuc," +
+                "ChiTiet=:ChiTiet,AnhChinh=:AnhChinh,AnhPhu=:AnhPhu  where IDSanPham=:IDSanPham";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(sql)
+                    .addParameter("TenSanPham", p.getTenSanPham())
+                    .addParameter("GiaHienTai", p.getGiaHienTai())
+                    .addParameter("GiaMuaNgay", p.getGiaMuaNgay())
+                    .addParameter("BuocGia", p.getBuocGia())
+                    .addParameter("IDDanhMuc", p.getIDDanhMuc())
+                    .addParameter("IDNguoiGiuGiaHienTai", p.getIDNguoiGiuGiaHienTai())
+                    .addParameter("ThoiGianDangBan", p.getThoiGianDangBan())
+                    .addParameter("ThoiGianKetThuc", p.getThoiGianKetThuc())
+                    .addParameter("ChiTiet", p.getChiTiet())
+                    .addParameter("AnhChinh", p.getAnhChinh())
+                    .addParameter("AnhPhu", p.getAnhPhu())
+                    .addParameter("IDSanPham", p.getIDSanPham())
+                    .executeUpdate();
+        }
+    }
 }

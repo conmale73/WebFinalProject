@@ -41,16 +41,37 @@ public class DauGiaModel {
         }
     }
 
-//    public static void add(DauGia d) {
-//
-//        String insertSql = "INSERT INTO `daugia` (`IDSanPham`, `LuotDauGia`, `GiaDat`, `IDNguoiDatGia`) VALUES (:IDSanPham, , :GiaDat, :IDNguoiDatGia);";
-//        try (Connection con = DbUtils.getConnection()) {
-//            con.createQuery(insertSql)
-//                    .addParameter("IDSanPham", d.getIDSanPham())
-//                    .addParameter("LuotDauGia", d.getLuotDauGia())
-//                    .addParameter("GiaDat", d.getGiaDat())
-//                    .addParameter("IDNguoiDatGia", d.getIDNguoiDatGia())
-//                    .executeUpdate();
-//        }
-//    }
+    public static DauGia luotDauGiaCuoiCung(String id){
+        String query = "SELECT *\n" +
+                "FROM daugia\n" +
+                "WHERE LuotDauGia=(SELECT MAX(LuotDauGia) FROM daugia WHERE IDSanPham =:ID)\n" +
+                "AND IDSanPham=:ID";
+        try (Connection con = DbUtils.getConnection()){
+            List<DauGia> list = con.createQuery(query)
+                    .addParameter("ID", id)
+                    .executeAndFetch(DauGia.class);
+            return list.get(0);
+        }
+    }
+    public static void add(DauGia d) {
+
+        String insertSql = "INSERT INTO `daugia` (`IDSanPham`, `LuotDauGia`, `GiaDat`, `IDNguoiDatGia`) VALUES (:IDSanPham, :LuotDauGia, :GiaDat, :IDNguoiDatGia);";
+        try (Connection con = DbUtils.getConnection()) {
+            con.createQuery(insertSql)
+                    .addParameter("IDSanPham", d.getIDSanPham())
+                    .addParameter("LuotDauGia", d.getLuotDauGia())
+                    .addParameter("GiaDat", d.getGiaDat())
+                    .addParameter("IDNguoiDatGia", d.getIDNguoiDatGia())
+                    .executeUpdate();
+        }
+    }
+    public static List<DauGia> findUserAuctions(int id){
+        String query = "SELECT * FROM daugia WHERE IDNguoiDatGia=:ID";
+        try (Connection con = DbUtils.getConnection()){
+            return con.createQuery(query)
+                    .addParameter("ID", id)
+                    .executeAndFetch(DauGia.class);
+        }
+
+    }
 }

@@ -6,6 +6,13 @@ public class DauGia {
     double GiaDat;
     int IDNguoiDatGia;
 
+    public DauGia(String IDSanPham, int luotDauGia, double giaDat, int IDNguoiDatGia) {
+        this.IDSanPham = IDSanPham;
+        LuotDauGia = luotDauGia;
+        GiaDat = giaDat;
+        this.IDNguoiDatGia = IDNguoiDatGia;
+    }
+
     public String getIDSanPham() {
         return IDSanPham;
     }

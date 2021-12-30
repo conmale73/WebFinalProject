@@ -94,7 +94,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Home/Index">Trang Chủ <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Auction">Đấu Giá</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/Bidder/Auction/Index">Đấu Giá</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBidder" role="button" data-toggle="dropdown"
